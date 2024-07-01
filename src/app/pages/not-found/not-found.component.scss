@@ -1,0 +1,23 @@
+div.local-center {
+  margin-top: 17vh;
+  display: flex;
+  justify-content: center;
+
+  .card {
+    // background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    .card-body {
+      .local-not-found {
+        width: 100%;
+        height: 70vh;
+        background-image: url("./../../../assets/images/background/Not-Found/not-found01NotFound.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 0.2%;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+div.local-center {
+  margin-top: 17vh;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: center;
+
+  .card {
+    margin: 0;
+    width: 90%;
+    background: linear-gradient(68.15deg, #2f343f 14.62%, #07389b 85.61%);
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    .local-card-body {
+      padding: 5%;
+      color: aliceblue;
+      width: 80%;
+      min-height: 70vh;
+
+      .hello {
+        text-align: center;
+        padding: 5%;
+      }
+
+      p > a {
+        text-decoration: none;
+        color: aliceblue;
+      }
+      p > a:hover {
+        text-decoration: none;
+        color: rgb(163, 195, 223);
+      }
+      .local-img {
+        display: flex;
+       justify-content: center;
+       align-items: center;
+      }
+      .local-img > img  {
+        border: solid 2px rgba(10, 10, 10, 0.3);
+        border-radius: 3%;
+       width: 70%;
+
+
+      }
+    }
+  }
+}
+
+// Este css n esta sendo usando pois implementamos no style.css  um global, este ficou somente para consulta
+.body2 {
+  display: grid;
+
+  grid-template-areas: "localHeader" "localBody";
+  width: 100%;
+  height: max-content;
+
+  #localHeader2 {
+    grid-area: localHeader;
+    width: 96%;
+    height: 15vh;
+    background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
+    position: fixed;
+    top: 4vh;
+  }
+
+  #localBody2 {
+    grid-area: localBody;
+    display: grid;
+    width: 100%;
+    grid-template-areas:
+      "localContent localContent localContent localContent"
+      "localFooter localFooter localFooter localFooter";
+
+    #localContent2 {
+      grid-area: localContent;
+      display: flex;
+      align-items: initial;
+      justify-content: space-around;
+      width: 100%;
+      height: 95vh;
+      padding: 0.5%;
+      background-image: url("./../../assets/images/background/body_background03.jpeg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      padding: 2%;
+      // height: max-content;
+    }
+
+    #localFooter2 {
+      grid-area: localFooter;
+      width: 100%;
+      height: 5vh;
+      background: linear-gradient(68.15deg, #09031f 14.62%, #07389b 85.61%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

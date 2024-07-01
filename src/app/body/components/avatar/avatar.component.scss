@@ -1,0 +1,36 @@
+.ajust-avatar-img-local {
+  img {
+    width: 80px;
+    border-radius: 50%;
+  }
+}
+
+
+
+/* Smartphones */
+@media (max-width: 600px) {
+
+  div.ajust-avatar-img-local > img{
+    width: 60px;
+  }
+
+
+}
+
+/* Tablets em modo retrato */
+@media (min-width: 601px) and (max-width: 768px) {
+  div.ajust-avatar-img-local > img{
+    width: 60px;
+  }
+}
+
+/* Tablets em modo paisagem e desktops pequenos */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+
+  div.ajust-avatar-img-local > img{
+    width: 70px !important;
+  }
+}
+
+

@@ -1,0 +1,47 @@
+.body-align {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* tenho 3 linhas, a 1º com auto, 2º, 1 fração que preecherá todo o restante
+  do espaço automaticamente, 3º automatica de acordo com conteudo**/
+  /*OBS: as medidas de altura do header e do footer ficarão fixas lá dentro das tags**/
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+
+
+
+
+}
+
+
+.fixed-header {
+  position: fixed;
+  top: 1vh;
+  width: 90%;
+  z-index: 1000; /* garantir que o header fique sobre outros elementos */
+}
+
+
+/* Compensar a altura do header fixo no layout */
+body::before {
+  content: "";
+  display: block;
+  height: var(--header-height);
+}
+
+main {
+  margin-top: var(--header-height); /* garantir que o conteúdo não fique escondido pelo header */
+
+
+}
+
+/***/
+app-header , app-main, app-footer {
+   display: flex;
+   justify-content: center;
+
+}
+app-main {
+  min-height: 95vh;
+  /* overflow-y: auto; */
+}

@@ -1,0 +1,44 @@
+div.local-center {
+  margin-top: 17vh;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: center;
+
+  .card {
+    padding: 5%;
+    width: 90%;
+    background: linear-gradient(68.15deg, #2f343f 14.62%, #07389b 85.61%);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    color: aliceblue;
+    .local-Button {
+      width: 90%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .localUper > a {
+      color: brown;
+    }
+    .localUper > a:hover {
+      color: rgb(163, 195, 223) !important;
+    }
+
+    .local-img {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+    }
+    .local-img > img {
+      width: 80%;
+      height: 50vh;
+      background-size: auto;
+      margin: 1%;
+      border: solid 2px rgba(10, 10, 10, 0.3);
+      border-radius: 3%;
+
+    }
+  }
+}

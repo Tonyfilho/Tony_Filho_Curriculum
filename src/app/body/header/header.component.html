@@ -1,0 +1,47 @@
+<div class="localHeader-header">
+  @if (this.localLogin$ | async) {
+  <div class="login">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Display Grid</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Display Flex</a>
+      </li>
+    </ul>
+  </div>
+
+  } @else {
+  <div class="logout">
+    <div class="local-menu">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/about'" routerLinkActive="router-link-active" >About </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  }
+  <div class="avatar">
+    <div class="ajust-avatar">
+      <ul class="nav">
+        @if (this.localLogin$ |async ) {
+          <li class="nav-item" (click)="logout()">
+            <a class="nav-link" href="#">Logout </a>
+          </li>
+
+        }
+        <li class="nav-item">
+          <a class="nav-link" href="#">Authentication</a>
+        </li>
+
+      </ul>
+
+    </div>
+     <div class="ajust-avatar-img">
+     <app-avatar></app-avatar>
+    </div>
+  </div>
+</div>

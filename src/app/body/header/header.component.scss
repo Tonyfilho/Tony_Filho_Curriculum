@@ -1,0 +1,122 @@
+.localHeader-header {
+  width: 90%;
+  height: 13vh;
+  background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
+  position: relative;
+  top: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login {
+    width: 70%;
+  }
+
+  .logout {
+    width: 70%;
+  }
+
+  .avatar {
+    width: 30%;
+    display: flex;
+    align-items: center;
+
+    .ajust-avatar {
+      display: flex;
+      justify-content: center;
+
+      flex-grow: 3;
+    }
+    .ajust-avatar-img{
+      flex-grow: 1;
+      justify-content: center;
+
+    }
+  }
+}
+ul > li > a {
+  color: aliceblue;
+  cursor: pointer;
+}
+ul > li > a:hover {
+  color: rgb(163, 195, 223) !important;
+}
+
+/*Media querys */
+
+/* Smartphones */
+@media (max-width: 600px) {
+  .login {
+    width: 50%;
+  }
+
+  .logout {
+    width: 50%;
+  }
+
+  .avatar {
+    width: 50% !important;
+  }
+
+  .localHeader-header > div {
+    font-size: 14px !important;
+
+  }
+
+
+}
+
+/* Tablets em modo retrato */
+@media (min-width: 601px) and (max-width: 768px) {
+  .login {
+    width: 60%;
+  }
+
+  .logout {
+    width: 60%;
+  }
+
+  .avatar {
+    width: 40% !important;
+  }
+
+  .localHeader-header > div {
+    font-size: 16px !important;
+  }
+
+}
+
+/* Tablets em modo paisagem e desktops pequenos */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .login {
+    width: 60%;
+  }
+
+  .logout {
+    width: 60%;
+  }
+
+  .avatar {
+    width: 40% !important;
+  }
+
+  .localHeader-header > div {
+    font-size: 18px !important;
+  }
+
+}
+
+/* Desktops e telas grandes */
+@media (min-width: 1025px) {
+  .localHeader-header > div {
+    font-size: 20px !important;
+  }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1440px) {
+  .localHeader-header > div {
+    font-size: 22px !important;
+  }
+}
