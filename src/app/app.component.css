@@ -35,12 +35,14 @@ main {
 
 }
 
-/***/
-app-header , app-main, app-footer {
+/**BODY APPs*/
+app-header , app-main, app-footer{
    display: flex;
    justify-content: center;
 
-}
+  }
+  /**COMPONENTS Apps*/
+
 app-main {
   min-height: 95vh;
   /* overflow-y: auto; */

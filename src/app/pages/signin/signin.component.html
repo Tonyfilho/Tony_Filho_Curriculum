@@ -1,1 +1,64 @@
-<p>signin works!</p>
+<!-- <form class="local-form">
+  <mat-form-field class="local-form-email">
+    <mat-label>Email</mat-label>
+     <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+           placeholder="Ex. pat@example.com">
+    <input type="email"
+           placeholder="Ex. pat@example.com">
+    <mat-hint>Errors appear instantly!</mat-hint> -->
+<!-- @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+    }
+    @if (emailFormControl.hasError('required')) {
+      <mat-error>Email is <strong>required</strong></mat-error>
+    } -->
+<!-- </mat-form-field> -->
+
+<!-- PassWord -->
+<!-- <mat-form-field class="local-form-password">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput #message maxlength="256" placeholder="Ex. I need help with...">
+     <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+</form>  -->
+<div class="local-card">
+  
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>Signin</mat-card-title>
+      <mat-card-subtitle>Enter with your account</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Email -->
+    <mat-card-content>
+      <form class="local-form">
+        <mat-form-field class="local-form-email">
+          <mat-label>Email</mat-label>
+
+          <input type="email" placeholder="Ex. pat@example.com" />
+          <!-- PassWord -->
+        </mat-form-field>
+        <mat-form-field class="local-form-password">
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            #message
+            maxlength="256"
+            placeholder="Ex. I need help with..."
+          />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button href="https://www.google.com/" target="_blank">Recover password</a>
+      <button mat-raised-button color="primary">LOGIN</button>
+      <button mat-flat-button >REGISTER</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+</div>
