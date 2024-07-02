@@ -4,7 +4,6 @@ div.local-center {
 
   justify-content: center;
 
-
   .card {
     background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
     // background-color:  rgb(163, 195, 223);
@@ -12,19 +11,118 @@ div.local-center {
     padding: 0;
     width: 60%;
     .card-body {
-
       .local-not-found {
         padding: 8vh;
-        background-color:  rgba(163, 195, 223, 0.7)!important;
+        // background-color:  #a3c3dfb3!important;
+        background: linear-gradient(68.15deg, #a3c3dfb3 14.62%, #293244 85.61%);
         width: 100%;
         height: 50vh;
         border: solid 1px rgb(126, 200, 223);
         border-radius: 3px;
-
       }
     }
   }
 }
 button {
   width: 20%;
+}
+
+/* Smartphones */
+@media (max-width: 600px) {
+  div.col-md-6 {
+    font-size: 12px !important;
+  }
+
+  input {
+    font-size: 12px !important;
+    width: 24vw;
+
+  }
+  button {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+
+  }
+  button.go-back {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+
+  }
+
+  a {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 4%;
+  }
+}
+
+/* Tablets em modo retrato */
+@media (min-width: 601px) and (max-width: 768px) {
+  div.col-md-6 {
+    font-size: 12px !important;
+  }
+
+  input {
+    font-size: 12px !important;
+    width: 24vw;
+
+  }
+  button {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+
+  }
+  button.go-back {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+
+  }
+
+  a {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 4%;
+  }
+}
+
+/* Tablets em modo paisagem e desktops pequenos */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  div.col-md-6 {
+    font-size: 14px !important;
+  }
+
+  input {
+    font-size: 14px !important;
+    width: 28vw !important;
+
+  }
+  button {
+    width: 28vw;
+    height: 4vh;
+    font-size: 12px !important;
+
+  }
+  button.go-back {
+    width: 24vw;
+    height: 4vh;
+    font-size: 12px !important;
+
+  }
+
+  a {
+    width: 24vw;
+    height: 4vh;
+    font-size: 12px !important;
+    margin: 0 !important;
+    padding: 1%;
+  }
 }
