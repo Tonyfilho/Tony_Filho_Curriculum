@@ -1,64 +1,49 @@
-<!-- <form class="local-form">
-  <mat-form-field class="local-form-email">
-    <mat-label>Email</mat-label>
-     <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-           placeholder="Ex. pat@example.com">
-    <input type="email"
-           placeholder="Ex. pat@example.com">
-    <mat-hint>Errors appear instantly!</mat-hint> -->
-<!-- @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
-      <mat-error>Please enter a valid email address</mat-error>
-    }
-    @if (emailFormControl.hasError('required')) {
-      <mat-error>Email is <strong>required</strong></mat-error>
-    } -->
-<!-- </mat-form-field> -->
+<div class="local-center">
+  <div class="card">
+    <div class="card-body">
+      <div class="local-not-found">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            type="button"
+            class="btn btn-outline-light me-md-2"
+            (click)="goBack()"
+          >
+            Go Back
+          </button>
+        </div>
 
-<!-- PassWord -->
-<!-- <mat-form-field class="local-form-password">
-    <mat-label>Password</mat-label>
-    <input type="password" matInput #message maxlength="256" placeholder="Ex. I need help with...">
-     <mat-hint align="start"><strong>Don't disclose personal info</strong> </mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-  </mat-form-field>
-</form>  -->
-<div class="local-card">
-  
-  <mat-card>
-    <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>Signin</mat-card-title>
-      <mat-card-subtitle>Enter with your account</mat-card-subtitle>
-    </mat-card-header>
+        <div class="text-center">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder=" Must be 8-20  long">
+              </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-    <!-- Email -->
-    <mat-card-content>
-      <form class="local-form">
-        <mat-form-field class="local-form-email">
-          <mat-label>Email</mat-label>
+              <a class="btn btn-outline-secondary" role="button" aria-disabled="false">Recover Password</a>
+              <button  type="button"
+                class="btn btn-outline-danger me-md-2"
+              >
+                LOGIN
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary me-md-2"
+              >
+                REGISTER
+              </button>
+            </div>
 
-          <input type="email" placeholder="Ex. pat@example.com" />
-          <!-- PassWord -->
-        </mat-form-field>
-        <mat-form-field class="local-form-password">
-          <mat-label>Password</mat-label>
-          <input
-            type="password"
-            matInput
-            #message
-            maxlength="256"
-            placeholder="Ex. I need help with..."
-          />
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <a mat-button href="https://www.google.com/" target="_blank">Recover password</a>
-      <button mat-raised-button color="primary">LOGIN</button>
-      <button mat-flat-button >REGISTER</button>
-    </mat-card-actions>
-  </mat-card>
-
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
