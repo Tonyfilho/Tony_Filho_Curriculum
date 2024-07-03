@@ -15,32 +15,43 @@
         <div class="text-center">
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <!-- Email -->
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@example.com">
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder=" Must be 8-20  long">
-              </div>
+              <form
+                class="form"
+                [formGroup]="autenticationForm"
+                (ngSubmit)="submitForms()"
+              >
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="name@example.com"
+                    formControlName="email"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder=" Must be 8-20  long"
+                    formControlName="password"
+                  />
+                </div>
+              </form>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
-
               <a class="btn btn-outline-dark" role="button">Recover Password</a>
-              <button  type="button"
-                class="btn btn-outline-danger me-md-2"
-              >
+              <button type="button" class="btn btn-outline-danger me-md-2">
                 LOGIN
               </button>
-              <button
-                type="button"
-                class="btn btn-outline-primary me-md-2"
-              >
+              <button type="button" class="btn btn-outline-primary me-md-2">
                 REGISTER
               </button>
             </div>
-
           </div>
         </div>
       </div>
