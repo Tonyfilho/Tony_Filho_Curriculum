@@ -29,6 +29,9 @@ button {
 
 /* Smartphones */
 @media (max-width: 600px) {
+  .local-not-found {
+    padding: 5vh !important;
+  }
   div.col-md-6 {
     font-size: 12px !important;
   }
@@ -36,19 +39,16 @@ button {
   input {
     font-size: 12px !important;
     width: 24vw;
-
   }
   button {
     width: 24vw;
     height: 4vh;
     font-size: 11px !important;
-
   }
   button.go-back {
     width: 24vw;
     height: 4vh;
     font-size: 11px !important;
-
   }
 
   a {
@@ -62,6 +62,9 @@ button {
 
 /* Tablets em modo retrato */
 @media (min-width: 601px) and (max-width: 768px) {
+  .local-not-found {
+    padding: 6vh !important;
+  }
   div.col-md-6 {
     font-size: 12px !important;
   }
@@ -71,19 +74,16 @@ button {
   input {
     font-size: 12px !important;
     width: 24vw;
-
   }
   button {
     width: 24vw;
     height: 4vh;
     font-size: 11px !important;
-
   }
   button.go-back {
     width: 24vw;
     height: 4vh;
     font-size: 11px !important;
-
   }
 
   a {
@@ -97,29 +97,38 @@ button {
 
 /* Tablets em modo paisagem e desktops pequenos */
 @media (min-width: 769px) and (max-width: 1024px) {
-
+  div.local-center {
+    margin-top: 25vh;
+  }
+  .local-not-found {
+    padding: 4vh !important;
+  }
   div.col-md-6 {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
   .offset-md-3 {
     margin: 0;
   }
-  input {
-    font-size: 14px !important;
-    width: 29vw !important;
 
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
+    width: 33.5vw;
+  }
+  // .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
+  //   width: 30vw;
+  // }
+  input {
+    font-size: 16px !important;
+    width: 32.5vw !important;
   }
   button {
     width: 14vw;
     height: 4vh;
     font-size: 12px !important;
-
   }
   button.go-back {
     width: 10vw;
     height: 4vh;
     font-size: 12px !important;
-
   }
 
   a {
@@ -131,9 +140,8 @@ button {
   }
 }
 
-
- /* Desktops e telas grandes */
- @media (min-width: 1025px) {
+/* Desktops e telas grandes */
+@media (min-width: 1025px) {
   div.col-md-6 {
     font-size: 14px !important;
   }
@@ -143,19 +151,16 @@ button {
   input {
     font-size: 14px !important;
     width: 32vw !important;
-
   }
   button {
     width: 14vw;
     height: 4vh;
     font-size: 12px !important;
-
   }
   button.go-back {
     width: 10vw;
     height: 4vh;
     font-size: 12px !important;
-
   }
 
   a {
@@ -165,10 +170,10 @@ button {
     margin: 0 !important;
     padding: 0.5%;
   }
- }
+}
 
- /* Telas muito grandes */
- @media (min-width: 1440px) {
+/* Telas muito grandes */
+@media (min-width: 1440px) {
   div.col-md-6 {
     font-size: 20px !important;
   }
@@ -178,19 +183,16 @@ button {
   input {
     font-size: 20px !important;
     width: 40vw !important;
-
   }
   button {
     width: 14vw;
     height: 4vh;
     font-size: 20px !important;
-
   }
   button.go-back {
     width: 10vw;
     height: 4vh;
     font-size: 20px !important;
-
   }
 
   a {
@@ -200,4 +202,4 @@ button {
     margin: 0 !important;
     padding: 0.5%;
   }
- }
+}
