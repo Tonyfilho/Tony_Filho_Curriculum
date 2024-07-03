@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -5,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
@@ -32,7 +33,7 @@ export class SigninComponent  implements OnInit{
   }
 
   submitForms() {
-    
+
 
   }
 
