@@ -113,9 +113,7 @@ button {
   .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
     width: 33.5vw;
   }
-  // .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
-  //   width: 30vw;
-  // }
+
   input {
     font-size: 16px !important;
     width: 32.5vw !important;
@@ -142,31 +140,43 @@ button {
 
 /* Desktops e telas grandes */
 @media (min-width: 1025px) {
+  div.local-center {
+    margin-top: 25vh;
+  }
+  .local-not-found {
+    padding: 5vh !important;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
+    margin-top: 5vh;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
+    margin-top: 3vh;
+  }
   div.col-md-6 {
-    font-size: 14px !important;
+    font-size: 18px !important;
   }
   .offset-md-3 {
     margin: 0;
   }
   input {
-    font-size: 14px !important;
+    font-size: 18px !important;
     width: 32vw !important;
   }
   button {
     width: 14vw;
     height: 4vh;
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
   button.go-back {
     width: 10vw;
     height: 4vh;
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 
   a {
     width: 14vw;
     height: 4vh;
-    font-size: 12px !important;
+    font-size: 14px !important;
     margin: 0 !important;
     padding: 0.5%;
   }
