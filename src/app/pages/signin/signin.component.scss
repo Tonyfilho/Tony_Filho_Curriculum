@@ -24,7 +24,7 @@ div.local-center {
   }
 }
 button {
-  width: 20%;
+  width: 14vh;
 }
 
 /* Smartphones */
@@ -183,33 +183,88 @@ button {
 }
 
 /* Telas muito grandes */
-@media (min-width: 1440px) {
+@media (min-width: 1431px) {
+  div.local-center {
+    margin-top: 25vh;
+  }
+  .local-not-found {
+    padding: 3vh !important;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
+    margin-top: 5vh;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
+    margin-top: 3vh;
+  }
   div.col-md-6 {
-    font-size: 20px !important;
+    font-size: 18px !important;
   }
   .offset-md-3 {
-    // margin: 0;
+    margin: 0;
   }
   input {
-    font-size: 20px !important;
-    width: 40vw !important;
+    font-size: 18px !important;
+    width: 42.5vw !important;
   }
   button {
-    width: 14vw;
+    width: 10vw;
     height: 4vh;
-    font-size: 20px !important;
+    font-size: 12px !important;
   }
   button.go-back {
     width: 10vw;
     height: 4vh;
-    font-size: 20px !important;
+    font-size: 12px !important;
   }
 
   a {
-    width: 14vw;
+    width: 10vw;
     height: 4vh;
-    font-size: 20px !important;
+    font-size: 14px !important;
     margin: 0 !important;
-    padding: 0.5%;
+    padding: 0.7%;
+  }
+}
+/* Telas muito grandes */
+@media (min-width: 1531px) {
+  div.local-center {
+    margin-top: 25vh;
+  }
+  .local-not-found {
+    padding: 3vh !important;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
+    margin-top: 5vh;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
+    margin-top: 3vh;
+  }
+  div.col-md-6 {
+    font-size: 18px !important;
+  }
+  .offset-md-3 {
+    margin: 0;
+  }
+  input {
+    font-size: 18px !important;
+    width: 44vw !important;
+  }
+  button {
+    width: 8vw;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+  button.go-back {
+    width: 8vw;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+
+  a {
+    width: 8vw;
+    height: 4vh;
+    font-size: 14px !important;
+    margin: 0 !important;
+    padding: 0.7%;
   }
 }
