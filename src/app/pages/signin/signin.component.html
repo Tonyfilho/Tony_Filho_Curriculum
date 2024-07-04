@@ -30,6 +30,26 @@
                     placeholder="name@example.com"
                     formControlName="email"
                   />
+                        <!-- Validatiors------------------------------------ -->
+                  <!-- Usando CONTROLS Errors -->
+                  @if(!autenticationForm.controls['email'].valid &&
+                  autenticationForm.controls['email'].touched) {
+                  <section>
+                    @if
+                    (autenticationForm.controls['email'].errors?.['required']) {
+                    <small class="warning" style="color: red; padding: 0.5%; font-size: 10px;">
+                      <p>Field is mandatory</p>
+                    </small>
+                    } @if (autenticationForm.hasError('pattern', 'email')) {
+                    <!-- Usando HASERROR -->
+                    <small class="warning" style="color: red; padding: 0.5%; font-size: 10px;">
+                      <p>
+                        {{ "Pattern Error, Email needs to be youremail@....." }}
+                      </p>
+                    </small>
+                    }
+                  </section>
+                  }
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
@@ -40,24 +60,6 @@
                     placeholder=" Must be 8-20  long"
                     formControlName="password"
                   />
-                    <!-- Validatiors------------------------------------ -->
-          <!-- Usando CONTROLS Errors -->
-          @if(!autenticationForm.controls['email'].valid && autenticationForm.controls['email'].touched) {
-            <section>
-              @if (autenticationForm.controls['email'].errors?.['required']) {
-                <small class="warning" style="color: red; padding:1%;">
-                  <p>Field is mandatory</p>
-                </small>
-              }
-              @if (autenticationForm.hasError('pattern', 'email')) {
-                <!-- Usando HASERROR -->
-                <small class="warning" style="color: red; padding:1%;"
-                  >
-                  <p>{{'Pattern Error, Email needs to be youremail@.....'}}</p>
-                </small>
-              }
-          </section>
-          }
                 </div>
               </form>
             </div>

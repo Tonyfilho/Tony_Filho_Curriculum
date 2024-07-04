@@ -29,16 +29,32 @@ button {
 
 /* Smartphones */
 @media (max-width: 600px) {
+  div.local-center {
+
+    height: max-content;
+  }
   .local-not-found {
-    padding: 5vh !important;
+    padding: 9vw !important;
+    min-height: 60vh;
   }
   div.col-md-6 {
     font-size: 12px !important;
+    width: 100%;
   }
 
   input {
     font-size: 12px !important;
-    width: 24vw;
+    width: 100%;
+  }
+  section {
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
   }
   button {
     width: 24vw;
@@ -62,18 +78,31 @@ button {
 
 /* Tablets em modo retrato */
 @media (min-width: 601px) and (max-width: 768px) {
+  div.local-center {
+    height: max-content;
+  }
   .local-not-found {
-    padding: 6vh !important;
+    padding: 7vh !important;
+    min-height: 60vh;
   }
   div.col-md-6 {
     font-size: 12px !important;
+    width: 100%;
   }
-  // .d-grid.gap-2.d-md-flex.justify-content-md-end {
-  //   width: 25vw;
-  // }
+
   input {
     font-size: 12px !important;
     width: 24vw;
+  }
+  section {
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
   }
   button {
     width: 24vw;
@@ -97,26 +126,41 @@ button {
 
 /* Tablets em modo paisagem e desktops pequenos */
 @media (min-width: 769px) and (max-width: 1024px) {
+
   div.local-center {
     margin-top: 25vh;
+    height: max-content;
   }
   .local-not-found {
     padding: 4vh !important;
+    min-height: 55vh;
   }
   div.col-md-6 {
     font-size: 16px !important;
+    width: 100%;
   }
   .offset-md-3 {
     margin: 0;
   }
 
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
-    width: 33.5vw;
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
+  }
+  section {
+    width: 100%;
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
   }
 
   input {
     font-size: 16px !important;
-    width: 32.5vw !important;
+    width: 100%;
   }
   button {
     width: 14vw;
@@ -130,9 +174,9 @@ button {
   }
 
   a {
-    width: 14vw;
+    width: 16vw;
     height: 4vh;
-    font-size: 12px !important;
+    font-size: 11px !important;
     margin: 0 !important;
     padding: 0.5%;
   }
@@ -142,28 +186,29 @@ button {
 @media (min-width: 1025px) {
   div.local-center {
     margin-top: 25vh;
+    height: max-content;
   }
   .local-not-found {
     padding: 5vh !important;
+    min-height: 55vh;
   }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
-    margin-top: 5vh;
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
   }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
-    margin-top: 3vh;
-  }
+
   div.col-md-6 {
     font-size: 18px !important;
+    width: 100%;
   }
   .offset-md-3 {
     margin: 0;
   }
   input {
-    font-size: 18px !important;
-    width: 32vw !important;
+    font-size: 18px ;
+    width: 100%;
   }
   button {
-    width: 14vw;
+    width: 13vw;
     height: 4vh;
     font-size: 14px !important;
   }
@@ -174,11 +219,12 @@ button {
   }
 
   a {
-    width: 14vw;
+    width: 13vw;
     height: 4vh;
-    font-size: 14px !important;
-    margin: 0 !important;
-    padding: 0.5%;
+    font-size: 12px !important;
+    margin: 0 ;
+    padding: 0;
+    padding-top: 1.5%;
   }
 }
 
@@ -186,85 +232,86 @@ button {
 @media (min-width: 1431px) {
   div.local-center {
     margin-top: 25vh;
+    height: max-content;
   }
   .local-not-found {
     padding: 3vh !important;
+    width: 100%;
   }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
-    margin-top: 5vh;
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
   }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
-    margin-top: 3vh;
-  }
+
   div.col-md-6 {
     font-size: 18px !important;
+    width: 100%;
   }
   .offset-md-3 {
     margin: 0;
   }
   input {
     font-size: 18px !important;
-    width: 42.5vw !important;
+    width: 100%
   }
   button {
-    width: 10vw;
+    width: 20%;
     height: 4vh;
     font-size: 12px !important;
   }
   button.go-back {
-    width: 10vw;
+    width: auto;
     height: 4vh;
     font-size: 12px !important;
   }
 
   a {
-    width: 10vw;
+    width: auto;
     height: 4vh;
     font-size: 14px !important;
     margin: 0 !important;
     padding: 0.7%;
   }
 }
-/* Telas muito grandes */
-@media (min-width: 1531px) {
-  div.local-center {
-    margin-top: 25vh;
-  }
-  .local-not-found {
-    padding: 3vh !important;
-  }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
-    margin-top: 5vh;
-  }
-  .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
-    margin-top: 3vh;
-  }
-  div.col-md-6 {
-    font-size: 18px !important;
-  }
-  .offset-md-3 {
-    margin: 0;
-  }
-  input {
-    font-size: 18px !important;
-    width: 44vw !important;
-  }
-  button {
-    width: 8vw;
-    height: 4vh;
-    font-size: 12px !important;
-  }
-  button.go-back {
-    width: 8vw;
-    height: 4vh;
-    font-size: 12px !important;
-  }
+// /* Telas muito grandes */
+// @media (min-width: 1531px) {
+//   div.local-center {
+//     margin-top: 25vh;
+//   }
+//   .local-not-found {
+//     padding: 3vh !important;
+//   }
+//   .d-grid.gap-2.d-md-flex.justify-content-md-end.one {
+//     margin-top: 5vh;
+//   }
+//   .d-grid.gap-2.d-md-flex.justify-content-md-end.two {
+//     margin-top: 3vh;
+//   }
+//   div.col-md-6 {
+//     font-size: 18px !important;
+//   }
+//   .offset-md-3 {
+//     margin: 0;
+//   }
+//   input {
+//     font-size: 18px !important;
+//     width: 44vw !important;
+//   }
+//   button {
+//     width: 8vw;
+//     height: 4vh;
+//     font-size: 12px !important;
+//   }
+//   button.go-back {
+//     width: 8vw;
+//     height: 4vh;
+//     font-size: 12px !important;
+//   }
 
-  a {
-    width: 8vw;
-    height: 4vh;
-    font-size: 14px !important;
-    margin: 0 !important;
-    padding: 0.7%;
-  }
-}
+//   a {
+//     width: 8vw;
+//     height: 4vh;
+//     font-size: 14px !important;
+//     margin: 0 !important;
+//     padding: 0.7%;
+//   }
+// }
