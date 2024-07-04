@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-signin',
@@ -18,7 +19,11 @@ export class SigninComponent  implements OnInit{
   private fb = inject(UntypedFormBuilder);
   route = inject(Router);
   autenticationForm!: UntypedFormGroup ;
+  isLogin: boolean = false;
 
+  constructor(private authServices: AuthenticationService) {
+
+  }
 
   ngOnInit(): void {
     this.autenticationForm = this.fb.group({
@@ -36,20 +41,32 @@ export class SigninComponent  implements OnInit{
 
   }
 
+
   submitForms() {
 
     if (!this.autenticationForm.valid) {
-       this.autenticationForm.setValidators(Validators.required)   }
+       this.autenticationForm.setValidators(Validators.required)
+       }
 
-    let  localForm: localForms = {...this.autenticationForm.value};
-    this.autenticationForm.reset;
+     this.authServices.signIn({
+      email: this.autenticationForm.value.email,
+      password: this.autenticationForm.value.password
+     }).subscribe(
+      {
+        next: val => {
+          this.route.navigate(['/home']);
+          this.isLogin = !this.isLogin;
+          this.autenticationForm.reset;
+          // this.autenticationForm
 
-
-
-
-
-
-
+        },
+        error: err => {
+          console.log('Ocorreu um Erro');
+          this.isLogin = false;
+        },
+        // complete: () => console.log('Fim da Stream de dados')
+      }
+     );
   }
 
 }
