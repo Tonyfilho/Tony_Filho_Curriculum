@@ -9,7 +9,7 @@ import { MainComponent } from './body/main/main.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MainComponent, HeaderComponent, FooterComponent, ],
+  imports: [RouterOutlet, MainComponent, HeaderComponent, FooterComponent, AngularFireModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
