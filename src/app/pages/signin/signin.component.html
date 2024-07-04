@@ -12,68 +12,113 @@
           </button>
         </div>
 
-        <div class="text-center">
+        <form class="text-center" [formGroup]="autenticationForm"
+        (ngSubmit)="submitForms()">
           <div class="row">
             <div class="col-md-6 offset-md-3">
-              <form
+              <!-- <form
                 class="form"
                 [formGroup]="autenticationForm"
                 (ngSubmit)="submitForms()"
-              >
-                <!-- Email -->
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email address</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    placeholder="name@example.com"
-                    formControlName="email"
-                  />
-                        <!-- Validatiors------------------------------------ -->
-                  <!-- Usando CONTROLS Errors -->
-                  @if(!autenticationForm.controls['email'].valid &&
-                  autenticationForm.controls['email'].touched) {
-                  <section>
-                    @if
-                    (autenticationForm.controls['email'].errors?.['required']) {
-                    <small class="warning" style="color: red; padding: 0.5%; font-size: 10px;">
-                      <p>Field is mandatory</p>
-                    </small>
-                    } @if (autenticationForm.hasError('pattern', 'email')) {
-                    <!-- Usando HASERROR -->
-                    <small class="warning" style="color: red; padding: 0.5%; font-size: 10px;">
-                      <p>
-                        {{ "Pattern Error, Email needs to be youremail@....." }}
-                      </p>
-                    </small>
-                    }
-                  </section>
+              > -->
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@example.com"
+                  formControlName="email"
+                />
+                <!-- Validatiors------------------------------------ -->
+                <!-- Usando CONTROLS Errors -->
+                @if(!autenticationForm.controls['email'].valid &&
+                autenticationForm.controls['email'].touched) {
+                <section>
+                  @if (autenticationForm.controls['email'].errors?.['required'])
+                  {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>Field is mandatory</p>
+                  </small>
+                  } @if (autenticationForm.hasError('pattern', 'email')) {
+                  <!------------------------------------------------ Usando HASERROR -->
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>
+                      {{ "Pattern Error, Email needs to be youremail@....." }}
+                    </p>
+                  </small>
                   }
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    placeholder=" Must be 8-20  long"
-                    formControlName="password"
-                  />
-                </div>
-              </form>
+                </section>
+                }
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder=" Must be 8-20  long"
+                  formControlName="password"
+                />
+                <!-- Validatiors------------------------------------ -->
+                <!---------------------------------------------- Usando CONTROLS Errors -->
+                @if(!autenticationForm.controls['password'].valid &&
+                autenticationForm.controls['password'].touched) {
+                <section>
+                  @if
+                  (autenticationForm.controls['password'].errors?.['required'])
+                  {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>Field is mandatory</p>
+                  </small>
+                  <!-- Usando HASERROR -->
+                  } @if (autenticationForm.hasError('minlength', 'password') ||
+                  autenticationForm.hasError('maxlength', 'password') ) {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>
+                      {{
+                        "Min Password 8 caracters and Max Password 16 caracters"
+                      }}
+                    </p>
+                  </small>
+                  }
+                </section>
+                }
+              </div>
+              <!-- </form> -->
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
               <a class="btn btn-outline-dark" role="button">Recover Password</a>
-              <button type="button" class="btn btn-outline-danger me-md-2">
+              <button
+                type="submit"
+                class="btn btn-outline-danger me-md-2"
+                [disabled]="this.autenticationForm.invalid"
+              >
                 LOGIN
               </button>
-              <button type="button" class="btn btn-outline-primary me-md-2">
+              <button
+                type="button"
+                class="btn btn-outline-primary me-md-2"
+                [disabled]="this.autenticationForm.invalid"
+              >
                 REGISTER
               </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

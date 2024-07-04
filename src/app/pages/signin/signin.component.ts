@@ -1,3 +1,6 @@
+export interface localForms {
+  email: string , password: string
+}
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -29,10 +32,22 @@ export class SigninComponent  implements OnInit{
 
   goBack() {
     this.route.navigateByUrl("/")
+    // this.autenticationForm.invalid
 
   }
 
   submitForms() {
+
+    if (!this.autenticationForm.valid) {
+       this.autenticationForm.setValidators(Validators.required)   }
+
+    let  localForm: localForms = {...this.autenticationForm.value};
+    this.autenticationForm.reset;
+
+
+
+
+
 
 
   }
