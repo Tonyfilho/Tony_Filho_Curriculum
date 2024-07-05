@@ -1,9 +1,12 @@
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import {  Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { from, Observable, of } from 'rxjs';
+import { initializeApp } from '@angular/fire/app';
+import { from, Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment.prod';
+
 
 
 type SingIn = {
@@ -14,7 +17,7 @@ type SingIn = {
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  app = initializeApp(environment.firebase);
   constructor(private auth: AngularFireAuth ) {
 
   }
