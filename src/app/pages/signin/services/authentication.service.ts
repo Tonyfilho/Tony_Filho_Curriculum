@@ -46,7 +46,7 @@ export class AuthenticationService {
        const localUserToken = new ModelGoogleSignInLocalStore(e.user.email, e._tokenResponse.kind,
         e._tokenResponse['localId'], e.user.displayName,  e.user.accessToken, e._tokenRespons['refreshToken'], expirationDate,
         e.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png': e.user['photoURL']);
-       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados.
+       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
 
 
     })

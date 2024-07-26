@@ -101,17 +101,17 @@
               <!-- </form> -->
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
-              <a class="btn btn-outline-dark" role="button">Recover Password</a>
+              <a class="btn btn-dark" role="button">Recover Password</a>
               <button
                 type="submit"
-                class="btn btn-outline-danger me-md-2"
-                [disabled]="this.autenticationForm.invalid"
+                class="btn btn-danger me-md-2"
+                [disabled]="this.autenticationForm.invalid" (click)="login()"
               >
                 LOGIN
               </button>
               <button
                 type="button"
-                class="btn btn-outline-primary me-md-2"
+                class="btn btn-success me-md-2"
                 [disabled]="this.autenticationForm.invalid"
               >
                 REGISTER

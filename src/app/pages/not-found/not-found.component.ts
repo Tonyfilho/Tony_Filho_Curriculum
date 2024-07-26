@@ -15,7 +15,7 @@ export class NotFoundComponent {
 
 
   goBack() {
-    this.route.navigateByUrl("/")
+    this.route.navigateByUrl("/about")
 
   }
 
