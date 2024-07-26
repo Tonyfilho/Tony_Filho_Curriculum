@@ -1,8 +1,8 @@
-import { IGoogleSignIn } from '../interface/google-signin';
+import { IGoogleSignInLocalStore } from '../interface/google-signin';
 
 
 
-export class ModelGoogleSignIn implements IGoogleSignIn {
+export class ModelGoogleSignInLocalStore implements IGoogleSignInLocalStore {
   email: string;
   kind: string;
   localId: string;
