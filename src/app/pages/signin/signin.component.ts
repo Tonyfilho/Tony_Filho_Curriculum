@@ -1,11 +1,12 @@
-export interface localForms {
-  email: string, password: string
-}
+
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarComponent } from '../../body/components/snack-bar/snack-bar.component';
+
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +22,7 @@ export class SigninComponent implements OnInit {
   autenticationForm!: UntypedFormGroup;
   isLogin: boolean = false;
 
-  constructor(private authServices: AuthenticationService) {
+  constructor(private authServices: AuthenticationService,) {
 
   }
 
@@ -60,6 +61,7 @@ export class SigninComponent implements OnInit {
         },
         error: err => {
           console.log('Ocorreu um Erro');
+
           this.isLogin = false;
         },
         // complete: () => console.log('Fim da Stream de dados')
@@ -73,4 +75,7 @@ export class SigninComponent implements OnInit {
     this.autenticationForm.reset;
   }
 
+
 }
+
+

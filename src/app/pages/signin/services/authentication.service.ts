@@ -9,6 +9,8 @@ import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxj
 
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { environment } from '../../../../environments/environment.prod';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarComponent } from '../../../body/components/snack-bar/snack-bar.component';
 
 
 
@@ -31,7 +33,7 @@ export class AuthenticationService {
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
 
 
-  constructor( private auth: Auth,) {
+  constructor( private auth: Auth, private _snackBar: MatSnackBar) {
 
   }
 
@@ -51,7 +53,15 @@ export class AuthenticationService {
 
     })
     , catchError(e => {
+      this.openSnackBar(5000)
       return of (e);
     }))}
 
-}
+
+
+    openSnackBar(millisecond: number) {
+      this._snackBar.openFromComponent(SnackBarComponent, {
+        duration: millisecond,
+      });
+    }
+  }
