@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup,
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarComponent } from '../../body/components/snack-bar/snack-bar.component';
+import { SnackBarComponent } from '../../_share/snack-bar/snack-bar.component';
 
 
 @Component({

@@ -1,5 +1,5 @@
-import { ModelGoogleSignInLocalStore } from './../../../_models/model/model-google-signin';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
+import { ModelGoogleSignInLocalStore } from './../../../_models/model/model-google-signin';
 
 
 import { Injectable } from '@angular/core';
@@ -9,8 +9,8 @@ import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxj
 
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { environment } from '../../../../environments/environment.prod';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarComponent } from '../../../body/components/snack-bar/snack-bar.component';
+import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
+import { Router } from '@angular/router';
 
 
 
@@ -33,35 +33,34 @@ export class AuthenticationService {
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
 
 
-  constructor( private auth: Auth, private _snackBar: MatSnackBar) {
+  constructor(private auth: Auth, private snackService: SnackBarService, private routes: Router
+  ) {
 
   }
 
 
   signIn(params: SingIn): Observable<UserCredential> {
-     return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(d =>  {
-     // console.log("tap: data: ",( <any>d.user.getIdToken()) )
-      this.avatarUser$.next(d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png': d.user['photoURL'] );
-      this.nameUser$.next(d.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet': d.user.displayName);
+    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(d => {
+      // console.log("tap: data: ",( <any>d.user.getIdToken()) )
+      this.avatarUser$.next(d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : d.user['photoURL']);
+      this.nameUser$.next(d.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : d.user.displayName);
     }), map((e: any) => {
-       const expirationDate = new Date(new Date().getTime() + +e._tokenResponse['expiresIn'] * 1000);
-       const localUserToken = new ModelGoogleSignInLocalStore(e.user.email, e._tokenResponse.kind,
-        e._tokenResponse['localId'], e.user.displayName,  e.user.accessToken, e._tokenRespons['refreshToken'], expirationDate,
-        e.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png': e.user['photoURL']);
-       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
+      const expirationDate = new Date(new Date().getTime() + +e._tokenResponse['expiresIn'] * 1000);
+      const localUserToken = new ModelGoogleSignInLocalStore(e.user.email, e._tokenResponse.kind,
+        e._tokenResponse['localId'], e.user.displayName, e.user.accessToken, e._tokenRespons['refreshToken'], expirationDate,
+        e.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : e.user['photoURL']);
+      localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
 
 
     })
-    , catchError(e => {
-      this.openSnackBar(5000)
-      return of (e);
-    }))}
-
-
-
-    openSnackBar(millisecond: number) {
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        duration: millisecond,
-      });
-    }
+      , catchError(e => {
+        this.routes.navigateByUrl('/autentication')
+        this.snackService.openSnackBar(5000);
+        return of(e);
+      }))
   }
+
+
+
+
+}
