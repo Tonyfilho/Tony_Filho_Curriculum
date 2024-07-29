@@ -55,12 +55,14 @@ export class SigninComponent implements OnInit {
     }).subscribe(
       {
         next: val => {
+          console.log("success: ",  val.user)
           this.login();
           // this.autenticationForm
 
         },
         error: err => {
-          console.log('Ocorreu um Erro');
+          console.log('HTTP Error: ', err);
+          this.route.navigate(['/body']);
 
           this.isLogin = false;
         },

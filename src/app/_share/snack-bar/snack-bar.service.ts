@@ -8,12 +8,17 @@ import { Router } from '@angular/router';
 })
 export class SnackBarService {
 
-  constructor(private _snackBar: MatSnackBar,) { }
+  constructor(private _snackBar: MatSnackBar,) {
+
+  }
 
 
-  openSnackBar(millisecond: number,) {
-    this._snackBar.openFromComponent(SnackBarComponent, {
+  openSnackBar(millisecond: number, message: string) {
+    this._snackBar.openFromComponent(SnackBarComponent,  {
       duration: millisecond,
+      data: message,
+      
+
     });
   }
 }
