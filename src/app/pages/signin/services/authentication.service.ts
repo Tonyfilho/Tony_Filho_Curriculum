@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { environment } from '../../../../environments/environment.prod';
 import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -31,9 +32,9 @@ export class AuthenticationService {
   avatarUser$: BehaviorSubject<string> = new BehaviorSubject<string>('')/**Pegando avatar do gmail */
   nameUser$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Pegando usuario do gmail */
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
-  UserCredential$!: UserCredential;
+  UserCredential$!: BehaviorSubject<UserCredential>;
 
-  constructor(private auth: Auth, private snackService: SnackBarService, private routes: Router
+  constructor(private auth: Auth, private snackService: SnackBarService
   ) {
 
   }
@@ -41,7 +42,7 @@ export class AuthenticationService {
 
   signIn(params: SingIn): Observable<UserCredential> {
     return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap((d: UserCredential | any) => {
-      //console.log("tap: data: ",( <any>d.user.getIdToken()) )
+
       this.avatarUser$.next(d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : d.user['photoURL']);
       this.nameUser$.next(d.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : d.user.displayName);
       const expirationDate = new Date(new Date().getTime() + +d._tokenResponse['expiresIn'] * 1000);
@@ -56,6 +57,20 @@ export class AuthenticationService {
     }))
   }
 
+  signInUserCredential(params: SingIn): Observable<UserCredential> {
+    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(res => {
+      const localUserToken = res.user.toJSON;
+      console.log("ToString: ", localUserToken);
+      // localStorage.setItem("userCredential", localUserToken());
+      this.UserCredential$.next(res)
+
+    }
+    )).pipe(catchError((e: HttpErrorResponse) => {
+      console.log("Error do catchError: ", e);
+      this.snackService.openSnackBar(5000, e.message);
+      return throwError(() => e.message);
+    }));
+  }
 
 
 
