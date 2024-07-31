@@ -12,6 +12,7 @@ import { FirebaseApp, initializeApp } from 'firebase/app';
 import { environment } from '../../../../environments/environment.prod';
 import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { getAuth } from 'firebase/auth';
 
 
 
@@ -32,16 +33,18 @@ export class AuthenticationService {
   avatarUser$: BehaviorSubject<string> = new BehaviorSubject<string>('')/**Pegando avatar do gmail */
   nameUser$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Pegando usuario do gmail */
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
-  UserCredential$!: BehaviorSubject<UserCredential>;
+  userCredential$!: BehaviorSubject<UserCredential>;
+  localAuth = getAuth(app);
 
-  constructor(private auth: Auth, private snackService: SnackBarService
+
+  constructor( private snackService: SnackBarService
   ) {
 
   }
 
 
   signIn(params: SingIn): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap((d: UserCredential | any) => {
+    return from(signInWithEmailAndPassword(this.localAuth, params.email, params.password)).pipe(tap((d: UserCredential | any) => {
 
       this.avatarUser$.next(d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : d.user['photoURL']);
       this.nameUser$.next(d.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : d.user.displayName);
@@ -58,11 +61,11 @@ export class AuthenticationService {
   }
 
   signInUserCredential(params: SingIn): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(res => {
+    return from(signInWithEmailAndPassword(this.localAuth, params.email, params.password)).pipe(tap(res => {
       const localUserToken = res.user.toJSON;
       console.log("ToString: ", localUserToken);
       // localStorage.setItem("userCredential", localUserToken());
-      this.UserCredential$.next(res)
+      this.userCredential$.next(res)
 
     }
     )).pipe(catchError((e: HttpErrorResponse) => {
