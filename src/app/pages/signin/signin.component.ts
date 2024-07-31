@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../_share/snack-bar/snack-bar.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -49,18 +50,18 @@ export class SigninComponent implements OnInit {
       this.autenticationForm.setValidators(Validators.required)
     }
 
-    this.authServices.signIn({
+    this.authServices.signInUserCredential({
       email: this.autenticationForm.value.email,
       password: this.autenticationForm.value.password
     }).subscribe(
       {
         next: val => {
-          console.log("success: ",  val.user)
+          console.log("success: ",  val)
           this.login();
           // this.autenticationForm
 
         },
-        error: err => {
+        error: (err: HttpErrorResponse) => {
           console.log('HTTP Error: ', err);
           this.route.navigate(['/body']);
 

@@ -1,4 +1,4 @@
-import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
+import { Auth, getAuth, GoogleAuthProvider, UserCredential } from '@angular/fire/auth';
 import { ModelGoogleSignInLocalStore } from './../../../_models/model/model-google-signin';
 
 
@@ -7,12 +7,17 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, catchError, from, Observable, tap, throwError } from 'rxjs';
 
-import { Router } from '@angular/router';
-import { FirebaseApp, initializeApp } from 'firebase/app';
-import { environment } from '../../../../environments/environment.prod';
-import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
+
+
+
 import { HttpErrorResponse } from '@angular/common/http';
-import { getAuth } from 'firebase/auth';
+import { FirebaseApp } from '@angular/fire/app';
+import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+
+
+
 
 
 
@@ -21,9 +26,9 @@ type SingIn = {
   password: string
 }
 
-const app: FirebaseApp = initializeApp(environment.firebase);
-const provider = new GoogleAuthProvider();
+//const app: FirebaseApp = initializeApp(environment.firebase)//OBS: So funciona se usaro construtor
 // const auth = Inject(Auth); /***Não funciona unsado o Inject, tem q ir para construtor */
+const provider = new GoogleAuthProvider();
 @Injectable({
   providedIn: 'root'
 })
@@ -34,38 +39,43 @@ export class AuthenticationService {
   nameUser$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Pegando usuario do gmail */
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
   userCredential$!: BehaviorSubject<UserCredential>;
-  localAuth = getAuth(app);
+  auth!: Auth;
 
 
-  constructor( private snackService: SnackBarService
+
+  constructor( private snackService: SnackBarService, firebaseApp : FirebaseApp
   ) {
-
+      this.auth = getAuth(firebaseApp);
   }
 
 
   signIn(params: SingIn): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.localAuth, params.email, params.password)).pipe(tap((d: UserCredential | any) => {
+    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap((res: UserCredential | any) => {
 
-      this.avatarUser$.next(d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : d.user['photoURL']);
-      this.nameUser$.next(d.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : d.user.displayName);
-      const expirationDate = new Date(new Date().getTime() + +d._tokenResponse['expiresIn'] * 1000);
-      const localUserToken = new ModelGoogleSignInLocalStore(d.user.email, d._tokenResponse.kind,
-        d._tokenResponse['localId'], d.user.displayName, d.user.accessToken, d._tokenRespons['refreshToken'], expirationDate,
-        d.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : d.user['photoURL']);
+      this.avatarUser$.next(res.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user['photoURL']);
+      this.nameUser$.next(res.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : res.user.displayName);
+      const expirationDate = new Date(new Date().getTime() + +res._tokenResponse['expiresIn'] * 1000);
+      const localUserToken = new ModelGoogleSignInLocalStore(res.user.email, res._tokenResponse.kind,
+        res._tokenResponse['localId'], res.user.displayName, res.user.accessToken, res._tokenRespons['refreshToken'], expirationDate,
+        res.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user['photoURL']);
       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
-
-    })).pipe(catchError(e => {
-      this.snackService.openSnackBar(5000, e.message);
-      return throwError(() => e.message);
+      this.userCredential$.next(res && res)
     }))
+    .pipe(catchError((e: HttpErrorResponse) => {
+      this.snackService.openSnackBar(5000, e.message);
+      console.log("error no server: ", e)
+      return throwError(() => e.message);
+    }));
   }
 
   signInUserCredential(params: SingIn): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.localAuth, params.email, params.password)).pipe(tap(res => {
-      const localUserToken = res.user.toJSON;
-      console.log("ToString: ", localUserToken);
+    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(res => {
+      res.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user['photoURL'];
+      this.nameUser$.next(res.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : res.user.displayName);
+
       // localStorage.setItem("userCredential", localUserToken());
-      this.userCredential$.next(res)
+      this.userCredential$.next(res && res);
+
 
     }
     )).pipe(catchError((e: HttpErrorResponse) => {

@@ -1,6 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from '../../../pages/signin/services/authentication.service';
 
 @Component({
   selector: 'app-avatar',
@@ -12,12 +13,14 @@ import { Observable } from 'rxjs';
 export class AvatarComponent {
 
 
-  localImg$!: Observable<string>;
+ 
+  localImg$: Observable<string>;
 
 
-  constructor () {
+  constructor (private authenticationService: AuthenticationService) {
 
-    this.localImg$ = new Observable((d: any ) => d == null ? d.next("") : d.next("./../../../../assets/images/login/no_avatar.png"))
+
+     this.localImg$ = authenticationService.avatarUser$ == null ? authenticationService.avatarUser$ : new Observable((d: any ) => d.next("./../../../../assets/images/login/no_avatar.png"));
   }
 
 }
