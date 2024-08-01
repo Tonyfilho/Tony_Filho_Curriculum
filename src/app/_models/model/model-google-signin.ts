@@ -2,7 +2,7 @@ import { IGoogleSignInLocalStore } from '../interface/google-signin';
 
 
 
-export class ModelGoogleSignInLocalStore implements IGoogleSignInLocalStore {
+export class ModelTokenResponse implements IGoogleSignInLocalStore {
   email: string;
   kind: string;
   localId: string;

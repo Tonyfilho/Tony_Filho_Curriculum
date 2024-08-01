@@ -24,6 +24,7 @@ export class SigninComponent implements OnInit {
   isLogin: boolean = false;
 
   constructor(private authServices: AuthenticationService,) {
+    this.authServices.userCredential$?.subscribe(d => console.log("UserCredential: ", d));
 
   }
 
@@ -47,10 +48,10 @@ export class SigninComponent implements OnInit {
   submitForms() {
 
     if (!this.autenticationForm.valid) {
-      this.autenticationForm.setValidators(Validators.required)
+      this.autenticationForm.setValidators(Validators.required);
     }
 
-    this.authServices.signInUserCredential({
+    this.authServices.signIn({
       email: this.autenticationForm.value.email,
       password: this.autenticationForm.value.password
     }).subscribe(
@@ -58,7 +59,7 @@ export class SigninComponent implements OnInit {
         next: val => {
           console.log("success: ",  val)
           this.login();
-          // this.autenticationForm
+
 
         },
         error: (err: HttpErrorResponse) => {
@@ -67,9 +68,13 @@ export class SigninComponent implements OnInit {
 
           this.isLogin = false;
         },
-        // complete: () => console.log('Fim da Stream de dados')
+
       }
     );
+
+
+
+  //  this.authServices.signInPromise({email: this.autenticationForm.value.email, password: this.autenticationForm.value.password});
   }
 
   login() {
