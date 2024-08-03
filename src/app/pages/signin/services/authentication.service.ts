@@ -35,9 +35,7 @@ const provider = new GoogleAuthProvider();
 })
 export class AuthenticationService  extends UnSubscription {
   private tokenExpirationTimer: any;
-  userToken$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Salvando o Token no model */
-  avatarUser$: BehaviorSubject<string> = new BehaviorSubject<string>('')/**Pegando avatar do gmail */
-  nameUser$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Pegando usuario do gmail */
+ // userToken$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Salvando o Token no model */
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
   userCredential$:BehaviorSubject<UserCredential> = new BehaviorSubject<UserCredential | any>(null); //tem iniciar o construttor para n dar error de subscribe
   tokenResponse$: BehaviorSubject<UserCredential> = new BehaviorSubject<UserCredential | any>(null); //tem iniciar o construttor para n dar error de subscribe
@@ -55,14 +53,13 @@ export class AuthenticationService  extends UnSubscription {
   signIn(params: SingIn): Observable<UserCredential> {
     return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap((res: UserCredential | any) => {
 
-      this.avatarUser$.next(res.user?.['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user?.['photoURL']);
-      this.nameUser$.next(res.user?.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : res.user?.displayName);
+
     const expirationDate = new Date(new Date().getTime() + +res?._tokenResponse['expiresIn'] * 1000);
       const localUserToken = new ModelTokenResponse(res?.user.email, res?._tokenResponse.kind,
         res._tokenResponse?.['localId'], res?.user.displayName, res?.user.accessToken, res._tokenRespons?.refreshToken, expirationDate,
         res.user?.['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user?.['photoURL']);
       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
-      this.tokenResponse$.next(res && res._tokenResponse); //Esta variavel é somente para estudo.
+      this.tokenResponse$.next(res && res._tokenResponse); //Esta variavel é para salvar o token
       this.userCredential$.next(res && res.user);
 
     }))
@@ -74,12 +71,12 @@ export class AuthenticationService  extends UnSubscription {
   }
 
   signInUserCredential(params: SingIn): Observable<UserCredential> {
-    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap(res => {
-      res.user['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user['photoURL'];
-      this.nameUser$.next(res.user.displayName == null ? 'Hello Pal, you dont have Name in your register yet' : res.user.displayName);
+    return from(signInWithEmailAndPassword(this.auth, params.email, params.password)).pipe(tap((res: UserCredential | any) => {
+
 
       // localStorage.setItem("userCredential", localUserToken());
-      this.userCredential$?.next(res);
+      this.tokenResponse$.next(res && res._tokenResponse); //Esta variavel é para salvar o token
+      this.userCredential$?.next(res && res.user);
     })).pipe(catchError((e: HttpErrorResponse) => {
       console.log("Error do catchError: ", e);
       this.snackService.openSnackBar(5000, e.message);
@@ -89,9 +86,12 @@ export class AuthenticationService  extends UnSubscription {
 
   /**Podemo usar a nova sintax do JS */
 
-  signInUserCredential2 = (params: SingIn) =>  {
+  signInUserCredentialNewSintax = (params: SingIn) =>  {
      const localRespose = signInWithEmailAndPassword(this.auth, params.email, params.password);
-      return from(localRespose).pipe(catchError((e: HttpErrorResponse) => {
+      return from(localRespose).pipe(tap((res: UserCredential | any ) => {
+        this.tokenResponse$.next(res && res._tokenResponse); //Esta variavel é para salvar o token
+       this.userCredential$?.next(res && res.user);
+      })).pipe(catchError((e: HttpErrorResponse) => {
         console.log("Error do catchError: ", e);
         this.snackService.openSnackBar(5000, e.message);
         return throwError(() => e.message);
