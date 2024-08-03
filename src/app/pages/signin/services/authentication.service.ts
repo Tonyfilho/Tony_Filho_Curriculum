@@ -14,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FirebaseApp } from '@angular/fire/app';
 import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { UnSubscription } from '../../../_share/UnSubscription';
 
 
 
@@ -32,7 +33,7 @@ const provider = new GoogleAuthProvider();
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthenticationService  extends UnSubscription {
   private tokenExpirationTimer: any;
   userToken$: BehaviorSubject<string> = new BehaviorSubject<string>(''); /**Salvando o Token no model */
   avatarUser$: BehaviorSubject<string> = new BehaviorSubject<string>('')/**Pegando avatar do gmail */
@@ -46,6 +47,7 @@ export class AuthenticationService {
 
   constructor(private snackService: SnackBarService, firebaseApp: FirebaseApp
   ) {
+    super();
     this.auth = getAuth(firebaseApp);
   }
 
@@ -60,9 +62,8 @@ export class AuthenticationService {
         res._tokenResponse?.['localId'], res?.user.displayName, res?.user.accessToken, res._tokenRespons?.refreshToken, expirationDate,
         res.user?.['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user?.['photoURL']);
       localStorage.setItem('userData', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
-      console.log("RES: ", {...res});
-
-      this.userCredential$.next(res && res);
+      this.tokenResponse$.next(res && res._tokenResponse); //Esta variavel é somente para estudo.
+      this.userCredential$.next(res && res.user);
 
     }))
       .pipe(catchError((e: HttpErrorResponse) => {
