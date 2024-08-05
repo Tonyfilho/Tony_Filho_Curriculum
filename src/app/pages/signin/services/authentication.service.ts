@@ -95,9 +95,20 @@ export class AuthenticationService extends UnSubscription {
 
 
 
+  /**
+   *
+   * @param expirationDate Get time of the Firebase Auth API and calc the expieration date
+   * after the expieration data done, it will call the logout() method.
+   */
+  private autoLogOut = (expirationDate: number) =>  {
+    this.tokenExpirationTimer = setTimeout (() => {
+      this.logOut();
+    }, expirationDate);
+
+  }
 
 
-  
+
 
   /**
   * this method will called by user in Logout button and in
