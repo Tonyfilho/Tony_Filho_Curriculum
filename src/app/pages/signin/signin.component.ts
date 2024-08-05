@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
       this.autenticationForm.setValidators(Validators.required);
     }
 
-    this.authServices.signIn({
+    this.authServices.signInUserCredential({
       email: this.autenticationForm.value.email,
       password: this.autenticationForm.value.password
     }).subscribe(
