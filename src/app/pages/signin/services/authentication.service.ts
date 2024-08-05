@@ -1,4 +1,4 @@
-import { Auth, getAuth, GoogleAuthProvider, UserCredential } from '@angular/fire/auth';
+import { Auth, getAuth, GoogleAuthProvider, signOut, UserCredential } from '@angular/fire/auth';
 import { ModelTokenResponse } from './../../../_models/model/model-google-signin';
 
 
@@ -16,6 +16,7 @@ import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { UnSubscription } from '../../../_share/UnSubscription';
 import { IGoogleToken } from '../../../_models/interface/google-token';
+import { Location } from '@angular/common';
 
 
 
@@ -38,20 +39,20 @@ export class AuthenticationService extends UnSubscription {
   private tokenExpirationTimer: any;
   isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
   userCredential$: BehaviorSubject<UserCredential> = new BehaviorSubject<UserCredential | any>(null); //tem iniciar o construttor para n dar error de subscribe
-  tokenResponse$: BehaviorSubject<IGoogleToken> = new BehaviorSubject<IGoogleToken | any>(null); //tem iniciar o construttor para n dar error de subscribe
+  tokenResponse$: BehaviorSubject<IGoogleToken | null> = new BehaviorSubject<IGoogleToken | any>(null); //tem iniciar o construttor para n dar error de subscribe
   auth!: Auth;
 
 
 
-  constructor(private snackService: SnackBarService, firebaseApp: FirebaseApp
+  constructor(private snackService: SnackBarService, firebaseApp: FirebaseApp, private location: Location,
   ) {
     super();
     this.auth = getAuth(firebaseApp);
   }
 
   private handAuthentication = () => {
-    this.tokenResponse$.pipe(tap((localUserToken : IGoogleToken) =>  {
-    return  localStorage.setItem('userToken', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
+    this.tokenResponse$.pipe(tap((localUserToken: IGoogleToken | null) => {
+      return localStorage.setItem('userToken', JSON.stringify(localUserToken)); //Quardaremos em LocalStorage um String com todos os Dados transformado em Json.
 
     })).subscribe();
 
@@ -86,10 +87,33 @@ export class AuthenticationService extends UnSubscription {
       this.tokenResponse$.next(localUserToken); //Esta variavel é para salvar o token
       this.userCredential$?.next(res && res.user);
     })).pipe(catchError((e: HttpErrorResponse) => {
-      console.log("Error do catchError: ", e);
+      //    console.log("Error do catchError: ", e);
       this.snackService.openSnackBar(5000, e.message);
       return throwError(() => e.message);
     }));
   }
+
+
+
+
+
+  
+
+  /**
+  * this method will called by user in Logout button and in
+  * authoLogout() method.
+  */
+  logOut = () => {
+    signOut(this.auth);
+    this.tokenResponse$.next(null);  //limpando Observable
+    localStorage.removeItem("userToken");
+    this.location.go('/about');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = undefined;
+
+  }
+
 
 }
