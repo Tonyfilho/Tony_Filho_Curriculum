@@ -1,4 +1,4 @@
-import { AngularFireModule } from '@angular/fire/compat';
+import { AuthenticationService } from './pages/signin/services/authentication.service';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './body/footer/footer.component';
@@ -19,5 +19,8 @@ import { MainComponent } from './body/main/main.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  constructor(private auth: AuthenticationService) {
+    this.auth.autoLogin();
+  }
 
 }

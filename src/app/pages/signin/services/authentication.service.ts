@@ -48,6 +48,7 @@ export class AuthenticationService extends UnSubscription {
   ) {
     super();
     this.auth = getAuth(firebaseApp);
+    this.autoLogin();
   }
 
   private handAuthentication = () => {
@@ -93,6 +94,34 @@ export class AuthenticationService extends UnSubscription {
     }));
   }
 
+  /**
+   * autoLogin will put in the AppComponent and everytime it will be reload
+   * the data will load from LOCALSTORAGE.
+   * 1º I need to check if already  signIn if doenst have , the Observable VAR hasUserLogin will be null
+   * 2º If got a token I update the Observable User VAR
+   * 3ª create a expiration date and calc the time after signIn
+   * 4º start autoLogout
+   * 5º The method must be called in the OnInit() and never in the Constructor.
+   */
+
+    autoLogin = () => {
+     const localGetStorage: IGoogleToken = {...JSON.parse(localStorage.getItem('userToken') as string)};
+     console.log("LocalStorage ", localGetStorage);
+     if (!localGetStorage) {
+         return;
+     }
+     const localTokenResponse: IGoogleToken  =  new ModelTokenResponse(localGetStorage?.email, localGetStorage?.kind,
+      localGetStorage?.['localId'], localGetStorage.displayName, localGetStorage.idToken, localGetStorage?.refreshToken, localGetStorage.expiresIn,
+      localGetStorage['avatar'] == null ? './../../../../assets/images/login/no_avatar.png' : localGetStorage?.['avatar']);
+      this.tokenResponse$.next(localTokenResponse);
+     let localExpirationTime = new Date(localGetStorage.expiresIn).getTime() - new Date().getTime();
+     this.autoLogOut(localExpirationTime);
+
+
+
+    }
+
+
 
 
   /**
@@ -109,7 +138,6 @@ export class AuthenticationService extends UnSubscription {
 
 
 
-
   /**
   * this method will called by user in Logout button and in
   * authoLogout() method.
@@ -117,7 +145,7 @@ export class AuthenticationService extends UnSubscription {
   logOut = () => {
     signOut(this.auth);
     this.tokenResponse$.next(null);  //limpando Observable
-    localStorage.removeItem("userToken");
+    localStorage.removeItem("userToken"); //limpando o LocalStore
     this.location.go('/about');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
