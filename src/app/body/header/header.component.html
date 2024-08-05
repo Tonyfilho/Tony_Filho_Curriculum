@@ -16,9 +16,13 @@
     <div class="local-menu">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/about'" routerLinkActive="router-link-active" >About </a>
+          <a
+            class="nav-link"
+            [routerLink]="'/about'"
+            routerLinkActive="router-link-active"
+            >About
+          </a>
         </li>
-
       </ul>
     </div>
   </div>
@@ -28,20 +32,19 @@
     <div class="ajust-avatar">
       <ul class="nav">
         @if (this.localLogin$ |async ) {
-          <li class="nav-item" (click)="logout()">
-            <a class="nav-link" href="#">Logout </a>
-          </li>
+        <li class="nav-item" (click)="logout()">
+          <a class="nav-link" href="#">Logout </a>
+        </li>
 
-        }
+        } @else {
         <li class="nav-item">
           <a class="nav-link" [routerLink]="'/autentication'">Authentication</a>
         </li>
-
+        }
       </ul>
-
     </div>
-     <div class="ajust-avatar-img">
-     <app-avatar></app-avatar>
+    <div class="ajust-avatar-img">
+      <app-avatar></app-avatar>
     </div>
   </div>
 </div>

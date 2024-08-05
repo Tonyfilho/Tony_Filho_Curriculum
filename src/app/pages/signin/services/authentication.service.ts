@@ -37,7 +37,7 @@ const provider = new GoogleAuthProvider();
 })
 export class AuthenticationService extends UnSubscription {
   private tokenExpirationTimer: any;
-  isLoginAuthorization$: Observable<boolean> = new Observable(d => d.next(false));   /**Esta variavel sever para liberar o Login pelo Gmail ou Facebook */
+  isLoginAuthorization$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);   /**Esta variavel sever para liberar o Login no Header*/
   userCredential$: BehaviorSubject<UserCredential> = new BehaviorSubject<UserCredential | any>(null); //tem iniciar o construttor para n dar error de subscribe
   tokenResponse$: BehaviorSubject<IGoogleToken | null> = new BehaviorSubject<IGoogleToken | any>(null); //tem iniciar o construttor para n dar error de subscribe
   auth!: Auth;
@@ -67,6 +67,7 @@ export class AuthenticationService extends UnSubscription {
         res.user?.['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user?.['photoURL']);
       this.tokenResponse$.next(localUserToken); //Esta variavel é para salvar o token
       this.userCredential$.next(res && res.user);
+      this.isLoginAuthorization$.next(true);
     }))
       .pipe(catchError((e: HttpErrorResponse) => {
         this.snackService.openSnackBar(5000, e.message);
@@ -87,6 +88,7 @@ export class AuthenticationService extends UnSubscription {
         res.user?.['photoURL'] == null ? './../../../../assets/images/login/no_avatar.png' : res.user?.['photoURL']);
       this.tokenResponse$.next(localUserToken); //Esta variavel é para salvar o token
       this.userCredential$?.next(res && res.user);
+      this.isLoginAuthorization$.next(true);
     })).pipe(catchError((e: HttpErrorResponse) => {
       //    console.log("Error do catchError: ", e);
       this.snackService.openSnackBar(5000, e.message);
@@ -146,6 +148,7 @@ export class AuthenticationService extends UnSubscription {
     signOut(this.auth);
     this.tokenResponse$.next(null);  //limpando Observable
     localStorage.removeItem("userToken"); //limpando o LocalStore
+    this.isLoginAuthorization$.next(false);
     this.location.go('/about');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
