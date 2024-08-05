@@ -1,6 +1,6 @@
 
 
-export interface IGoogleSignInLocalStore {
+export interface IGoogleToken {
   kind:string;
   localId:string;
   email:string;
