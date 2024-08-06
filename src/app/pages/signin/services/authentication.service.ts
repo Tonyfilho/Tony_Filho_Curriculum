@@ -107,16 +107,16 @@ export class AuthenticationService extends UnSubscription {
    */
 
     autoLogin = () => {
-     const localGetStorage: IGoogleToken = {...JSON.parse(localStorage.getItem('userToken') as string)};
-     console.log("LocalStorage ", localGetStorage);
-     if (!localGetStorage) {
-         return;
-     }
-     const localTokenResponse: IGoogleToken  =  new ModelTokenResponse(localGetStorage?.email, localGetStorage?.kind,
+     const localGetStorage: IGoogleToken = JSON.parse(localStorage.getItem('userToken') as string);
+    // console.log("LocalStorage ", localGetStorage);
+    if (!localGetStorage) {
+      return;
+    }
+    const localTokenResponse: IGoogleToken  =  new ModelTokenResponse(localGetStorage?.email, localGetStorage?.kind,
       localGetStorage?.['localId'], localGetStorage.displayName, localGetStorage.idToken, localGetStorage?.refreshToken, localGetStorage.expiresIn,
       localGetStorage['avatar'] == null ? './../../../../assets/images/login/no_avatar.png' : localGetStorage?.['avatar']);
       this.tokenResponse$.next(localTokenResponse);
-     let localExpirationTime = new Date(localGetStorage.expiresIn).getTime() - new Date().getTime();
+      let localExpirationTime = new Date(localGetStorage.expiresIn).getTime() - new Date().getTime();
      this.autoLogOut(localExpirationTime);
 
 

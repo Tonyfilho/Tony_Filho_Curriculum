@@ -1,5 +1,5 @@
 import { AuthenticationService } from './pages/signin/services/authentication.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './body/footer/footer.component';
 import { HeaderComponent } from './body/header/header.component';
@@ -18,9 +18,15 @@ import { MainComponent } from './body/main/main.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   constructor(private auth: AuthenticationService) {
+  }
+
+
+
+  ngOnInit(): void {
     this.auth.autoLogin();
+
   }
 
 }

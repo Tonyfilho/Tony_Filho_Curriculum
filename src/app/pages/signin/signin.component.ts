@@ -1,12 +1,10 @@
 
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarComponent } from '../../_share/snack-bar/snack-bar.component';
-import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -23,8 +21,9 @@ export class SigninComponent implements OnInit {
   autenticationForm!: UntypedFormGroup;
   isLogin: boolean = false;
 
+
   constructor(private authServices: AuthenticationService,) {
-    this.authServices.userCredential$?.subscribe(d => console.log("UserCredential: ", d));
+   // this.authServices.userCredential$?.subscribe(d => console.log("UserCredential: ", d));
 
   }
 
@@ -40,7 +39,7 @@ export class SigninComponent implements OnInit {
 
   goBack() {
     this.route.navigateByUrl("/body")
-    // this.autenticationForm.invalid
+     this.autenticationForm.reset();
 
   }
 

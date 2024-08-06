@@ -103,18 +103,18 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
               <a class="btn btn-dark" role="button">Recover Password</a>
               <button
+                type="button"
+                class="btn btn-info me-md-2"
+                [disabled]="this.autenticationForm.invalid"
+              >
+                REGISTER NOW
+              </button>
+              <button
                 type="submit"
-                class="btn btn-danger me-md-2"
+                class="btn btn-primary me-md-2"
                 [disabled]="this.autenticationForm.invalid"
               >
                 LOGIN
-              </button>
-              <button
-                type="button"
-                class="btn btn-success me-md-2"
-                [disabled]="this.autenticationForm.invalid"
-              >
-                REGISTER
               </button>
             </div>
           </div>
