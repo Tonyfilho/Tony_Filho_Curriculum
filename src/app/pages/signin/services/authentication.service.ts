@@ -153,7 +153,7 @@ export class AuthenticationService extends UnSubscription {
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
-    this.tokenExpirationTimer = undefined;
+    this.tokenExpirationTimer = null;
 
   }
 
