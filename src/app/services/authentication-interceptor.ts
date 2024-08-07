@@ -1,14 +1,14 @@
-import { HttpInterceptorFn, HttpParams } from "@angular/common/http";
+import { HttpInterceptorFn } from "@angular/common/http";
 import { inject } from "@angular/core";
+import { switchMap, take } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
-import { exhaustMap, switchMap, take } from "rxjs";
 
 export const interceptorFN: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthenticationService);
   console.log("dentro do interceptor");
 
   //return authService.tokenResponse$.pipe(take(1), exhaustMap(token => {
-  return authService.tokenResponse$.pipe(switchMap(token => {
+  return authService.tokenResponse$.pipe(take(2),switchMap(token => {
     console.log("dentro do interceptor", token?.localId);
     if (!token) {
       return next(req);
