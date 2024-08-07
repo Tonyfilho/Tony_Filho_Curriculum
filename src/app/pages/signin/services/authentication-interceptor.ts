@@ -12,10 +12,15 @@ export const interceptorFN: HttpInterceptorFn = (req, next) => {
       return next(req);
      }
      const modifiedHeader = req.clone({
-      params: new HttpParams().set('auth', token.idToken)
+     // params: new HttpParams().set('auth', token.idToken)
+     setHeaders: {
+      Authorization: token.idToken
+    }
      })
      return next(modifiedHeader);
   }));
 
+
+  
 }
 

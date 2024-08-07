@@ -14,7 +14,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     // provideHttpClient(withInterceptorsFromDi()),
     // {  provide:  HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true  },
+    
     provideHttpClient(withInterceptors([interceptorFN])),
+
     provideRouter(routes),
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

@@ -17,8 +17,9 @@ bootstrapApplication(AppComponent, appConfig)
 
 // bootstrapApplication(AppComponent, {
 //   providers: [
-// provideHttpClient(withInterceptorsFromDi()),
-// {  provide:  HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true  },
+//     provideHttpClient(withInterceptorsFromDi()),
+//     {  provide:  HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true  },
+
 //     provideHttpClient(withInterceptors([interceptorFN])),
 //     provideRouter(routes),
 //     provideAnimationsAsync(),
