@@ -1,5 +1,5 @@
 import { Auth, getAuth, GoogleAuthProvider, signOut, UserCredential } from '@angular/fire/auth';
-import { ModelTokenResponse } from './../../../_models/model/model-google-signin';
+
 
 
 import { Injectable } from '@angular/core';
@@ -8,15 +8,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, Observable, tap, throwError } from 'rxjs';
 
 
-
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { FirebaseApp } from '@angular/fire/app';
-import { SnackBarService } from '../../../_share/snack-bar/snack-bar.service';
+
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { UnSubscription } from '../../../_share/UnSubscription';
-import { IGoogleToken } from '../../../_models/interface/google-token';
+
+
 import { Location } from '@angular/common';
+import { IGoogleToken } from '../_models/interface/google-token';
+import { ModelTokenResponse } from '../_models/model/model-google-signin';
+import { SnackBarService } from '../_share/snack-bar/snack-bar.service';
+import { UnSubscription } from '../_share/UnSubscription';
 
 
 
