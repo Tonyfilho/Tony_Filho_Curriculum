@@ -1,15 +1,16 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AvatarComponent } from '../components/avatar/avatar.component';
-import { AuthenticationService } from './../../pages/signin/services/authentication.service';
+
 import { UnSubscription } from '../../_share/UnSubscription';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe, AvatarComponent, RouterModule],
+  imports: [AsyncPipe, AvatarComponent, RouterModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
