@@ -57,7 +57,7 @@ export class SigninComponent implements OnInit {
     }).subscribe(
       {
         next: val => {
-          console.log("success: ",  val)
+          console.log("success: ",  val.user)
           this.login();
 
 
