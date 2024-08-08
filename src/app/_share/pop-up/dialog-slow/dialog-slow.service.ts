@@ -9,7 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class DialogSlowService {
 
-  readonly dialog = inject(MatDialog);
+ private readonly dialog = inject(MatDialog);
 
    openDialog = (enterAnimationDuration: string, exitAnimationDuration: string) => {
     this.dialog.open(DialogSlowComponent, {

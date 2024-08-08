@@ -1,7 +1,7 @@
 
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
@@ -22,11 +22,12 @@ export class SigninComponent implements OnInit {
   route = inject(Router);
   autenticationForm!: UntypedFormGroup;
   isLogin: boolean = false;
+  @Input('aria-label') ariaLabel: string | undefined
 
 
   constructor(private authServices: AuthenticationService, private popUpService: DialogSlowService ) {
    // this.authServices.userCredential$?.subscribe(d => console.log("UserCredential: ", d));
-
+    console.log("fechou", this.ariaLabel);
   }
 
   ngOnInit(): void {
