@@ -57,15 +57,12 @@ export class SigninComponent implements OnInit {
     }).subscribe(
       {
         next: val => {
-          console.log("success: ",  val.user)
+         // console.log("success: ",  val.user)
           this.login();
-
-
         },
         error: (err: HttpErrorResponse) => {
-          console.log('HTTP Error: ', err);
+        //  console.log('HTTP Error: ', err);
           this.route.navigate(['/body']);
-
           this.isLogin = false;
         },
 
