@@ -6,16 +6,19 @@
   mat-dialog-content {
     h2 {
       color: aliceblue !important;
+      font-size: larger;
     }
     text-align: center !important;
     color: aliceblue !important;
+    font-size: medium;
   }
 
   mat-dialog-actions {
 
     button {
-      padding: 2%;
+      padding: 1.5%;
       margin-right: 8px;
+      border-radius: 5px;
     }
 
   }
