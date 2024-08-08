@@ -8,7 +8,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { routes } from './app.routes';
-import { interceptorFN } from './services/authentication-interceptor';
+import { interceptorFN } from './_services/authentication-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

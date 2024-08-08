@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { UserCredential } from '@angular/fire/auth';
-import { AuthenticationService } from '../../../services/authentication.service';
+import { AuthenticationService } from '../../../_services/authentication.service';
 
 @Component({
   selector: 'app-avatar',
