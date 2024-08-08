@@ -102,10 +102,15 @@
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
               <a class="btn btn-dark" role="button">Recover Password</a>
-              <button
+              <!-- <button
                 type="button"
                 class="btn btn-info me-md-2"
                 [disabled]="this.autenticationForm.invalid"
+              > -->
+              <button
+                type="button"
+                class="btn btn-info me-md-2"
+                (mouseover)="this.openDialog()"
               >
                 REGISTER NOW
               </button>

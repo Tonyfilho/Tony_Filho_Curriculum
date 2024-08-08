@@ -1,0 +1,22 @@
+
+.localpop-up {
+  width: 100%;
+  background-image: url("./../../../../assets/images/background/registroPopUp.jpg") !important;
+
+  mat-dialog-content {
+    h2 {
+      color: aliceblue !important;
+    }
+    text-align: center !important;
+    color: aliceblue !important;
+  }
+
+  mat-dialog-actions {
+
+    button {
+      padding: 2%;
+      margin-right: 8px;
+    }
+
+  }
+}

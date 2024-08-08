@@ -5,6 +5,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
+import { DialogSlowService } from '../../_share/pop-up/dialog-slow/dialog-slow.service';
 
 
 
@@ -23,7 +24,7 @@ export class SigninComponent implements OnInit {
   isLogin: boolean = false;
 
 
-  constructor(private authServices: AuthenticationService,) {
+  constructor(private authServices: AuthenticationService, private popUpService: DialogSlowService ) {
    // this.authServices.userCredential$?.subscribe(d => console.log("UserCredential: ", d));
 
   }
@@ -68,16 +69,17 @@ export class SigninComponent implements OnInit {
 
       }
     );
-
-
-
-  //  this.authServices.signInPromise({email: this.autenticationForm.value.email, password: this.autenticationForm.value.password});
   }
 
   login() {
     this.route.navigate(['/home']);
     this.isLogin = !this.isLogin;
     this.autenticationForm.reset;
+  }
+
+  openDialog = () => {
+    this.popUpService.openDialog('3000ms', '1500ms');
+
   }
 
 
