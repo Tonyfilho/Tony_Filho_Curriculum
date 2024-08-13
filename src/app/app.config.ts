@@ -12,10 +12,9 @@ import { interceptorFN } from './_services/authentication-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    //  provideHttpClient(withInterceptorsFromDi()),
-    // {  provide:  HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true  },
-
-    provideHttpClient(withInterceptors([interceptorFN])),
+   //  provideHttpClient(withInterceptorsFromDi()),
+   // {  provide:  HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true  },
+   // provideHttpClient(withInterceptors([interceptorFN])),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

@@ -6,6 +6,9 @@ import { RouterOutlet } from '@angular/router';
 
 import { AuthenticationService } from './_services/authentication.service';
 import { UnSubscription } from './_share/UnSubscription';
+import { MainComponent } from './components/main/main.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 type SingIn = {
