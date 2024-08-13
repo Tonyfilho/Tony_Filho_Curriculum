@@ -1,35 +1,26 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AvatarComponent } from '../components/avatar/avatar.component';
-
-import { UnSubscription } from '../../_share/UnSubscription';
 import { AuthenticationService } from '../../_services/authentication.service';
+import { AvatarComponent } from '../../components/avatar/avatar.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe, AvatarComponent, RouterModule, CommonModule],
+  imports: [AsyncPipe, AvatarComponent, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent extends UnSubscription {
-  localLogin$!: Observable<boolean>;
+export class HeaderComponent {
+
+  authentication = inject(AuthenticationService);
 
 
 
-  constructor(private auth: AuthenticationService) {
-    super();
-    this.auth.isLoginAuthorization$.subscribe(authentication => this.localLogin$ = new Observable(d => d.next(authentication)));
-
-
-  }
 
 
   logout() {
-    this.localLogin$ = new Observable(d => d.next(false));
-    this.auth.logOut();
+    this.authentication.logOut();
   }
 
 }

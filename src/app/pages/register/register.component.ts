@@ -1,62 +1,59 @@
-
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 
-
-
-
 @Component({
-  selector: 'app-signin',
+  selector: 'app-register',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class SigninComponent implements OnInit {
+export class RegisterComponent {
+
   private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   private fb = inject(UntypedFormBuilder);
   private route = inject(Router);
-  autenticationForm!: UntypedFormGroup;
+  registerForm!: UntypedFormGroup;
 
 
 
-  constructor(private authServices: AuthenticationService, private dialogService: DialogService, private dialog: MatDialog) {
-
+  constructor(private authServices: AuthenticationService, private popUpService: DialogService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.autenticationForm = this.fb.group({
+    this.registerForm = this.fb.group({
+      name: ['', {validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur'}],
       email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
       password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }]
 
     });
-    ;
+
 
   }
 
 
   goBack() {
-    this.route.navigateByUrl("/autentication");
-    this.autenticationForm.reset();
+    this.route.navigateByUrl("/body");
+    this.registerForm.reset();
 
   }
 
 
   submitForms() {
 
-    if (!this.autenticationForm.valid) {
-      this.autenticationForm.setValidators(Validators.required);
+    if (!this.registerForm.valid) {
+      this.registerForm.setValidators(Validators.required);
     }
 
     this.authServices.logInWithEmailAndPassword({
-      email: this.autenticationForm.value.email,
-      password: this.autenticationForm.value.password
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password
     }).subscribe(
       {
         next: () => {
@@ -74,30 +71,12 @@ export class SigninComponent implements OnInit {
   }
 
   login = () => {
-    this.dialogService.openDialogSucess();
     this.route.navigate(['/home']);
-    this.autenticationForm.reset;
+
+    this.registerForm.reset;
   }
 
-  openDialog = () => {
-    this.dialogService.openDialogRegistration('3000ms', '1500ms');
-    this.dialog.afterAllClosed.subscribe(() => {
-
-      if (this.dialogService.sigNalId() === 'mat-mdc-dialog-0') {
-        this.route.navigateByUrl("/register");
-
-      } else {
-        this.goBack();
-      }
-
-    });
-
-
-
-  };
 
 }
-
-
 
 

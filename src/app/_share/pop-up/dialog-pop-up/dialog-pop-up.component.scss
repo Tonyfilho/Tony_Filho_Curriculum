@@ -1,3 +1,35 @@
-button {
-  margin-right: 8px;
+
+
+
+.localpop-up {
+  width: 100%;
+  background-image: url("./../../../../assets/images/background/LogInPopUp.jpeg") !important;
+  background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+  background-position: center; /* Centraliza a imagem dentro do card */
+  background-repeat: no-repeat; /* Evita que a imagem se repita */
+  border: solid 1px rgb(126, 200, 223);; /* Exemplo de borda para o card */
+  border-radius: 8px; /* Deixa os cantos arredondados, opcional */
+  overflow: hidden; /* Par */
+  mat-dialog-content {
+    width: 35vw;
+    h2 {
+      color: aliceblue !important;
+      font-size: 2.1em;
+      text-shadow: #1d1212 1px 1px 2px;
+    }
+    text-align: center !important;
+    color: aliceblue !important;
+    font-size: 1.1em;
+    text-shadow: #1d1212 1px 1px 2px;
+  }
+
+  mat-dialog-actions {
+
+    button {
+      padding: 1.5%;
+      margin-right: 8px;
+      border-radius: 5px;
+    }
+
+  }
 }

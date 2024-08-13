@@ -33,14 +33,16 @@ div.local-center {
       }
       .local-img {
         display: flex;
-        justify-content: center;
-        align-items: center;
+       justify-content: center;
+       align-items: center;
       }
-      .local-img > img {
+      .local-img > img  {
         border: solid 2px rgba(10, 10, 10, 0.3);
         border-radius: 3%;
-        width: 90%;
-        height: auto;
+       width: 90%;
+       min-height: max-content;
+
+
       }
     }
   }

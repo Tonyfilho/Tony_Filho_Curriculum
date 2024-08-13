@@ -1,23 +1,54 @@
 <div class="local-center">
   <div class="card">
     <div class="card-body">
-      <div class="local-singin">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end one">
-          <button
-            type="button"
-            class="btn btn-outline-light me-md-2 go-back"
-            (click)="goBack()"
-          >
-            Go Back
-          </button>
-        </div>
+      <div class="local-register">
 
-        <form class="text-center" [formGroup]="autenticationForm"
-        (ngSubmit)="submitForms()">
+
+        <form
+          class="text-center"
+          [formGroup]="this.registerForm"
+          (ngSubmit)="submitForms()"
+        >
           <div class="row">
             <div class="col-md-6 offset-md-3">
-
-              <!-- Email -->
+              <!-- --------------------------------Name -->
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="name"
+                  class="form-control"
+                  id="name"
+                  placeholder=" Must be 8-20  long"
+                  formControlName="name"
+                />
+                <!-- Validatiors------------------------------------ -->
+                <!---------------------------------------------- Usando CONTROLS Errors -->
+                @if(!registerForm.controls['name'].valid &&
+                registerForm.controls['name'].touched) {
+                <section>
+                  @if (registerForm.controls['name'].errors?.['required']) {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>Field is mandatory</p>
+                  </small>
+                  <!-- Usando HASERROR -->
+                  } @if (registerForm.hasError('minlength', 'name') ||
+                  registerForm.hasError('maxlength', 'name') ) {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>
+                      {{ "Min name 8 caracters and Max name 16 caracters" }}
+                    </p>
+                  </small>
+                  }
+                </section>
+                }
+              </div>
+              <!-- -------------------------------------Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input
@@ -29,18 +60,17 @@
                 />
                 <!-- Validatiors------------------------------------ -->
                 <!-- Usando CONTROLS Errors -->
-                @if(!autenticationForm.controls['email'].valid &&
-                autenticationForm.controls['email'].touched) {
+                @if(!registerForm.controls['email'].valid &&
+                registerForm.controls['email'].touched) {
                 <section>
-                  @if (autenticationForm.controls['email'].errors?.['required'])
-                  {
+                  @if (registerForm.controls['email'].errors?.['required']) {
                   <small
                     class="warning"
                     style="color: red; padding: 0.5%; font-size: 10px"
                   >
                     <p>Field is mandatory</p>
                   </small>
-                  } @if (autenticationForm.hasError('pattern', 'email')) {
+                  } @if (registerForm.hasError('pattern', 'email')) {
                   <!------------------------------------------------ Usando HASERROR -->
                   <small
                     class="warning"
@@ -54,6 +84,7 @@
                 </section>
                 }
               </div>
+              <!-- -------------------------------------Password -->
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input
@@ -65,12 +96,10 @@
                 />
                 <!-- Validatiors------------------------------------ -->
                 <!---------------------------------------------- Usando CONTROLS Errors -->
-                @if(!autenticationForm.controls['password'].valid &&
-                autenticationForm.controls['password'].touched) {
+                @if(!registerForm.controls['password'].valid &&
+                registerForm.controls['password'].touched) {
                 <section>
-                  @if
-                  (autenticationForm.controls['password'].errors?.['required'])
-                  {
+                  @if (registerForm.controls['password'].errors?.['required']) {
                   <small
                     class="warning"
                     style="color: red; padding: 0.5%; font-size: 10px"
@@ -78,8 +107,8 @@
                     <p>Field is mandatory</p>
                   </small>
                   <!-- Usando HASERROR -->
-                  } @if (autenticationForm.hasError('minlength', 'password') ||
-                  autenticationForm.hasError('maxlength', 'password') ) {
+                  } @if (registerForm.hasError('minlength', 'password') ||
+                  registerForm.hasError('maxlength', 'password') ) {
                   <small
                     class="warning"
                     style="color: red; padding: 0.5%; font-size: 10px"
@@ -97,21 +126,16 @@
               <!-- </form> -->
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
-              <button
-                type="button"
-                class="btn btn-info me-md-2"
-                (mouseover)="this.openDialog()"
-                [disabled]="!this.autenticationForm.invalid"
+
+              <a class="btn btn-dark" role="button" (click)="goBack()"
+                >CANCEL</a
               >
-                REGISTER NOW
-              </button>
-              <a class="btn btn-dark" role="button">Recover Password</a>
               <button
                 type="submit"
                 class="btn btn-primary me-md-2"
-                [disabled]="this.autenticationForm.invalid"
+                [disabled]="this.registerForm.invalid"
               >
-                LOGIN
+                REGISTER
               </button>
             </div>
           </div>
