@@ -105,7 +105,14 @@
               >
                 REGISTER NOW
               </button>
-              <a class="btn btn-dark" role="button">Recover Password</a>
+            
+              <button
+                type="submit"
+                class="btn btn-dark me-md-2"
+                [disabled]="this.autenticationForm.dirty"
+              >
+                Recover Password
+              </button>
               <button
                 type="submit"
                 class="btn btn-primary me-md-2"

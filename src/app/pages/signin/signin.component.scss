@@ -17,7 +17,7 @@ div.local-center {
         // background: linear-gradient(68.15deg, #a3c3dfb3 14.62%, #293244 85.61%);
         background-image: url('./../../../assets/images/background/Autentication.jpeg');
         width: 100%;
-        height: 50vh;
+        min-height: max-content;
         border: solid 1px rgb(126, 200, 223);
         border-radius: 3px;
 
