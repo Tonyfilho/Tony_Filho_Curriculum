@@ -2,10 +2,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../_services/authentication-email.service';
+
 import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 import { CommonModule } from '@angular/common';
 import { ErrorSnackBarService } from '../../_share/pop-up/error-pop-up/error-snack-bar.service';
+import { AuthenticationService } from '../../_services/authentication.service';
+import { DialogRecouverComponent } from '../../_share/pop-up/dialog-recouver/dialog-recouver.component';
+import { DialogPopUpComponent } from '../../_share/pop-up/dialog-pop-up/dialog-pop-up.component';
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-recover',
   standalone: true,
@@ -20,6 +25,7 @@ export class RecouverComponent {
   private route = inject(Router);
   private errorSnackBarService = inject(ErrorSnackBarService);
   recoverForm!: UntypedFormGroup;
+  private dialog = inject(MatDialog);
 
 
 
@@ -51,7 +57,7 @@ export class RecouverComponent {
     ).subscribe(
       {
         next: () => {
-          this.dialogService.openDialogRecouver();
+          this.openDialogRecouver();
           this.route.navigate(['/autentication']);
         },
         error: (err: HttpErrorResponse) => {
@@ -60,6 +66,19 @@ export class RecouverComponent {
         },
       }
     );
+
+  }
+  openDialogSucess = () => {
+    this.dialog.open(DialogPopUpComponent, {
+    });
+
+  }
+
+  openDialogRecouver = () => {
+    this.dialog.open(DialogRecouverComponent, {
+      enterAnimationDuration: '3000ms',
+      exitAnimationDuration: '2000ms'
+    });
 
   }
 

@@ -1,14 +1,15 @@
 
 import { inject, Injectable, signal } from '@angular/core';
 
-import { BehaviorSubject, catchError, from, Observable, throwError } from 'rxjs';
+import { catchError, from, Observable, throwError } from 'rxjs';
 
 import { Location } from '@angular/common';
-import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
+
 import { UnSubscription } from '../_share/UnSubscription';
 
 import { FirebaseApp } from '@angular/fire/app';
 import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, user, User } from '@angular/fire/auth';
+import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 
 
 
@@ -47,7 +48,7 @@ export class AuthenticationService extends UnSubscription {
   currentUserSig = signal<SingIn | null | undefined>(undefined);
 
 
-  constructor(private snackService: ErrorSnackBarService,
+  constructor(private errorSnackService: ErrorSnackBarService, firebaseApp: FirebaseApp, private location: Location,
   ) {
     super();
 
@@ -65,7 +66,7 @@ export class AuthenticationService extends UnSubscription {
   logInWithEmailAndPassword = (parans: SingIn) => {
     const localPromise = signInWithEmailAndPassword(this.auth, parans.email, parans.password!);
     return from(localPromise).pipe(catchError((e: any) => {
-      this.snackService.openErrorSnackBar(5000, e.code);
+      this.errorSnackService.openErrorSnackBar(5000, e.code);
       return throwError(() => e.code);
     }));
   }
