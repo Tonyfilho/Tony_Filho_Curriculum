@@ -1,0 +1,68 @@
+<div class="local-center">
+  <div class="card">
+    <div class="card-body">
+      <div class="local-recover">
+        <form
+          class="text-center"
+          [formGroup]="this.recoverForm"
+          (ngSubmit)="submitForms()"
+        >
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <!-- -------------------------------------Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@example.com"
+                  formControlName="email"
+                />
+                <!-- Validatiors------------------------------------ -->
+                <!-- Usando CONTROLS Errors -->
+                @if(!recoverForm.controls['email'].valid &&
+                recoverForm.controls['email'].touched) {
+                <section>
+                  @if (recoverForm.controls['email'].errors?.['required']) {
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>Field is mandatory</p>
+                  </small>
+                  } @if (recoverForm.hasError('pattern', 'email')) {
+                  <!------------------------------------------------ Usando HASERROR -->
+                  <small
+                    class="warning"
+                    style="color: red; padding: 0.5%; font-size: 10px"
+                  >
+                    <p>
+                      {{ "Pattern Error, Email needs to be youremail@....." }}
+                    </p>
+                  </small>
+                  }
+                </section>
+                }
+              </div>
+
+              <!-- </form> -->
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
+              <a class="btn btn-dark" role="button" (click)="goBack()"
+                >CANCEL</a
+              >
+              <button
+                type="submit"
+                class="btn btn-primary me-md-2"
+                [disabled]="this.recoverForm.invalid"
+              >
+                RECOUVER
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
