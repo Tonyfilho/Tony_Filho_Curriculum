@@ -47,6 +47,9 @@ div.local-center {
     }
   }
 }
+.card-title.local-center {
+ display: flex;
+}
 
 // Este css n esta sendo usando pois implementamos no style.css  um global, este ficou somente para consulta
 .body2 {
