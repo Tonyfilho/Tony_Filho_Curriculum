@@ -2,10 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +21,7 @@ export class RegisterComponent {
 
 
 
-  constructor(private authServices: AuthenticationService, private popUpService: DialogService, private dialog: MatDialog) {
+  constructor(private authServices: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -58,7 +56,6 @@ export class RegisterComponent {
       {
         next: () => {
           this.login();
-          this.authServices.isLoginAuthorization$.next(true);
         },
         error: (err: HttpErrorResponse) => {
           this.route.navigate(['/body']);

@@ -1,13 +1,11 @@
 
 import { inject, Injectable, signal } from '@angular/core';
 
-import { BehaviorSubject, catchError, from, Observable, throwError } from 'rxjs';
+import { catchError, from, Observable, throwError } from 'rxjs';
 
-import { Location } from '@angular/common';
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { UnSubscription } from '../_share/UnSubscription';
 
-import { FirebaseApp } from '@angular/fire/app';
 import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, user, User } from '@angular/fire/auth';
 
 

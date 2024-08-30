@@ -61,7 +61,6 @@ export class SigninComponent implements OnInit {
       {
         next: () => {
           this.login();
-          this.authServices.isLoginAuthorization$.next(true);
         },
         error: (err: HttpErrorResponse) => {
           this.route.navigate(['/body']);

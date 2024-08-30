@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { exhaustMap, from, Observable, of, take } from 'rxjs';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../_services/authentication.service';
 /**
  * 5º Reportar no Providers[...], nosso Interceptor, {
    provide: HTTP_INTERCEPTORS, useClass: HttpAuthenticationInterceptorService, multi: true
