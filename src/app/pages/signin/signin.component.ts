@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 
@@ -14,7 +13,7 @@ import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule,  MatDialogModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
