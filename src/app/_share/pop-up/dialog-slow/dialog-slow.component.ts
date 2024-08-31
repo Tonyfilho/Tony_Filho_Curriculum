@@ -25,6 +25,7 @@ export class DialogSlowComponent implements OnInit {
 
       if (result) {
         this.route.navigateByUrl("/register");
+        this.dialogRef.close();
 
       } else {
         this.route.navigateByUrl("/autentication");

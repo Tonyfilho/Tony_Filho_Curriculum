@@ -17,6 +17,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class RegisterComponent {
 
   private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  private phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
   private fb = inject(UntypedFormBuilder);
   private route = inject(Router);
   registerForm!: UntypedFormGroup;
@@ -28,13 +29,14 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      name: ['', {validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur'}],
+      name: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
       email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
-      password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }]
+      password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
+      phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
 
     });
 
-  //  this.closeDialog();
+    //  this.closeDialog();
 
   }
 
