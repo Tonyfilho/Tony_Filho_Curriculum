@@ -4,6 +4,8 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
+import { DialogSlowComponent } from '../../_share/pop-up/dialog-slow/dialog-slow.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +23,7 @@ export class RegisterComponent {
 
 
 
-  constructor(private authServices: AuthenticationService) {
+  constructor(private authServices: AuthenticationService, public dialogRef: MatDialogRef<DialogSlowComponent>) {
   }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class RegisterComponent {
 
     });
 
+  //  this.closeDialog();
 
   }
 
@@ -72,6 +75,8 @@ export class RegisterComponent {
 
     this.registerForm.reset;
   }
+
+
 
 
 }

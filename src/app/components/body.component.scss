@@ -51,6 +51,11 @@ div.local-center {
  display: flex;
 }
 
+a.nav-link:hover {
+  text-decoration: none;
+  color: rgb(223, 185, 163);
+}
+
 // Este css n esta sendo usando pois implementamos no style.css  um global, este ficou somente para consulta
 .body2 {
   display: grid;

@@ -78,11 +78,11 @@ export class SigninComponent implements OnInit {
     this.autenticationForm.reset;
   }
 
-  openDialog = () => {
+  localOpenDialogRegistration = () => {
     this.dialogService.openDialogRegistration('3000ms', '1500ms');
     this.dialog.afterAllClosed.subscribe(() => {
 
-      if (this.dialogService.sigNalId() === 'mat-mdc-dialog-0') {
+      if (this.dialogService.sigNalId()) {
         this.route.navigateByUrl("/register");
 
       } else {
