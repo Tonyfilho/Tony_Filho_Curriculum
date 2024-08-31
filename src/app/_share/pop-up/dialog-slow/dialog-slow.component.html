@@ -1,28 +1,37 @@
+<span class="localpop-up">
+  <mat-dialog-content>
+    <h2 mat-dialog-title>Are you not register yeat ?</h2>
+  </mat-dialog-content>
+  <mat-dialog-content>
+    Email to {{ "antonio.filho.t0116216@edu.atec.pt" }}
+  </mat-dialog-content>
+  <mat-dialog-content>
+    After your email, you will receive token authorization to allow your
+    register. And then you will be allow login and download of Curriculum.
+  </mat-dialog-content>
 
-
-   <span class="localpop-up">
-     <mat-dialog-content>
-       <h2 mat-dialog-title>Are you not register yeat ?</h2>
-     </mat-dialog-content>
-     <mat-dialog-content>
-       Email to {{ "antonio.filho.t0116216@edu.atec.pt" }}
-     </mat-dialog-content>
-     <mat-dialog-content>
-      After your email, you will receive token authorization to allow your
-       register. And then  you will be allow login and download of Curriculum.
-     </mat-dialog-content>
-
-     <mat-dialog-content>
-       The Token register authorization will have valid by 7 days. After that you
-       must email again to get another Token. After your register will can login.
-     </mat-dialog-content>
-     <mat-dialog-actions>
-       <button mat-button  mat-dialog-close id="goBack" style="background-color: rgb(241, 50, 66);">Go Back</button>
-       <button mat-button id="registration" [mat-dialog-close]="true" cdkFocusInitial style="background-color: rgb(41, 117, 231);">
-         Get Authorization
-       </button>
-     </mat-dialog-actions>
-   </span>
-
-
-
+  <mat-dialog-content>
+    The Token register authorization will have valid by 7 days. After that you
+    must email again to get another Token. After your register will can login.
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+      id="goBack"
+      style="background-color: rgb(241, 50, 66)"
+    >
+      Go Back
+    </button>
+    <!--  mat-dialog-close]="true" consigo capturar este boolean quando for fechado-->
+    <button
+      mat-button
+      id="registration"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      style="background-color: rgb(41, 117, 231)"
+    >
+      Get Authorization
+    </button>
+  </mat-dialog-actions>
+</span>

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { DialogService } from '../dialog-slow.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,21 +15,23 @@ import { DialogService } from '../dialog-slow.service';
 export class DialogSlowComponent implements OnInit {
   dialogRef = inject(MatDialogRef<DialogSlowComponent>);
   dialigService = inject( DialogService);
+  private route = inject(Router);
+
 
 
   ngOnInit(): void {
 
-    // this.dialogRef.afterClosed().subscribe(result => {
-    //   // this.dialigService.sigNalId.set(result);
+    this.dialogRef.afterClosed().subscribe((result: boolean) => {
 
-    //   console.log(`fechou: ${result}`, ' ' , this.dialogRef.id);
-    // });
+      if (result) {
+        this.route.navigateByUrl("/register");
 
-
+      } else {
+        this.route.navigateByUrl("/autentication");
+      }
+    });
   }
 
-  closeDialog = () => {
-    this.dialogRef.close('CloseModal');
-  }
+
 
 }

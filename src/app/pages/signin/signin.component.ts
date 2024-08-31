@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DialogService } from '../../_share/pop-up/dialog-slow.service';
-import { DialogSlowComponent } from '../../_share/pop-up/dialog-slow/dialog-slow.component';
 
 
 
@@ -23,12 +22,11 @@ export class SigninComponent implements OnInit {
   private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   private fb = inject(UntypedFormBuilder);
   private route = inject(Router);
- // dialogRefSlow = inject(MatDialogRef<DialogSlowComponent>);
   autenticationForm!: UntypedFormGroup;
 
 
 
-  constructor(private authServices: AuthenticationService, private dialogService: DialogService, public dialogRef: MatDialogRef<DialogSlowComponent>) {
+  constructor(private authServices: AuthenticationService, private dialogService: DialogService) {
 
   }
 
@@ -38,7 +36,7 @@ export class SigninComponent implements OnInit {
       password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }]
 
     });
-    ;
+
 
   }
 
@@ -82,30 +80,6 @@ export class SigninComponent implements OnInit {
 
   localOpenDialogRegistration = () => {
     this.dialogService.openDialogRegistration('3000ms', '1500ms');
-    // this.dialog.afterAllClosed.subscribe(() => {
-
-    //   if (this.dialogService.sigNalId()) {
-    //     this.route.navigateByUrl("/register");
-
-    //   } else {
-    //     this.goBack();
-    //   }
-
-    // });
-    this.dialogRef.afterClosed().subscribe((result: boolean) => {
-      console.log("dentro do after");
-      if (result) {
-        this.route.navigateByUrl("/register");
-
-      } else {
-        this.goBack();
-      }
-    });
-
-
-
-
-
   };
 
 }
