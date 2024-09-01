@@ -11,8 +11,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-register',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './register.componentcopy.html',
-  styleUrl: './register.componentcopy.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 

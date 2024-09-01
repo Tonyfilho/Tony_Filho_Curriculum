@@ -1,0 +1,289 @@
+div.local-center {
+  margin-top: 21vh;
+  display: flex;
+
+  justify-content: center;
+
+  .card {
+    background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
+    // background-color:  rgb(163, 195, 223);
+    margin: 0;
+    padding: 0;
+    width: 60%;
+    .card-body {
+      .local-register {
+        min-width: 100%;
+        min-height: 100%;
+        padding: 8vh;
+        background-image: url("./../../../assets/images/background/RegisterPage2.jpeg");
+        background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+        background-position: center; /* Centraliza a imagem dentro do card */
+        background-repeat: no-repeat; /* Evita que a imagem se repita */
+        border: solid 1px rgb(126, 200, 223);; /* Exemplo de borda para o card */
+        border-radius: 8px; /* Deixa os cantos arredondados, opcional */
+        overflow: hidden; /* Par */
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .text-center {
+          width: 75%;
+        }
+      }
+    }
+  }
+}
+button , a{
+  width: 14vh;
+  padding: 1%;
+}
+label {
+  text-align: center !important;
+  color: aliceblue !important;
+  font-size: 1.5em;
+  text-shadow: #1d1212 1px 1px 2px;
+}
+
+/* Smartphones */
+@media (max-width: 600px) {
+  div.local-center {
+    height: max-content;
+  }
+  .local-not-found {
+    padding: 9vw !important;
+    min-height: 60vh;
+  }
+  div.col-md-6 {
+    font-size: 12px !important;
+    width: 100%;
+  }
+
+  input {
+    font-size: 12px !important;
+    width: 100%;
+  }
+  section {
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+  button {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+  }
+  button.go-back {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+  }
+
+  a {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 4%;
+  }
+}
+
+/* Tablets em modo retrato */
+@media (min-width: 601px) and (max-width: 768px) {
+  div.local-center {
+    height: max-content;
+  }
+  .local-not-found {
+    padding: 7vh !important;
+    min-height: 60vh;
+  }
+  div.col-md-6 {
+    font-size: 12px !important;
+    width: 100%;
+  }
+
+  input {
+    font-size: 12px !important;
+    width: 24vw;
+  }
+  section {
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+  button {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+  }
+  button.go-back {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+  }
+
+  a {
+    width: 24vw;
+    height: 4vh;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 4%;
+  }
+}
+
+/* Tablets em modo paisagem e desktops pequenos */
+@media (min-width: 769px) and (max-width: 1024px) {
+  div.local-center {
+    margin-top: 25vh;
+    height: max-content;
+  }
+  .local-not-found {
+    padding: 4vh !important;
+    min-height: 55vh;
+  }
+  div.col-md-6 {
+    font-size: 16px !important;
+    width: 100%;
+  }
+  .offset-md-3 {
+    margin: 0;
+  }
+
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
+  }
+  section {
+    width: 100%;
+    height: 8vh !important;
+  }
+
+  section > small > p {
+    height: 5vh !important;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+
+  input {
+    font-size: 16px !important;
+    width: 100%;
+  }
+  button {
+    width: 14vw;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+  button.go-back {
+    width: 10vw;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+
+  a {
+    width: 16vw;
+    height: 4vh;
+    font-size: 11px !important;
+    margin: 0 !important;
+    padding: 0.5%;
+  }
+}
+
+/* Desktops e telas grandes */
+@media (min-width: 1025px) {
+  div.local-center {
+    margin-top: 25vh;
+    height: max-content;
+  }
+  .local-not-found {
+    padding: 5vh !important;
+    min-height: 55vh;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
+  }
+
+  div.col-md-6 {
+    font-size: 18px !important;
+    width: 100%;
+  }
+  .offset-md-3 {
+    margin: 0;
+  }
+  input {
+    font-size: 18px;
+    width: 100%;
+  }
+  button {
+    width: 13vw;
+    height: 4vh;
+    font-size: 14px !important;
+  }
+  button.go-back {
+    width: 10vw;
+    height: 4vh;
+    font-size: 14px !important;
+  }
+
+  a {
+    width: 13vw;
+    height: 4vh;
+    font-size: 12px !important;
+    margin: 0;
+    padding: 0;
+    padding-top: 1.5%;
+  }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1431px) {
+  div.local-center {
+    margin-top: 25vh;
+    height: max-content;
+  }
+  .local-not-found {
+    padding: 3vh !important;
+    width: 100%;
+  }
+  .d-grid.gap-2.d-md-flex.justify-content-md-end {
+    width: 100%;
+  }
+
+  div.col-md-6 {
+    font-size: 18px !important;
+    width: 100%;
+  }
+  .offset-md-3 {
+    margin: 0;
+  }
+  input {
+    font-size: 18px !important;
+    width: 100%;
+  }
+  button {
+    width: 20%;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+  button.go-back {
+    width: auto;
+    height: 4vh;
+    font-size: 12px !important;
+  }
+
+  a {
+    width: 20%;
+    height: 4vh;
+    font-size: 14px !important;
+    margin: 0 !important;
+    // padding: 0.7%;
+  }
+}
