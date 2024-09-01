@@ -36,7 +36,7 @@ export class RegisterComponent {
 
     });
 
-    //  this.closeDialog();
+    
 
   }
 
