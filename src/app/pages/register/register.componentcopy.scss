@@ -12,7 +12,6 @@ div.local-center {
   margin-top: 21vh;
   display: flex;
 
-
   justify-content: center;
 
   .card {
@@ -20,7 +19,7 @@ div.local-center {
     // background-color:  rgb(163, 195, 223);
     margin: 0;
     padding: 0;
-    width: 60%;
+    width: 70%;
     .card-body {
       .local-register {
         min-width: 100%;
@@ -30,39 +29,17 @@ div.local-center {
         background-size: cover; /* Ajusta a imagem para cobrir todo o card */
         background-position: center; /* Centraliza a imagem dentro do card */
         background-repeat: no-repeat; /* Evita que a imagem se repita */
-        border: solid 1px rgb(126, 200, 223);; /* Exemplo de borda para o card */
+        border: solid 1px rgb(126, 200, 223); /* Exemplo de borda para o card */
         border-radius: 8px; /* Deixa os cantos arredondados, opcional */
         overflow: hidden; /* Par */
         display: flex;
         align-items: center;
         justify-content: space-around;
 
-        .text-center {
-          .grid.text-center {
-            color: rgb(22, 22, 21);
-            justify-content: space-around;
-            
-
-
-          }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        .form-text-center {
+          color: rgb(22, 22, 21);
+          display: flex;
+          justify-content: space-evenly;
 
         }
       }

@@ -3,10 +3,11 @@
     <div class="card-body">
       <div class="local-register">
         <form
-          class="text-center"
+          class="form-text-center"
           [formGroup]="this.registerForm"
           (ngSubmit)="submitForms()"
         >
+        <div class="local-input">
           <div class="container px-4 text-center">
             <div class="row gx-5">
               <!-- Name -->
@@ -67,7 +68,8 @@
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="local-button">
           <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
             <a class="btn btn-dark" role="button" (click)="goBack()">CANCEL</a>
             <button
@@ -78,6 +80,10 @@
               REGISTER
             </button>
           </div>
+
+
+        </div>
+
         </form>
       </div>
     </div>
