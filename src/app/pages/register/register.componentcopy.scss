@@ -19,12 +19,11 @@ div.local-center {
     // background-color:  rgb(163, 195, 223);
     margin: 0;
     padding: 0;
-    width: 70%;
+    min-width: 70%;
     .card-body {
       .local-register {
         min-width: 100%;
         min-height: 100%;
-        padding: 8vh;
         background-image: url("./../../../assets/images/background/RegisterPage2.jpeg");
         background-size: cover; /* Ajusta a imagem para cobrir todo o card */
         background-position: center; /* Centraliza a imagem dentro do card */
@@ -32,14 +31,15 @@ div.local-center {
         border: solid 1px rgb(126, 200, 223); /* Exemplo de borda para o card */
         border-radius: 8px; /* Deixa os cantos arredondados, opcional */
         overflow: hidden; /* Par */
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-around;
+        padding: 6vh;
 
         .form-text-center {
           color: rgb(22, 22, 21);
-          display: flex;
-          justify-content: space-evenly;
+          // display: flex;
+          // justify-content: space-evenly;
 
         }
       }
