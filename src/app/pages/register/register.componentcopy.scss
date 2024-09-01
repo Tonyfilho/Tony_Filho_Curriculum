@@ -1,0 +1,71 @@
+.btn.ddi {
+  color: aliceblue;
+  background-color: rgb(28, 112, 238);
+  border-color: var(--bs-btn-hover-border-color);
+}
+.btn:hover {
+  background-color: rgb(2, 34, 82);
+  border-color: var(--bs-btn-hover-border-color);
+}
+
+div.local-center {
+  margin-top: 21vh;
+  display: flex;
+
+
+  justify-content: center;
+
+  .card {
+    background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);
+    // background-color:  rgb(163, 195, 223);
+    margin: 0;
+    padding: 0;
+    width: 60%;
+    .card-body {
+      .local-register {
+        min-width: 100%;
+        min-height: 100%;
+        padding: 8vh;
+        background-image: url("./../../../assets/images/background/RegisterPage2.jpeg");
+        background-size: cover; /* Ajusta a imagem para cobrir todo o card */
+        background-position: center; /* Centraliza a imagem dentro do card */
+        background-repeat: no-repeat; /* Evita que a imagem se repita */
+        border: solid 1px rgb(126, 200, 223);; /* Exemplo de borda para o card */
+        border-radius: 8px; /* Deixa os cantos arredondados, opcional */
+        overflow: hidden; /* Par */
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .text-center {
+          .grid.text-center {
+            color: rgb(22, 22, 21);
+            justify-content: space-around;
+            
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+      }
+    }
+  }
+}
