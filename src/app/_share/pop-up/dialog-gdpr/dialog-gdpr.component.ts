@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { DialogService } from '../dialog.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../_services/authentication.service';
 
 @Component({
   selector: 'app-dialog-gdpr',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
 export class DialogGdprComponent {
 
   dialogRef = inject(MatDialogRef<DialogGdprComponent>);
-  dialigService = inject( DialogService);
+  dialigService = inject(DialogService);
+  authenticationService = inject(AuthenticationService);
   private route = inject(Router);
 
 
@@ -23,11 +25,12 @@ export class DialogGdprComponent {
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
 
       if (result) {
-        
+        this.authenticationService.gdprAccessSig.set(true);
         this.route.navigateByUrl("/autentication");
 
 
       } else {
+        this.authenticationService.gdprAccessSig.set(false);
         this.route.navigateByUrl("/body");
       }
     });

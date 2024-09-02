@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { DialogService } from '../dialog.service';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../_services/authentication.service';
+import { DialogService } from '../dialog.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ import { AuthenticationService } from '../../../_services/authentication.service
 export class DialogSlowComponent implements OnInit {
   dialogRef = inject(MatDialogRef<DialogSlowComponent>);
   dialigService = inject( DialogService);
-  
+
   private route = inject(Router);
 
 
