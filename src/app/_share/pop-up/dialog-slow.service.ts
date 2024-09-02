@@ -14,6 +14,8 @@ export class DialogService {
 
   openDialogRegistration = (enterAnimationDuration: string, exitAnimationDuration: string) => {
     this.dialog.open(DialogSlowComponent, {
+      height: 'max-content',
+      width: 'max-content',
       enterAnimationDuration,
       exitAnimationDuration,
     });
