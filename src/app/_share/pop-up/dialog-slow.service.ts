@@ -30,8 +30,8 @@ export class DialogService {
 
   openDialogRegistrationGDPR = () => {
   this.dialog.open(DialogGdprComponent, {
-    height: 'max-content',
     width: 'max-content',
+    height: 'max-content',
     enterAnimationDuration: '3000ms',
     exitAnimationDuration:  '1500ms'
   });

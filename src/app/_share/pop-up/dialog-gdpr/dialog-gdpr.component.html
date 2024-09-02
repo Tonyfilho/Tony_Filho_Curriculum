@@ -1,97 +1,101 @@
-<span class="localpop-up">
-  <mat-dialog-actions>
-    <button
-      mat-button
-      mat-dialog-close
-      id="goBack"
-      style="background-color: rgb(241, 50, 66)"
-    >
-      Go Back
-    </button>
-    <!--  mat-dialog-close]="true" consigo capturar este boolean quando for fechado-->
-    <button
-      mat-button
-      id="registration"
-      [mat-dialog-close]="true"
-      cdkFocusInitial
-      style="background-color: rgb(41, 117, 231)"
-    >
-      Accept and Go To
-    </button>
-  </mat-dialog-actions>
-  <mat-dialog-content>RGPT</mat-dialog-content>
-  <mat-dialog-content>
-    **Privacy Policy and Consent for Data Processing**
-  </mat-dialog-content>
-  <mat-dialog-content>
-    I Antonio Filho, IT
-    Developer take your data privacy very seriously and are committed to
-    protecting the personal information you share with us. This document aims to
-    inform you about how we collect, use, and protect your personal data in
-    compliance with the General Data Protection Regulation (GDPR).
 
-  </mat-dialog-content>
+  <mat-dialog-content class="localpop-up-gdpr">
+    <mat-dialog-actions>
+      <button
+        mat-button
+        mat-dialog-close
+        id="goBack"
+        style="background-color: rgb(241, 50, 66)"
+      >
+        Go Back
+      </button>
+      <!--  OBS..............mat-dialog-close]="true" consigo capturar este boolean quando for fechado-->
+      <button
+        mat-button
+        id="registration"
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+        style="background-color: rgb(41, 117, 231)"
+      >
+        Accept and go to Authentication
+      </button>
+    </mat-dialog-actions>
+    <mat-dialog-content>RGPT or GDPR</mat-dialog-content>
+    <mat-dialog-content>
+      **Privacy Policy and Consent for Data Processing**
+    </mat-dialog-content>
+    <mat-dialog-content>
+      I Antonio Filho, IT
+      Developer take your data privacy very seriously and are committed to
+      protecting the personal information you share with us. This document aims to
+      inform you about how we collect, use, and protect your personal data in
+      compliance with the General Data Protection Regulation (GDPR).
 
-  <mat-dialog-content>
-    **1. Personal Data Collected** We may collect the following types of
-    personal data when you use our site: - Contact information (such as name,
-    email address, phone number); - Browsing data (such as IP address,
-    geographic location, browser type, pages visited, and time spent); -
-    Information voluntarily provided by you, such as when filling out contact or
-    registration forms.
-  </mat-dialog-content>
-  <mat-dialog-content>
-    **2. Purpose of Data Processing** The personal data we collect will be used
-    for the following purposes: - To provide and improve the services offered on
-    our site; - To personalize the user experience; - To send relevant
-    communications, such as service updates, newsletters, or promotions (only
-    with your consent); - To comply with legal and regulatory obligations.
-  </mat-dialog-content>
-  <mat-dialog-content>
-    **3. Legal Basis for Data Processing** The processing of your personal data
-    is based on: - Your consent, when necessary, such as for sending marketing
-    communications; - The performance of a contract or pre-contractual measures;
-    - Compliance with legal obligations; - Our legitimate interest, where
-    applicable.
-  </mat-dialog-content>
+    </mat-dialog-content>
 
-  <mat-dialog-content>
-    **4. Data Sharing** We do not share your personal data with third parties
-    except when necessary to comply with legal obligations or to provide the
-    services you have requested. When sharing is necessary, we ensure that third
-    parties also comply with the GDPR.
-  </mat-dialog-content>
+    <mat-dialog-content>
+      **1. Personal Data Collected** We may collect the following types of
+      personal data when you use our site: - Contact information (such as name,
+      email address, phone number); - Browsing data (such as IP address,
+      geographic location, browser type, pages visited, and time spent); -
+      Information voluntarily provided by you, such as when filling out contact or
+      registration forms.
+    </mat-dialog-content>
+    <mat-dialog-content>
+      **2. Purpose of Data Processing** The personal data we collect will be used
+      for the following purposes: - To provide and improve the services offered on
+      our site; - To personalize the user experience; - To send relevant
+      communications, such as service updates, newsletters, or promotions (only
+      with your consent); - To comply with legal and regulatory obligations.
+    </mat-dialog-content>
+    <mat-dialog-content>
+      **3. Legal Basis for Data Processing** The processing of your personal data
+      is based on: - Your consent, when necessary, such as for sending marketing
+      communications; - The performance of a contract or pre-contractual measures;
+      - Compliance with legal obligations; - Our legitimate interest, where
+      applicable.
+    </mat-dialog-content>
 
-  <mat-dialog-content>
-    **5. Your Rights** Under the GDPR, you have the right to: - Access and
-    request a copy of your personal data that we hold; - Rectify any inaccurate
-    or incomplete personal data; - Request the deletion of your personal data,
-    where applicable; - Restrict the processing of your data in certain
-    circumstances; - Object to the processing of your personal data based on
-    legitimate interests; - Request the portability of your data to another
-    controller.
-  </mat-dialog-content>
-  <mat-dialog-content>
-    **6. Data Security** We have implemented appropriate technical and
-    organizational measures to protect your personal data against unauthorized
-    access, loss, destruction, or damage.
-  </mat-dialog-content>
+    <mat-dialog-content>
+      **4. Data Sharing** We do not share your personal data with third parties
+      except when necessary to comply with legal obligations or to provide the
+      services you have requested. When sharing is necessary, we ensure that third
+      parties also comply with the GDPR.
+    </mat-dialog-content>
 
-  <mat-dialog-content>
-    **7. Changes to This Policy** We may update this privacy policy
-    periodically. We recommend that you review this document regularly to stay
-    informed about how we are protecting your data. **8. Contact** If you have
-    any questions about this privacy policy or how we handle your personal data,
-    please contact us at
-    {{ "filhotony777@gmail.com" }} or by phone at 0351918203784. **Consent** By
-    continuing to use our site, you expressly consent to the collection and
-    processing of your personal data as described in this privacy policy.
-  </mat-dialog-content>
-  <mat-dialog-content>
-    This text can be adjusted according to the specific needs of your website
-    and how you process the personal data of your users. It’s also important to
-    ensure that users can easily access this policy and provide their consent in
-    a free, informed, and explicit manner.
-  </mat-dialog-content>
+    <mat-dialog-content>
+      **5. Your Rights** Under the GDPR, you have the right to: - Access and
+      request a copy of your personal data that we hold; - Rectify any inaccurate
+      or incomplete personal data; - Request the deletion of your personal data,
+      where applicable; - Restrict the processing of your data in certain
+      circumstances; - Object to the processing of your personal data based on
+      legitimate interests; - Request the portability of your data to another
+      controller.
+    </mat-dialog-content>
+    <mat-dialog-content>
+      **6. Data Security** We have implemented appropriate technical and
+      organizational measures to protect your personal data against unauthorized
+      access, loss, destruction, or damage.
+    </mat-dialog-content>
 
-</span>
+    <mat-dialog-content>
+      **7. Changes to This Policy** We may update this privacy policy
+      periodically. We recommend that you review this document regularly to stay
+      informed about how we are protecting your data. **8. Contact** If you have
+      any questions about this privacy policy or how we handle your personal data,
+      please contact us at
+      {{ "filhotony777@gmail.com" }} or by phone at 0351918203784. **Consent** By
+      continuing to use our site, you expressly consent to the collection and
+      processing of your personal data as described in this privacy policy.
+    </mat-dialog-content>
+    <mat-dialog-content>
+      This text can be adjusted according to the specific needs of your website
+      and how you process the personal data of your users. It’s also important to
+      ensure that users can easily access this policy and provide their consent in
+      a free, informed, and explicit manner.
+    </mat-dialog-content>
+
+
+  </mat-dialog-content >
+
+
