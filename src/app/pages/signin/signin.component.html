@@ -100,8 +100,8 @@
               <button
                 type="button"
                 class="btn btn-info me-md-2"
-                (mouseover)="this.localOpenDialogRegistration()"
-                [disabled]="!this.autenticationForm.invalid"
+                (mousedown)="this.localOpenDialogRegistration()"
+                [disabled]="this.autenticationForm.dirty || this.autenticationForm.touched"
               >
                 REGISTER NOW
               </button>
@@ -109,7 +109,7 @@
               <button
                 type="submit"
                 class="btn btn-dark me-md-2"
-                [disabled]="this.autenticationForm.dirty"
+                [disabled]="this.autenticationForm.dirty || this.autenticationForm.touched"
                 [routerLink]="'/recouver'"
               >
                 Recouver Password

@@ -40,7 +40,8 @@
 
         } @else {
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/autentication'">Authentication</a>
+            <!-- <a class="nav-link" [routerLink]="'/autentication'">Authentication</a> -->
+            <a class="nav-link" (mousedown)="openDialogRGPD()">Authentication</a>
           </li>
         }
 

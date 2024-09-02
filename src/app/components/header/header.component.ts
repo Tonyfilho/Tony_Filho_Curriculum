@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { AvatarComponent } from '../../components/avatar/avatar.component';
+import { DialogService } from '../../_share/pop-up/dialog-slow.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { AvatarComponent } from '../../components/avatar/avatar.component';
 export class HeaderComponent {
 
   authentication = inject(AuthenticationService);
+  dialogService = inject(DialogService);
 
 
 
@@ -21,6 +23,11 @@ export class HeaderComponent {
 
   logout() {
     this.authentication.logOut();
+  }
+
+
+  openDialogRGPD() {
+       this.dialogService.openDialogRegistrationGDPR();
   }
 
 }

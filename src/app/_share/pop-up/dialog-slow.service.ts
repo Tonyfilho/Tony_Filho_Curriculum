@@ -2,6 +2,7 @@ import { inject, Injectable, signal, } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogSlowComponent } from "./dialog-slow/dialog-slow.component";
 import { DialogPopUpComponent } from "./dialog-pop-up/dialog-pop-up.component";
+import { DialogGdprComponent } from "./dialog-gdpr/dialog-gdpr.component";
 
 
 
@@ -23,6 +24,18 @@ export class DialogService {
   }
   openDialogSucess = () => {
     this.dialog.open(DialogPopUpComponent, {});
+
+  }
+
+
+  openDialogRegistrationGDPR = () => {
+  this.dialog.open(DialogGdprComponent, {
+    height: 'max-content',
+    width: 'max-content',
+    enterAnimationDuration: '3000ms',
+    exitAnimationDuration:  '1500ms'
+  });
+
 
   }
 
