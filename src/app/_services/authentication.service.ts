@@ -43,11 +43,13 @@ export class AuthenticationService extends UnSubscription {
    * 3ª Irmos no AppComponent e setar o Signal
    */
   currentUserSig = signal<SingIn | null | undefined>(undefined);
+  gdprAccessSig = signal<boolean >(false);
 
 
   constructor(private snackService: ErrorSnackBarService,
   ) {
     super();
+
 
 
   }

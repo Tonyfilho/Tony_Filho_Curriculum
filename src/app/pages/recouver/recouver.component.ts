@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DialogService } from '../../_share/pop-up/dialog-slow.service';
+import { DialogService } from '../../_share/pop-up/dialog.service';
 import { CommonModule } from '@angular/common';
 import { ErrorSnackBarService } from '../../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { AuthenticationService } from '../../_services/authentication.service';

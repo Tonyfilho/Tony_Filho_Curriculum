@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { DialogService } from '../dialog-slow.service';
+import { DialogService } from '../dialog.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,8 +23,9 @@ export class DialogGdprComponent {
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
 
       if (result) {
+        
         this.route.navigateByUrl("/autentication");
-        this.dialogRef.close();
+
 
       } else {
         this.route.navigateByUrl("/body");

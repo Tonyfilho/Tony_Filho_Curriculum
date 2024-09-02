@@ -5,7 +5,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { DialogService } from '../../_share/pop-up/dialog-slow.service';
+import { DialogService } from '../../_share/pop-up/dialog.service';
 
 
 
@@ -36,7 +36,7 @@ export class SigninComponent implements OnInit {
 
     });
 
-    
+
   }
 
 
