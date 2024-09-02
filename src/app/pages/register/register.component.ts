@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { DialogSlowComponent } from '../../_share/pop-up/dialog-slow/dialog-slow.component';
-import { MatDialogRef } from '@angular/material/dialog';
+import { DDIService } from '../../_services/ddi.service';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +23,8 @@ export class RegisterComponent {
 
 
 
-  constructor(private authServices: AuthenticationService, public dialogRef: MatDialogRef<DialogSlowComponent>) {
+  constructor(private authServices: AuthenticationService, private ddiService: DDIService) {
+
   }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class RegisterComponent {
 
     });
 
-    
+  this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
 
   }
 

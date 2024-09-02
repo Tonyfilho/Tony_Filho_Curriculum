@@ -20,8 +20,7 @@ type SingIn = {
   userName?: string
 }
 
-//const app: FirebaseApp = initializeApp(environment.firebase)//OBS: So funciona se usaro construtor
-// const auth = Inject(Auth); /***Não funciona unsado o Inject, tem q ir para construtor */
+
 
 @Injectable({
   providedIn: 'root'

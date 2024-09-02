@@ -12,11 +12,6 @@ import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWit
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 
 
-
-
-
-
-
 type SingIn = {
   email: string;
   password?: string;
@@ -25,6 +20,10 @@ type SingIn = {
 
 //const app: FirebaseApp = initializeApp(environment.firebase)//OBS: So funciona se usaro construtor
 // const auth = Inject(Auth); /***Não funciona unsado o Inject, tem q ir para construtor */
+
+/*************************************OBS******
+ * Quando usamos o AngularFire Não precisamos de INTERCEPTORS, pois o AngularFire ja faz isto
+*/
 
 @Injectable({
   providedIn: 'root'
