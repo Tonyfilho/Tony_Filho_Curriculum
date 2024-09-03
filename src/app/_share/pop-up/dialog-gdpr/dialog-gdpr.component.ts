@@ -30,7 +30,6 @@ export class DialogGdprComponent {
 
 
       } else {
-        this.authenticationService.gdprAccessSig.set(false);
         this.route.navigateByUrl("/body");
       }
     });
