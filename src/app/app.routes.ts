@@ -2,9 +2,10 @@
 
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { routesGDPRGuard, routesUserGuard } from './_guards/routes-user.guard';
 
-import { BodyComponent } from './components/body.component';
-import { routesGDPRGuard, routesUserGuard } from './_services/routes-user.guard';
+
+
 
 
 export const routes: Routes = [
