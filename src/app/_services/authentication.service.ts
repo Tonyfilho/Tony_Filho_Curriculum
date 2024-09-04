@@ -42,6 +42,7 @@ export class AuthenticationService extends UnSubscription {
    * 3ª Irmos no AppComponent e setar o Signal
    */
   currentUserSig = signal<SingIn | null | undefined>(undefined);
+  isAuthUserSig = signal<boolean>(false);
   gdprAccessSig = signal<boolean >(false);
 
 

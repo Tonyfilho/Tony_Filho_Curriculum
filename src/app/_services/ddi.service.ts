@@ -24,7 +24,8 @@ export class DDIService extends UnSubscription {
   }
 
   getDDI = () => {
-    return this.httpService.get<any>(`https://servicodados.ibge.gov.br/api/v1/paises/${'BR'}`);
+    // return this.httpService.get<any>(`https://servicodados.ibge.gov.br/api/v1/paises/${'BR'}`);
+    return this.httpService.get<any>(`api/paises`);
 
 
   }

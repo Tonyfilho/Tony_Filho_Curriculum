@@ -23,7 +23,10 @@ export class DialogService {
 
   }
   openDialogSucess = () => {
-    this.dialog.open(DialogPopUpComponent, {});
+    this.dialog.open(DialogPopUpComponent, {
+      width: '30vw',
+      height: '20vw',
+    });
 
   }
 

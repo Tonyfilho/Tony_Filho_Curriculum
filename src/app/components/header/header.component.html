@@ -3,6 +3,9 @@
   <div class="login">
     <ul class="nav">
       <li class="nav-item">
+        <a class="nav-link" routerLink="/body">Home Land </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="https://ebook-front-with-angular.web.app/"  target="_blank" >Ebook Angular16 and 18 </a>
       </li>
       <li class="nav-item">
@@ -35,7 +38,7 @@
       <ul class="nav">
         @if (this.authentication.currentUserSig() != null) {
           <li class="nav-item" (click)="logout()">
-            <a class="nav-link" href="#">Logout </a>
+            <a class="nav-link" [routerLink]="'/about'">Logout </a>
           </li>
 
         } @else {

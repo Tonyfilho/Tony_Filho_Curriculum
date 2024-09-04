@@ -1,4 +1,4 @@
-<span class="localpop-up">
+<mat-dialog-content class="localpop-up">
   <mat-dialog-content>
     <h2 mat-dialog-title>All Right you Are LogIn</h2>
   </mat-dialog-content>
@@ -9,8 +9,8 @@
   </mat-dialog-content>
   <mat-dialog-actions>
 
-    <button mat-button id="Success" mat-dialog-close cdkFocusInitial style="background-color: rgb(41, 117, 231); width: 4vw;">
+    <button mat-button id="Success" [mat-dialog-close]="true" cdkFocusInitial style="background-color: rgb(41, 117, 231); width: 4vw;">
      Close
     </button>
   </mat-dialog-actions>
-</span>
+</mat-dialog-content>

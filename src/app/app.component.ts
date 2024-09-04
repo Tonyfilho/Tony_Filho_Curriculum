@@ -37,9 +37,11 @@ export class AppComponent  extends UnSubscription implements OnInit {
       if (user) {
         const localUser: SingIn = { email: user?.email!, password: '', userName: user?.displayName! };
         this.authService.currentUserSig.set(localUser);
+        this.authService.isAuthUserSig.set(true);
       } else {
 
         this.authService.currentUserSig.set(null);
+        this.authService.isAuthUserSig.set(false);
 
       }
       console.log("appUser: ", this.authService.currentUserSig())
