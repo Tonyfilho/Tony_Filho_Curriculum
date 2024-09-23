@@ -3,6 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { DialogSlowComponent } from "./dialog-slow/dialog-slow.component";
 import { DialogPopUpComponent } from "./dialog-pop-up/dialog-pop-up.component";
 import { DialogGdprComponent } from "./dialog-gdpr/dialog-gdpr.component";
+import { DialogSuccessComponent } from "./dialog-success/dialog-success.component";
 
 
 
@@ -22,7 +23,7 @@ export class DialogService {
     });
 
   }
-  openDialogSuccess = () => {
+  openDialogSingInSuccess = () => {
     this.dialog.open(DialogPopUpComponent, {
       width: '30vw',
       height: '20vw',
@@ -32,16 +33,24 @@ export class DialogService {
 
 
   openDialogRegistrationGDPR = () => {
-  this.dialog.open(DialogGdprComponent, {
-    width: 'max-content',
-    height: 'max-content',
-    enterAnimationDuration: '3000ms',
-    exitAnimationDuration:  '1500ms'
-  });
-
+    this.dialog.open(DialogGdprComponent, {
+      width: 'max-content',
+      height: 'max-content',
+      enterAnimationDuration: '3000ms',
+      exitAnimationDuration: '1500ms'
+    });
 
   }
 
+  openDialogSuccess = () => {
+    this.dialog.open(DialogSuccessComponent, {
+      width: 'max-content',
+      height: 'max-content',
+      enterAnimationDuration: '3000ms',
+      exitAnimationDuration: '1500ms'
+    });
+
+  }
 
 
 

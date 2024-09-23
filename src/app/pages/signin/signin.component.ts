@@ -72,7 +72,7 @@ export class SigninComponent implements OnInit {
   }
 
   login = () => {
-    this.dialogService.openDialogSuccess();
+    this.dialogService.openDialogSingInSuccess();
     this.route.navigate(['/home']);
     this.autenticationForm.reset;
   }
