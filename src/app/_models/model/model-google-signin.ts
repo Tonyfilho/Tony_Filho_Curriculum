@@ -1,4 +1,4 @@
-import { IGoogleToken } from '../interface/google-token';
+import { IGoogleToken } from '../interface/share-interfaces';
 
 
 

@@ -1,10 +1,27 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { collection, addDoc, getFirestore, doc, setDoc } from "firebase/firestore";
+import { IRegister } from "../_models/interface/share-interfaces";
+import { ErrorSnackBarService } from "../_share/pop-up/error-pop-up/error-snack-bar.service";
 
+const firestore = getFirestore();
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreDatabaseService {
+ popError = inject(ErrorSnackBarService);
 
-  constructor() { }
+  saveRegister =  (data: IRegister) => {
+    const register = doc(firestore, 'register');
+    try {
+      setDoc(register, data );
+
+     console.log("Document written with ID: ", register.id);
+   } catch (e) {
+    this.popError.openErrorSnackBar(3000, e as string);
+   }
+
+
+ }
+
 }
