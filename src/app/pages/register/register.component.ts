@@ -36,7 +36,7 @@ export class RegisterComponent {
 
     });
 
-  this.ddiService.getDDI().subscribe(ddi => console.log(ddi.id));
+  this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
 
   }
 
