@@ -21,7 +21,7 @@ export interface IRegister {
   displayName: string,
   email: string;
   password: string;
-  phone?: string;
+  phone: string;
 
 }
 export interface IDdi {

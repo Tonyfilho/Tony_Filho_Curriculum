@@ -1,9 +1,9 @@
 import { inject, Injectable } from "@angular/core";
-import { addDoc, collection, CollectionReference, doc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { from } from "rxjs";
 import { IDdi, IRegister } from "../_models/interface/share-interfaces";
 import { DialogService } from "../_share/pop-up/dialog.service";
 import { ErrorSnackBarService } from "../_share/pop-up/error-pop-up/error-snack-bar.service";
-import { from, Observable } from "rxjs";
 
 const fireBaseddiData: IDdi[] = [
   { "codigo": "004", "fone": "0093", "iso": "AF", "iso3": "AFG", "nome": "Afeganistão", "nomeFormal": "República Islâmica do Afeganistão" },
@@ -259,7 +259,7 @@ export class FirestoreDatabaseService {
 
 
   saveRegister = (data: IRegister) => {
-    const register = doc(firestore, 'register');
+    const register = doc(firestore, 'register', data.phone);
     try {
       setDoc(register, data);
       this.popSuccess.openDialogSuccess();
@@ -268,8 +268,6 @@ export class FirestoreDatabaseService {
     } catch (e) {
       this.popError.openErrorSnackBar(3000, e as string);
     }
-
-
   }
 
 
@@ -286,13 +284,13 @@ export class FirestoreDatabaseService {
 
 
   saveDDIObservable = () => {
-    let setLocal = "";
+    let setLocal;
     fireBaseddiData.forEach((element: IDdi) => {
       const docLocal = doc(firestore, 'ddiObservable', element.fone);
-    return  setLocal = setDoc(docLocal, element, { merge: true });
+     setLocal = setDoc(docLocal, element, { merge: true });
+     from(setLocal);
 
     });
-   from(setLocal);
 
   }
 

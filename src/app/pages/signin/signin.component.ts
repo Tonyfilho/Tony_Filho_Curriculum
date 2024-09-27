@@ -37,7 +37,8 @@ export class SigninComponent implements OnInit {
 
     });
 
-    this.fireStoreService.saveddiWithPromise();
+    /**Ja foi feito o POST no Firebase */
+    //this.fireStoreService.saveDDIObservable();
   }
 
 
