@@ -1,0 +1,79 @@
+<div class="local-center">
+  <div class="card">
+    <div class="card-body">
+      <div class="local-register">
+        <form
+          class="form-text-center"
+          [formGroup]="this.registerForm"
+          (ngSubmit)="submitForms()"
+        >
+          <div class="local-input">
+
+            <div class="container text-center">
+              <div class="row g-2">
+                <div class="col-6">
+                  <div class="p-3">Name</div>
+                  <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Text input with checkbox"
+                    />
+                </div>
+                <div class="col-6">
+                  <div class="p-3">Password</div>
+                  <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Password"
+                    />
+                </div>
+                <div class="col-6">
+                  <div class="p-3">Email</div>
+                  <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Email"
+                    />
+                </div>
+                <div class="col-6">
+                  <div class="p-3">Phone</div>
+                  <div class="input-group mb-3">
+                    <button type="button" class="btn ddi btn-outline-secondary">DDI</button>
+                    <button type="button" class="btn ddi btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+
+                    </ul>
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <div class="local-button">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
+              <a class="btn btn-dark" role="button" (click)="goBack()"
+                >CANCEL</a
+              >
+              <button
+                type="submit"
+                class="btn btn-primary me-md-2"
+                [disabled]="this.registerForm.invalid"
+              >
+                SING UP
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

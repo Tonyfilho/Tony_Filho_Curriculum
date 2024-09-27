@@ -15,9 +15,9 @@ export interface IGoogleToken {
 }
 export interface IRegister {
 
-  avatar?: string;
-  companyName?: string;
-  country?: string;
+  avatar: string;
+  companyName: string;
+  country: string;
   displayName: string,
   email: string;
   password: string;

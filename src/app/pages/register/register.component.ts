@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DDIService } from '../../_services/ddi.service';
+import { IRegister } from '../../_models/interface/share-interfaces';
 
 @Component({
   selector: 'app-register',
@@ -17,9 +18,20 @@ export class RegisterComponent {
 
   private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   private phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
-  private fb = inject(UntypedFormBuilder);
   private route = inject(Router);
-  registerForm!: UntypedFormGroup;
+  /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
+  private fb = inject(NonNullableFormBuilder);
+ protected registerForm = this.fb.group({
+
+  avatar: ['', { validators: [Validators.required], updateOn: 'blur' }],
+  country: ['', { validators: [Validators.required], updateOn: 'blur' }],
+  companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
+  displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
+  email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
+  password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
+  phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
+
+});
 
 
 
@@ -28,13 +40,7 @@ export class RegisterComponent {
   }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      name: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
-      email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
-      password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
-      phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
 
-    });
 
   this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
 
@@ -55,8 +61,8 @@ export class RegisterComponent {
     }
 
     this.authServices.logInWithEmailAndPassword({
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password
+      email: <string>this.registerForm.value.email,
+      password: <string> this.registerForm.value.password
     }).subscribe(
       {
         next: () => {
