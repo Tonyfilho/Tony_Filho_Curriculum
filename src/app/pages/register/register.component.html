@@ -17,6 +17,7 @@
                       type="text"
                       class="form-control"
                       aria-label="Text input with checkbox"
+                      formControlName="displayName"
                     />
                 </div>
                 <div class="col-6">
@@ -25,6 +26,7 @@
                       type="text"
                       class="form-control"
                       aria-label="Password"
+                      formControlName="password"
                     />
                 </div>
                 <div class="col-6">
@@ -33,10 +35,19 @@
                       type="text"
                       class="form-control"
                       aria-label="Email"
+                      formControlName="email"
                     />
                 </div>
                 <div class="col-6">
-                  <div class="p-3">Phone</div>
+                  <div class="p-1">Country</div>
+                  <input
+                      type="number"
+                      class="form-control"
+                      aria-label="phone"
+                      formControlName="phone"
+                    />
+
+                  <div class="p-2">Phone</div>
                   <div class="input-group mb-3">
                     <button type="button" class="btn ddi btn-outline-secondary">DDI</button>
                     <button type="button" class="btn ddi btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,10 +58,11 @@
                       <li><a class="dropdown-item" href="#">Another action</a></li>
 
                     </ul>
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button"
+                    formControlName="phone">
                   </div>
 
-                </div>
+                 </div>
               </div>
             </div>
 
