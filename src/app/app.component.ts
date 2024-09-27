@@ -6,9 +6,9 @@ import { RouterOutlet } from '@angular/router';
 
 import { AuthenticationService } from './_services/authentication.service';
 import { UnSubscription } from './_share/UnSubscription';
-import { MainComponent } from './components/main/main.component';
-import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainComponent } from './components/main/main.component';
 
 
 type SingIn = {
@@ -25,10 +25,12 @@ type SingIn = {
 })
 export class AppComponent  extends UnSubscription implements OnInit {
   authService = inject(AuthenticationService);
+  
 
 
  constructor() {
- super()
+ super();
+
 
  }
 

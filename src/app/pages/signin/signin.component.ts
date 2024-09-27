@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup,
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DialogService } from '../../_share/pop-up/dialog.service';
+import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 
 
 
@@ -22,7 +23,7 @@ export class SigninComponent implements OnInit {
   private fb = inject(UntypedFormBuilder);
   private route = inject(Router);
   autenticationForm!: UntypedFormGroup;
-
+  fireStoreService = inject(FirestoreDatabaseService);
 
 
   constructor(private authServices: AuthenticationService, private dialogService: DialogService) {
@@ -36,7 +37,7 @@ export class SigninComponent implements OnInit {
 
     });
 
-
+    this.fireStoreService.saveddiWithPromise();
   }
 
 

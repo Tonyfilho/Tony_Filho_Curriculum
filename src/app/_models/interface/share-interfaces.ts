@@ -24,3 +24,16 @@ export interface IRegister {
   phone?: string;
 
 }
+export interface IDdi {
+
+  codigo: string;
+  fone: string;
+  iso: string;
+  iso3: string;
+  nome: string;
+  nomeFormal: string;
+
+}
+
+
+
