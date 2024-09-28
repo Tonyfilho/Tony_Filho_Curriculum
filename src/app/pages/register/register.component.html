@@ -7,68 +7,113 @@
           [formGroup]="this.registerForm"
           (ngSubmit)="submitForms()"
         >
-          <div class="local-input">
-
-            <div class="container text-center">
-              <div class="row g-2">
-                <div class="col-6">
-                  <div class="p-3">Name</div>
-                  <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Text input with checkbox"
-                      formControlName="displayName"
-                    />
-                </div>
-                <div class="col-6">
-                  <div class="p-3">Password</div>
-                  <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Password"
-                      formControlName="password"
-                    />
-                </div>
-                <div class="col-6">
-                  <div class="p-3">Email</div>
-                  <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Email"
-                      formControlName="email"
-                    />
-                </div>
-                <div class="col-6">
-                  <div class="p-1">Country</div>
-                  <input
-                      type="number"
-                      class="form-control"
-                      aria-label="phone"
-                      formControlName="phone"
-                    />
-
-                  <div class="p-2">Phone</div>
-                  <div class="input-group mb-3">
-                    <button type="button" class="btn ddi btn-outline-secondary">DDI</button>
-                    <button type="button" class="btn ddi btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                      <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-
-                    </ul>
-                    <input type="text" class="form-control" aria-label="Text input with segmented dropdown button"
-                    formControlName="phone">
-                  </div>
-
-                 </div>
+          <div class="container mt-5">
+            <h2>Sing Up</h2>
+            <form>
+              <!-- Avatar Dropdown -->
+              <div class="mb-3">
+                <label for="avatar" class="form-label">Avatar</label>
+                <select
+                  class="form-select"
+                  id="avatar"
+                  [(ngModel)]="selectedAvatar"
+                  name="avatar"
+                  (change)="onAvatarChange()"
+                >
+                  <option selected>Selecione uma opção</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="custom">Custom</option>
+                </select>
               </div>
-            </div>
 
+              <!-- Custom Avatar Upload (Controlado por *ngIf) -->
+              <div class="mb-3" *ngIf="showCustomAvatarUpload">
+                <label for="customAvatar" class="form-label"
+                  >Upload Custom Avatar</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="customAvatar"
+                  (change)="onFileSelected($event)"
+                />
+              </div>
+              
+              <!-- Company Name -->
+              <div class="mb-3">
+                <label for="companyName" class="form-label">Company Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="companyName"
+                  placeholder="Nome da Empresa"
+                />
+              </div>
 
+              <!-- Display Name -->
+              <div class="mb-3">
+                <label for="displayName" class="form-label">Display Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="displayName"
+                  placeholder="Nome de Exibição"
+                />
+              </div>
 
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
 
+              <!-- Password -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Senha"
+                />
+              </div>
+
+              <div class="row">
+                <!-- Country Dropdown -->
+                <div class="col-md-6 mb-3">
+                  <label for="country" class="form-label">Country</label>
+                  <select class="form-select" id="country">
+                    <option selected>Selecione um país</option>
+                    <option value="BR">Brasil</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="CA">Canadá</option>
+                    <option value="UK">Reino Unido</option>
+                    <option value="DE">Alemanha</option>
+                    <!-- Adicione mais países conforme necessário -->
+                  </select>
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6 mb-3">
+                  <label for="phone" class="form-label">Phone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Telefone"
+                  />
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
           </div>
           <div class="local-button">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end two">

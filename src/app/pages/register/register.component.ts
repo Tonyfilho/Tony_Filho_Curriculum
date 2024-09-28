@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DDIService } from '../../_services/ddi.service';
-import { IRegister } from '../../_models/interface/share-interfaces';
 
 @Component({
   selector: 'app-register',
@@ -16,22 +15,23 @@ import { IRegister } from '../../_models/interface/share-interfaces';
 })
 export class RegisterComponent {
 
+  protected selectedAvatar: string = '';
+  protected showCustomAvatarUpload: boolean = false;
   private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   private phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
   private fb = inject(NonNullableFormBuilder);
- protected registerForm = this.fb.group({
+  protected registerForm = this.fb.group({
+    avatar: ['', { validators: [Validators.required], updateOn: 'blur' }],
+    country: ['', { validators: [Validators.required], updateOn: 'blur' }],
+    companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
+    displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
+    email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
+    password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
+    phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
 
-  avatar: ['', { validators: [Validators.required], updateOn: 'blur' }],
-  country: ['', { validators: [Validators.required], updateOn: 'blur' }],
-  companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
-  displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
-  email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
-  password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
-  phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
-
-});
+  });
 
 
 
@@ -42,7 +42,7 @@ export class RegisterComponent {
   ngOnInit(): void {
 
 
-  this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
+    this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
 
   }
 
@@ -62,7 +62,7 @@ export class RegisterComponent {
 
     this.authServices.logInWithEmailAndPassword({
       email: <string>this.registerForm.value.email,
-      password: <string> this.registerForm.value.password
+      password: <string>this.registerForm.value.password
     }).subscribe(
       {
         next: () => {
@@ -84,8 +84,17 @@ export class RegisterComponent {
     this.registerForm.reset;
   }
 
+  onAvatarChange(): void {
+    this.showCustomAvatarUpload = this.selectedAvatar === 'custom';
+  }
 
-
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      console.log('Arquivo selecionado:', file.name);
+      // Aqui você pode tratar o upload do arquivo como necessário
+    }
+  }
 
 }
 
