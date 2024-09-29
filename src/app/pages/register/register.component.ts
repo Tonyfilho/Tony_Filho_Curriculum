@@ -5,7 +5,12 @@ import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DDIService } from '../../_services/ddi.service';
+import { IRegister } from '../../_models/interface/share-interfaces';
 
+
+
+const emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -17,19 +22,22 @@ export class RegisterComponent {
 
   protected selectedAvatar: string = '';
   protected showCustomAvatarUpload: boolean = false;
-  private emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  private phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
+  protected previewUrl: string | ArrayBuffer | null = null;
+  protected country: string = "Portugal"
+  protected Ddi: IRegister[] = [];
+  protected phone: string = "0351";
+
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
   private fb = inject(NonNullableFormBuilder);
   protected registerForm = this.fb.group({
     avatar: ['', { validators: [Validators.required], updateOn: 'blur' }],
-    country: ['', { validators: [Validators.required], updateOn: 'blur' }],
+    country: [this.country, { validators: [Validators.required], updateOn: 'blur' }],
     companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
-    email: ['', { validators: [Validators.required, Validators.pattern(this.emailRegex)], updateOn: 'blur' }],
+    email: ['', { validators: [Validators.required, Validators.pattern(emailRegex)], updateOn: 'blur' }],
     password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
-    phone: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(this.phoneRegex)], updateOn: 'blur' }]
+    phone: [+this.phone, { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(phoneRegex)], updateOn: 'blur' }]
 
   });
 

@@ -28,7 +28,7 @@ div.local-center {
     position: absolute;
     opacity: 0.7;
     z-index: 1;
-   
+
   }
 }
 
@@ -51,4 +51,11 @@ div.local-center {
   z-index: 2;
   background-color: rgb(2, 34, 82);
   border-color: var(--bs-btn-hover-border-color);
+}
+
+.singIn {
+  display: flex;
+  justify-content: space-evenly;
+  color:  rgb(2, 34, 82);
+  z-index: 3;
 }
