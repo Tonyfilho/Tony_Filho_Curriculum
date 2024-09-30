@@ -24,7 +24,7 @@
               <div class="col-md-6 mb-3 d-flex align-items-center justify-content-center">
                 @if (avatar()) {
                 <div class="image-preview"
-                  style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; border: 2px solid #ccc;">
+                  style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; border: 2px solid #ccc;">
                   <img [src]="avatar()" alt="Avatar Preview" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 }
@@ -43,25 +43,25 @@
             <!-- Company Name -->
             <div class="mb-3">
               <label for="companyName" class="form-label">Company Name</label>
-              <input type="text" class="form-control" id="companyName" placeholder="Nome da Empresa">
+              <input type="text" formControlName="companyName" class="form-control" id="companyName" placeholder="Nome da Empresa">
             </div>
 
             <!-- Display Name -->
             <div class="mb-3">
               <label for="displayName" class="form-label">Display Name</label>
-              <input type="text" class="form-control" id="displayName" placeholder="Nome de Exibição">
+              <input formControlName="displayName" type="text"  class="form-control" id="displayName" placeholder="Nome de Exibição">
             </div>
 
             <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Email">
+              <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
             </div>
 
             <!-- Password -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Senha">
+              <input formControlName="" type="password" class="form-control" id="password" placeholder="Senha">
             </div>
 
             <!-- Country and Phone (Aligned) -->

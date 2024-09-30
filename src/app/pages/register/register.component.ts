@@ -3,9 +3,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, Signal, signal } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IRegister } from '../../_models/interface/share-interfaces';
+import { IDdi } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { DDIService } from '../../_services/ddi.service';
 
 type TAvatar = {
  image: string;
@@ -29,34 +28,35 @@ export class RegisterComponent {
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
   protected country: string = "Portugal"
-  protected Ddi: IRegister[] = [];
+  protected Ddi: IDdi[] = [];
+  protected localRegister!: IDdi;
   protected phone: string = "0351";
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
   private fb = inject(NonNullableFormBuilder);
   protected registerForm = this.fb.group({
-    avatar: [this.selectedAvatar.image
-      , { validators: [Validators.required], updateOn: 'blur' }],
-    country: [this.country, { validators: [Validators.required], updateOn: 'blur' }],
+    avatar: [this.selectedAvatar.image, { validators: [Validators.required], updateOn: 'blur' }],
     companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     email: ['', { validators: [Validators.required, Validators.pattern(emailRegex)], updateOn: 'blur' }],
     password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
+    country: [this.country, { validators: [Validators.required], updateOn: 'blur' }],
     phone: [+this.phone, { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(phoneRegex)], updateOn: 'blur' }]
 
   });
 
 
 
-  constructor(private authServices: AuthenticationService, private ddiService: DDIService) {
+  constructor(private authServices: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
-
-
-    this.ddiService.getDDI().subscribe(ddi => console.log(ddi));
+    
+    // this.Ddi.forEach((element: IDdi) => {
+    //   this.localRegister = {...element};
+    // });
 
   }
 
@@ -94,7 +94,6 @@ export class RegisterComponent {
 
   login = () => {
     this.route.navigate(['/home']);
-
     this.registerForm.reset;
   }
 

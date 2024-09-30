@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MatDialogRef,
       useValue: {}
-    },
+    }, provideFirebaseApp(() => initializeApp({"projectId":"tonyfilhocurriculum","appId":"1:597192581826:web:767e11ae8845af40ba115b","storageBucket":"tonyfilhocurriculum.appspot.com","apiKey":"AIzaSyC-propOrDXybHt9dxIAIjb7_xLil_2d9M","authDomain":"tonyfilhocurriculum.firebaseapp.com","messagingSenderId":"597192581826"})), provideFirestore(() => getFirestore()),
 
 
 
