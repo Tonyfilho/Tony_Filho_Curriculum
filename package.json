@@ -1,6 +1,6 @@
 {
   "name": "curriculum",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -39,5 +39,16 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.2"
-  }
+  },
+  "description": "online Tony-Filho CV",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "oficinadosdrones@gmail.com"
+  },
+  "keywords": [
+    "TonyFilho"
+  ],
+  "author": "Tony Filho",
+  "license": "ISC"
 }
