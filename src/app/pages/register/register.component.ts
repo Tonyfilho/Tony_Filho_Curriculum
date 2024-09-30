@@ -99,7 +99,7 @@ export class RegisterComponent {
   }
 
   onAvatarChange(): void {
-    this.showCustomAvatarUpload = this.avatar() === 'custom';
+    this.showCustomAvatarUpload = this.selectedAvatar.gender === 'custom';
   }
 
   onFileSelected(event: any): void {
