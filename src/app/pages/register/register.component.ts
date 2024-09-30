@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IRegister } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { DDIService } from '../../_services/ddi.service';
-import { IRegister } from '../../_models/interface/share-interfaces';
 
+type TAvatar = {
+ image: string;
+ gender: string;
+
+}
 
 
 const emailRegex: RegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -20,9 +25,9 @@ const phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+
 })
 export class RegisterComponent {
 
-  protected selectedAvatar: string = '';
+  protected selectedAvatar: TAvatar = { image: '', gender: ''};
   protected showCustomAvatarUpload: boolean = false;
-  protected previewUrl: string | ArrayBuffer | null = null;
+  protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
   protected country: string = "Portugal"
   protected Ddi: IRegister[] = [];
   protected phone: string = "0351";
@@ -31,7 +36,8 @@ export class RegisterComponent {
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
   private fb = inject(NonNullableFormBuilder);
   protected registerForm = this.fb.group({
-    avatar: ['', { validators: [Validators.required], updateOn: 'blur' }],
+    avatar: [this.selectedAvatar.image
+      , { validators: [Validators.required], updateOn: 'blur' }],
     country: [this.country, { validators: [Validators.required], updateOn: 'blur' }],
     companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
@@ -93,7 +99,7 @@ export class RegisterComponent {
   }
 
   onAvatarChange(): void {
-    this.showCustomAvatarUpload = this.selectedAvatar === 'custom';
+    this.showCustomAvatarUpload = this.avatar() === 'custom';
   }
 
   onFileSelected(event: any): void {
