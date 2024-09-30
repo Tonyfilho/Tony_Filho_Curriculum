@@ -99,6 +99,9 @@ export class RegisterComponent {
   }
 
   onAvatarChange(): void {
+    console.log('Arquivo selecionado:', this.selectedAvatar.gender);
+
+
     this.showCustomAvatarUpload = this.selectedAvatar.gender === 'custom';
   }
 

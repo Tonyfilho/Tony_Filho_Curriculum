@@ -38,6 +38,7 @@
               <input type="file" class="form-control" id="customAvatar" (change)="onFileSelected($event)">
             </div>
             }
+          </form>
 
             <!-- Company Name -->
             <div class="mb-3">
@@ -85,11 +86,22 @@
               </div>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Enviar</button>
-          </form>
+         
         </div>
-
+        <div class="local-button">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
+            <a class="btn btn-dark" role="button" (click)="goBack()"
+              >CANCEL</a
+            >
+            <button
+              type="submit"
+              class="btn btn-primary me-md-2"
+              [disabled]="this.registerForm.invalid"
+            >
+              SING UP
+            </button>
+          </div>
+        </div>
       </form>
       <!-- </div> -->
     </div>
