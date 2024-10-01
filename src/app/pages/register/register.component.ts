@@ -120,6 +120,7 @@ export class RegisterComponent {
       reader.onload = () => {
         reader.readAsDataURL(file); // Carrega o arquivo como Data URL
         this.selectedItensAvatarGender.image = reader.result; // Armazena a URL da imagem
+        /**Salvando na Db */
       };
     }
   }
