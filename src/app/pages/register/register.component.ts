@@ -25,13 +25,13 @@ const phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+
 })
 export class RegisterComponent {
 
-  protected selectedAvatar: TAvatar = { image: '', gender: ''};
+  protected selectedAvatar: TAvatar = { image: "./../../../assets/images/login/no_avatar.png", gender: 'Choose Your Gender'};
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
   protected country: string = "Portugal"
   protected Ddi: IDdi[] = [];
   protected localRegister!: IDdi;
-  protected phone: string = "0351";
+  protected ddi: string = "0351";
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
@@ -43,7 +43,7 @@ export class RegisterComponent {
     email: ['', { validators: [Validators.required, Validators.pattern(emailRegex)], updateOn: 'blur' }],
     password: ['', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'blur' }],
     country: [this.country, { validators: [Validators.required], updateOn: 'blur' }],
-    phone: [+this.phone, { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(phoneRegex)], updateOn: 'blur' }]
+    phone: [+this.ddi, { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(phoneRegex)], updateOn: 'blur' }]
 
   });
 
