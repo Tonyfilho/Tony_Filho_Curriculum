@@ -7,8 +7,8 @@ import { IDdi } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 
-type TAvatar = {
- image: string;
+type TItensClass = {
+ image: string | ArrayBuffer | null;
  gender: string;
 
 }
@@ -25,7 +25,7 @@ const phoneRegex: RegExp = /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+
 })
 export class RegisterComponent {
 
-  protected selectedAvatar: TAvatar = { image: "./../../../assets/images/login/no_avatar.png", gender: 'Choose Your Gender'};
+  protected selectedItensAvatarGender: TItensClass = { image: "./../../../assets/images/login/no_avatar.png", gender: 'none'};
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
   protected country: string = "Portugal"
@@ -37,7 +37,7 @@ export class RegisterComponent {
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
   private fb = inject(NonNullableFormBuilder);
   protected registerForm = this.fb.group({
-    avatar: [this.selectedAvatar.image, { validators: [Validators.required], updateOn: 'blur' }],
+    avatar: [this.selectedItensAvatarGender.image, { validators: [Validators.required], updateOn: 'blur' }],
     companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     email: ['', { validators: [Validators.required, Validators.pattern(emailRegex)], updateOn: 'blur' }],
@@ -94,17 +94,33 @@ export class RegisterComponent {
   }
 
   onAvatarChange(): void {
-    console.log('Arquivo selecionado:', this.selectedAvatar.gender);
+    switch (this.selectedItensAvatarGender.gender) {
+      case 'male':
+        this.selectedItensAvatarGender.gender = "male"
+        this.selectedItensAvatarGender.image = "./../../../assets/images/login/male_avatar.png"
+        break;
+        case 'female':
+          this.selectedItensAvatarGender.gender = "female"
+          this.selectedItensAvatarGender.image = "./../../../assets/images/login/female_avatar.png"
+        break;
+    
+      default:'none'
+        break;
+    }
+    console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
 
 
-    this.showCustomAvatarUpload = this.selectedAvatar.gender === 'custom';
+    this.showCustomAvatarUpload = this.selectedItensAvatarGender.gender === 'custom';
   }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      console.log('Arquivo selecionado:', file.name);
-      // Aqui você pode tratar o upload do arquivo como necessário
+      const reader = new FileReader();
+      reader.onload = () => {
+        reader.readAsDataURL(file); // Carrega o arquivo como Data URL
+        this.selectedItensAvatarGender.image = reader.result; // Armazena a URL da imagem
+      };
     }
   }
 
