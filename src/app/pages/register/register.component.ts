@@ -5,6 +5,7 @@ import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { IDdi } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
+import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 
 type TAvatar = {
  image: string;
@@ -48,16 +49,11 @@ export class RegisterComponent {
 
 
 
-  constructor(private authServices: AuthenticationService) {
-
-  }
+  constructor(private authServices: AuthenticationService, private firestoreDadabaseService: FirestoreDatabaseService) { }
 
   ngOnInit(): void {
     
-    // this.Ddi.forEach((element: IDdi) => {
-    //   this.localRegister = {...element};
-    // });
-
+  this.firestoreDadabaseService.getDDI().subscribe(itens => console.log(itens))
   }
 
 

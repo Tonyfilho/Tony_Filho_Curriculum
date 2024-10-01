@@ -12,6 +12,7 @@ import { routes } from './app.routes';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogRef,  } from '@angular/material/dialog';
 import { provideHttpClient } from '@angular/common/http';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
    //  provideHttpClient(withInterceptorsFromDi()),
@@ -24,10 +25,7 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()),
     provideHttpClient(),
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    {
-      provide: MatDialogRef,
-      useValue: {}
-    }, provideFirebaseApp(() => initializeApp({"projectId":"tonyfilhocurriculum","appId":"1:597192581826:web:767e11ae8845af40ba115b","storageBucket":"tonyfilhocurriculum.appspot.com","apiKey":"AIzaSyC-propOrDXybHt9dxIAIjb7_xLil_2d9M","authDomain":"tonyfilhocurriculum.firebaseapp.com","messagingSenderId":"597192581826"})), provideFirestore(() => getFirestore()),
+    {provide: MatDialogRef,  useValue: {}   }
 
 
 
