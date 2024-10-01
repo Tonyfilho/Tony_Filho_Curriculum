@@ -58,8 +58,7 @@ export class RegisterComponent {
       {
         validators: [
           Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(16),
+        
         ],
         updateOn: 'blur',
       },
@@ -70,7 +69,7 @@ export class RegisterComponent {
         validators: [
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(16),
+          Validators.maxLength(50),
         ],
         updateOn: 'blur',
       },
@@ -195,9 +194,6 @@ export class RegisterComponent {
        this.registerForm.controls.avatar.setErrors({'incorrect': true});
        setInterval( () => {
         this.avatar = null;
-       //  this.registerForm.get('avatar')?.reset();
-         console.log("dentro do setinterval");
-
        }, 3000);
     }
   }

@@ -11,8 +11,8 @@
             <div class="col-md-6 mb-3">
               <label for="avatar" class="form-label">Avatar</label>
               <select class="form-select" id="
-              "[(ngModel)]="selectedItensAvatarGender.gender" name="avatar"
-                (change)="onAvatarChange()" [ngModelOptions]="{standalone: true}">
+              " [(ngModel)]="selectedItensAvatarGender.gender" name="avatar" (change)="onAvatarChange()"
+                [ngModelOptions]="{standalone: true}" required="">
                 <option selected>Choose Your Avatar</option>
                 <option value="none">None</option>
                 <option value="male">Male</option>
@@ -38,28 +38,62 @@
           @if (showCustomAvatarUpload) {
           <div class="mt-3">
             <label for="customAvatar" class="form-label">Upload Custom Avatar</label>
-            <input type="file" class="form-control" id="customAvatar" [(ngModel)]="this.avatar"  [ngModelOptions]="{standalone: true}" (change)="onFileSelected($event)">
+            <input type="file" class="form-control" id="customAvatar" [(ngModel)]="this.avatar"
+              [ngModelOptions]="{standalone: true}" (change)="onFileSelected($event)">
           </div>
           }
         </form>
         <form class="form-text-center" [formGroup]="this.registerForm" (ngSubmit)="submitForms()">
 
-          <div class="row"> 
+          <div class="row">
             <div class="col-md-6 mb-3">
               <label for="gender" class="form-label">Gender</label>
               <select class="form-select" id="gender" formControlName="gender" name="gender">
                 <option selected>Choose Your Gender</option>
                 <option value="none">None</option>
                 <option value="male">Male</option>
-                <option value="female">Female</option>             
-              </select>  
-            </div>  
+                <option value="female">Female</option>
+              </select>
+              <!--------------------- Validatiors------------------------------------ -->
+              <!---------------------------------------------------Usando CONTROLS Errors -->
+              @if(!registerForm.controls['gender'].valid &&
+              registerForm.controls['gender'].touched) {
+              <section>
+                @if (registerForm.controls['gender'].errors?.['required'])
+                {
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                  <p>Field is mandatory</p>
+                </small>
+                } @if (registerForm.hasError('pattern', 'gender')) {
+                <!------------------------------------------------ Usando HASERROR -->
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                  <p>
+                    "Just Files With PNG, JPG and JPEJ"
+                  </p>
+                </small>
+                }
+              </section>
+              }
+            </div>
             <!-- Company Name -->
             <div class="col-md-6 mb-3">
               <label for="companyName" class="form-label">Company Name</label>
               <input type="text" formControlName="companyName" class="form-control" id="companyName"
                 placeholder="Nome da Empresa">
             </div>
+            <!--------------------- Validatiors------------------------------------ -->
+            <!---------------------------------------------------Usando CONTROLS Errors -->
+            @if(!registerForm.controls['companyName'].valid &&
+            registerForm.controls['companyName'].touched) {
+            <section>
+              @if (registerForm.controls['companyName'].errors?.['required'])
+              {
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>Field is mandatory</p>
+              </small>
+              }
+            </section>
+            }
           </div>
 
           <!-- Display Name -->
@@ -67,18 +101,86 @@
             <label for="displayName" class="form-label">Display Name</label>
             <input formControlName="displayName" type="text" class="form-control" id="displayName"
               placeholder="Nome de Exibição">
+            <!--------------------- Validatiors------------------------------------ -->
+            <!---------------------------------------------------Usando CONTROLS Errors -->
+            @if(!registerForm.controls['displayName'].valid &&
+            registerForm.controls['displayName'].touched) {
+            <section>
+              @if (registerForm.controls['displayName'].errors?.['required'])
+              {
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>Field is mandatory</p>
+              </small>
+              } @if (registerForm.hasError('minLength', 'displayName')) {
+              <!------------------------------------------------ Usando HASERROR -->
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>
+                  "Min Length 2 letters"
+                </p>
+              </small>
+              }
+              @if (registerForm.hasError('maxLength', 'displayName')) {
+              <!------------------------------------------------ Usando HASERROR -->
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>
+                  "Max Length 50 letters"
+                </p>
+              </small>
+              }
+            </section>
+            }
           </div>
 
           <!-- Email -->
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+            <!--------------------- Validatiors------------------------------------ -->
+            <!---------------------------------------------------Usando CONTROLS Errors -->
+            @if(!registerForm.controls['email'].valid &&
+            registerForm.controls['email'].touched) {
+            <section>
+              @if (registerForm.controls['email'].errors?.['required'])
+              {
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>Field is mandatory</p>
+              </small>
+              } @if (registerForm.hasError('pattern', 'email')) {
+              <!------------------------------------------------ Usando HASERROR -->
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>
+                  {{ "YourEmail@blaBlaBla.com" }}
+                </p>
+              </small>
+              }
+            </section>
+            }
           </div>
 
           <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input formControlName="password" type="password" class="form-control" id="password" placeholder="Senha">
+            <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
+            <!--------------------- Validatiors------------------------------------ -->
+            <!---------------------------------------------------Usando CONTROLS Errors -->
+            @if(!registerForm.controls['password'].valid &&
+            registerForm.controls['password'].touched) {
+            <section>
+              @if (registerForm.controls['password'].errors?.['required'])
+              {
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>Field is mandatory</p>
+              </small>
+              } @if (registerForm.hasError('pattern', 'password')) {
+              <!------------------------------------------------ Usando HASERROR -->
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>
+                  Must have min 8 letters max 16, min 1 Uppercase and min 1 special character
+                </p>
+              </small>
+              }
+            </section>
+            }
           </div>
 
           <!-- Country and Phone (Aligned) -->
@@ -100,8 +202,28 @@
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
               <input formControlName="phone" type="number" class="form-control" id="phone" name="phone"
-                placeholder="Telefone">
+                placeholder="Phone">
             </div>
+             <!--------------------- Validatiors------------------------------------ -->
+            <!---------------------------------------------------Usando CONTROLS Errors -->
+            @if(!registerForm.controls['phone'].valid &&
+            registerForm.controls['phone'].touched) {
+            <section>
+              @if (registerForm.controls['phone'].errors?.['required'])
+              {
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>Field is mandatory</p>
+              </small>
+              } @if (registerForm.hasError('pattern', 'phone')) {
+              <!------------------------------------------------ Usando HASERROR -->
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <p>
+                  Must have Numbers
+                </p>
+              </small>
+              }
+            </section>
+            }
           </div>
 
         </form>
