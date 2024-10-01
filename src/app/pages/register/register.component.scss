@@ -32,7 +32,7 @@ div.local-center {
 .container.mt-5 {
   position: relative;
   color: rgb(70, 76, 83);
-  font-size: 2em !important;
+  font-size: 1.5rem !important;
   font-weight: 400;
   z-index: 2;
 }
@@ -59,4 +59,8 @@ div.local-center {
   display:flex !important;
   align-items: center !important;
   
+}
+.form-label{
+  margin-bottom: .2rem;
+  font-size: 1.5rem;
 }

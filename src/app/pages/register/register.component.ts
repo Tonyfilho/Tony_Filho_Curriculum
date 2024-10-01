@@ -27,7 +27,7 @@ export class RegisterComponent {
 
   protected selectedItensAvatarGender: TItensClass = { image: "./../../../assets/images/login/no_avatar.png", gender: 'none'};
   protected showCustomAvatarUpload: boolean = false;
-  protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
+ // protected avatar: Signal< string | ArrayBuffer>= signal( "./../../../assets/images/login/no_avatar.png");
   protected country: string = "Portugal"
   protected Ddi: IDdi[] = [];
   protected localRegister!: IDdi;
@@ -38,6 +38,7 @@ export class RegisterComponent {
   private fb = inject(NonNullableFormBuilder);
   protected registerForm = this.fb.group({
     avatar: [this.selectedItensAvatarGender.image, { validators: [Validators.required], updateOn: 'blur' }],
+    gender: ['none', { validators: [Validators.required], updateOn: 'blur' }],
     companyName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     displayName: ['', { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(16)], updateOn: 'blur' }],
     email: ['', { validators: [Validators.required, Validators.pattern(emailRegex)], updateOn: 'blur' }],
@@ -95,31 +96,34 @@ export class RegisterComponent {
 
   onAvatarChange(): void {
     switch (this.selectedItensAvatarGender.gender) {
-      case 'male':
-        this.selectedItensAvatarGender.gender = "male"
+      case 'male':        
         this.selectedItensAvatarGender.image = "./../../../assets/images/login/male_avatar.png"
         break;
-        case 'female':
-          this.selectedItensAvatarGender.gender = "female"
+        case 'female':          
           this.selectedItensAvatarGender.image = "./../../../assets/images/login/female_avatar.png"
+        break;
+        case 'custom':          
+          this.selectedItensAvatarGender.image = "./../../../assets/images/login/no_avatar.png"
         break;
     
       default:'none'
         break;
     }
     console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
-
-
+    
+    
     this.showCustomAvatarUpload = this.selectedItensAvatarGender.gender === 'custom';
   }
-
+  
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
       const reader = new FileReader();
       reader.onload = () => {
         reader.readAsDataURL(file); // Carrega o arquivo como Data URL
         this.selectedItensAvatarGender.image = reader.result; // Armazena a URL da imagem
+        console.log('File Selecionado:', this.selectedItensAvatarGender.image);
         /**Salvando na Db */
       };
     }
