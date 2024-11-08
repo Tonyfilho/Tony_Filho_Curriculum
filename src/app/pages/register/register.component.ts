@@ -189,10 +189,7 @@ item: any;
       this.selectedItensAvatarGender.gender === 'custom';
   }
 
-  onSelectCoutry(event: any) {
-  //  this.ptDdi = event.target.files[0];
-    console.log("phone ", event)
-  }
+
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
