@@ -61,12 +61,12 @@
               <section>
                 @if (registerForm.controls['gender'].errors?.['required'])
                 {
-                <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                   <p>Field is mandatory</p>
                 </small>
                 } @if (registerForm.hasError('pattern', 'gender')) {
                 <!------------------------------------------------ Usando HASERROR -->
-                <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                   <p>
                     "Just Files With PNG, JPG and JPEJ"
                   </p>
@@ -88,7 +88,7 @@
             <section>
               @if (registerForm.controls['companyName'].errors?.['required'])
               {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>Field is mandatory</p>
               </small>
               }
@@ -108,12 +108,12 @@
             <section>
               @if (registerForm.controls['displayName'].errors?.['required'])
               {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>Field is mandatory</p>
               </small>
               } @if (registerForm.hasError('minLength', 'displayName')) {
               <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>
                   "Min Length 2 letters"
                 </p>
@@ -121,7 +121,7 @@
               }
               @if (registerForm.hasError('maxLength', 'displayName')) {
               <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>
                   "Max Length 50 letters"
                 </p>
@@ -142,17 +142,18 @@
             <section>
               @if (registerForm.controls['email'].errors?.['required'])
               {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>Field is mandatory</p>
               </small>
               } @if (registerForm.hasError('pattern', 'email')) {
               <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
-                <p>
-                  {{ "YourEmail@blaBlaBla.com" }}
-                </p>
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
+                <p>{{ "Just Corporate Email" }}</p>
+                <p>{{ "Not Allow Free provider email Ex: Google, Hotmail..."}}</p>
+                <p>{{"Ex: yourName@companyThatYouWorking...."}}, </p>
               </small>
               }
+
             </section>
             }
           </div>
@@ -168,12 +169,12 @@
             <section>
               @if (registerForm.controls['password'].errors?.['required'])
               {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>Field is mandatory</p>
               </small>
               } @if (registerForm.hasError('pattern', 'password')) {
               <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>
                   Must have min 8 letters max 16, min 1 Uppercase and min 1 special character
                 </p>
@@ -204,19 +205,19 @@
               <input formControlName="phone" type="number" class="form-control" id="phone" name="phone"
                 placeholder="Phone">
             </div>
-             <!--------------------- Validatiors------------------------------------ -->
+            <!--------------------- Validatiors------------------------------------ -->
             <!---------------------------------------------------Usando CONTROLS Errors -->
             @if(!registerForm.controls['phone'].valid &&
             registerForm.controls['phone'].touched) {
             <section>
               @if (registerForm.controls['phone'].errors?.['required'])
               {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>Field is mandatory</p>
               </small>
               } @if (registerForm.hasError('pattern', 'phone')) {
               <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 10px">
+              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
                 <p>
                   Must have Numbers
                 </p>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormsModule,
   NonNullableFormBuilder,
@@ -22,6 +22,10 @@ const emailRegex: RegExp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const phoneRegex: RegExp =
   /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[Ee]([+-]?\d+))?/i;
+
+const providerEmailRegex: RegExp =
+  /^(?!.*@(gmail|outlook|yahoo|protonmail|zoho|aol|gmx|mail|icloud|yandex|tutanota|mailfence|rediffmail|lycos|hushmail|mailru|fastmail|tempmail|guerrillamail|10minutemail|inbox|hotmail|sapomail|netcabo|clix)\.(com|ru|net|org|lv)).+$/;
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -35,7 +39,7 @@ export class RegisterComponent {
     gender: 'none',
   };
   protected showCustomAvatarUpload: boolean = false;
- protected avatar: string|null = null;
+  protected avatar: string | null = null;
   protected country: string = 'Portugal';
   protected Ddi: IDdi[] = [];
   protected localRegister!: IDdi;
@@ -56,10 +60,7 @@ export class RegisterComponent {
     companyName: [
       '',
       {
-        validators: [
-          Validators.required,
-        
-        ],
+        validators: [Validators.required],
         updateOn: 'blur',
       },
     ],
@@ -77,7 +78,11 @@ export class RegisterComponent {
     email: [
       '',
       {
-        validators: [Validators.required, Validators.pattern(emailRegex)],
+        validators: [
+          Validators.required,
+          Validators.pattern(providerEmailRegex),
+          Validators.pattern(emailRegex),
+        ],
         updateOn: 'blur',
       },
     ],
@@ -178,23 +183,20 @@ export class RegisterComponent {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-  
 
-    if (file && imgRegex.test(file.name)) {      
+    if (file && imgRegex.test(file.name)) {
       const reader = new FileReader();
-      reader.onload = () => { 
-        /**onload vai carregar o arquivo e quando terminar manda pata reader.readAsDataURL */      
+      reader.onload = () => {
+        /**onload vai carregar o arquivo e quando terminar manda pata reader.readAsDataURL */
         this.selectedItensAvatarGender.image = reader.result; // Armazena a URL da imagem
-      
       };
       reader.readAsDataURL(file); // Carrega o arquivo como Data URL
       /**Salvando na Db */
-    }
-    else {      
-       this.registerForm.controls.avatar.setErrors({'incorrect': true});
-       setInterval( () => {
+    } else {
+      this.registerForm.controls.avatar.setErrors({ incorrect: true });
+      setInterval(() => {
         this.avatar = null;
-       }, 3000);
+      }, 3000);
     }
   }
 }
