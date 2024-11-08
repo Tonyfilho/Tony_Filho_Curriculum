@@ -42,10 +42,10 @@ export class RegisterComponent extends UnSubscription {
   };
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
-  protected country: string = 'Portugal';
+  protected countryAndDdi = {country: 'Portugal', fone: '0351'};
   protected wordDdi: IDdi[] = [];
-  // protected localRegister!: IDdi;
-  @Input() ptDdi: string = '0351';
+ 
+ 
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
@@ -100,11 +100,11 @@ export class RegisterComponent extends UnSubscription {
       },
     ],
     country: [
-      this.country,
+      this.countryAndDdi.country,
       { validators: [Validators.required], updateOn: 'blur' },
     ],
     phone: [
-      +this.ptDdi,
+      +this.countryAndDdi.fone,
       {
         validators: [
           Validators.required,
@@ -116,22 +116,20 @@ export class RegisterComponent extends UnSubscription {
       },
     ],
   });
-item: any;
+  item: any;
 
   constructor(
     private authServices: AuthenticationService,
     private firestoreDadabaseService: FirestoreDatabaseService
   ) {
-    super()
-
+    super();
   }
- 
-
 
   ngOnInit(): void {
-    this.firestoreDadabaseService
-      .getDDI()
-      .subscribe((itens) => {  this.wordDdi.push(...itens),  console.log(itens[0].nome)});
+    this.firestoreDadabaseService.getDDI().subscribe((itens) => {
+      this.wordDdi.push(...itens)
+      //, console.log(itens[0].nome);
+    });
   }
 
   goBack() {
@@ -183,13 +181,11 @@ item: any;
         'none';
         break;
     }
- //   console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
+    //   console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
 
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
   }
-
-
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

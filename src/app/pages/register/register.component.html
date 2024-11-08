@@ -43,7 +43,8 @@
           </div>
           }
         </form>
-        <form class="form-text-center" [formGroup]="this.registerForm" (ngSubmit)="submitForms()">
+        <!-- <form class="form-text-center" [formGroup]="this.registerForm" (ngSubmit)="submitForms()"> -->
+        <form class="form-text-center" [formGroup]="this.registerForm">
 
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -183,27 +184,29 @@
             </section>
             }
           </div>
+        </form>
 
+        <form>
           <!-- Country and Phone (Aligned) -->
           <div class="row">
             <!-- Country Dropdown -->
             <div class="col-md-6 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" formControlName="country" name="country" >
+              <select class="form-select" id="country"  name="country" [(ngModel)]="this.countryAndDdi.fone">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
-                  
-                  <option >{{item.nome}}</option>
-                
+
+                <option [ngValue]="item.fone">{{item.nome}}</option>
+
                 }
-              
+
               </select>
             </div>
 
             <!-- Phone -->
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input formControlName="phone" type="number" class="form-control" id="phone" name="phone"
+              <input  type="number" class="form-control" id="phone" name="phone"
                 placeholder="Phone">
             </div>
             <!--------------------- Validatiors------------------------------------ -->
@@ -227,13 +230,12 @@
             </section>
             }
           </div>
-
         </form>
       </div>
       <div class="local-button">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
           <a class="btn btn-dark" role="button" (click)="goBack()">CANCEL</a>
-          <button type="submit" class="btn btn-primary me-md-2" [disabled]="this.registerForm.invalid">
+          <button type="submit" class="btn btn-primary me-md-2" [disabled]="this.registerForm.invalid" (click)="submitForms()">
             SING UP
           </button>
         </div>
