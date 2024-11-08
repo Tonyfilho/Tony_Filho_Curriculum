@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 // import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { BehaviorSubject, from, Observable, take, tap } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, from, Observable, of, scheduled, take, tap } from 'rxjs';
 import { IDdi, IRegister } from '../_models/interface/share-interfaces';
 import { DialogService } from '../_share/pop-up/dialog.service';
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
@@ -24,7 +24,7 @@ export class FirestoreDatabaseService extends UnSubscription {
   private popError = inject(ErrorSnackBarService);
   private popSuccess = inject(DialogService);
   private mockUpService = inject(CountryCodesService);
-  ddiItem$!: BehaviorSubject<IDdi[]>;
+  // ddiItem$!: BehaviorSubject<IDdi[]>;
 
   constructor(firestore: Firestore) {
     super();
@@ -64,13 +64,14 @@ export class FirestoreDatabaseService extends UnSubscription {
     });
   };
 
-    getDDI = () => {
+  getDDI= () => {
     const localCollection = collection(db, 'ddi');
-  return  collectionData(localCollection)
-      .pipe(
-        take(1),
-        tap((data: any) => {return this.ddiItem$.next(data), console.log("servicesData ", data)})
-      )
-      ;
+    return collectionData(localCollection).pipe(
+      take(1),
+      tap((data: any[]) => {
+        // return this.ddiItem$.next(data), console.log('servicesData ', data);
+        return scheduled(data, asyncScheduler);
+      })
+    );
   };
 }

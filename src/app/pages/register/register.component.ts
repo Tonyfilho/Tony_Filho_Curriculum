@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   FormsModule,
   NonNullableFormBuilder,
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { IDdi } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
+import { UnSubscription } from '../../_share/UnSubscription';
+import { Subject } from 'rxjs';
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -33,7 +35,7 @@ const providerEmailRegex: RegExp =
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
+export class RegisterComponent extends UnSubscription {
   protected selectedItensAvatarGender: TItensClass = {
     image: './../../../assets/images/login/no_avatar.png',
     gender: 'none',
@@ -41,9 +43,9 @@ export class RegisterComponent {
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
   protected country: string = 'Portugal';
-  protected Ddi: IDdi[] = [];
-  protected localRegister!: IDdi;
-  protected ddi: string = '0351';
+  protected wordDdi: IDdi[] = [];
+  // protected localRegister!: IDdi;
+  @Input() ptDdi: string = '0351';
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
@@ -102,7 +104,7 @@ export class RegisterComponent {
       { validators: [Validators.required], updateOn: 'blur' },
     ],
     phone: [
-      +this.ddi,
+      +this.ptDdi,
       {
         validators: [
           Validators.required,
@@ -114,16 +116,22 @@ export class RegisterComponent {
       },
     ],
   });
+item: any;
 
   constructor(
     private authServices: AuthenticationService,
     private firestoreDadabaseService: FirestoreDatabaseService
-  ) {}
+  ) {
+    super()
+
+  }
+ 
+
 
   ngOnInit(): void {
-    // this.firestoreDadabaseService
-    //   .getDDI()
-    //   .subscribe((itens) => console.log(itens));
+    this.firestoreDadabaseService
+      .getDDI()
+      .subscribe((itens) => {  this.wordDdi.push(...itens),  console.log(itens[0].nome)});
   }
 
   goBack() {
@@ -175,10 +183,15 @@ export class RegisterComponent {
         'none';
         break;
     }
-    console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
+ //   console.log('Arquivo selecionado:', this.selectedItensAvatarGender.gender);
 
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
+  }
+
+  onSelectCoutry(event: any) {
+  //  this.ptDdi = event.target.files[0];
+    console.log("phone ", event)
   }
 
   onFileSelected(event: any): void {

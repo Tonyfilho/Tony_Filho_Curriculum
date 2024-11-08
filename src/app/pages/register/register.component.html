@@ -189,13 +189,14 @@
             <!-- Country Dropdown -->
             <div class="col-md-6 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" formControlName="country" name="country">
+              <select class="form-select" id="country" formControlName="country" name="country" >
                 <option selected>Selecione um país</option>
-                <option value="BR">Brasil</option>
-                <option value="US">Estados Unidos</option>
-                <option value="CA">Canadá</option>
-                <option value="UK">Reino Unido</option>
-                <option value="DE">Alemanha</option>
+                @for (item of this.wordDdi; track $index) {
+                  
+                  <option >{{item.nome}}</option>
+                
+                }
+              
               </select>
             </div>
 

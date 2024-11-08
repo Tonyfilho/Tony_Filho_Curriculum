@@ -16,6 +16,10 @@ type ddi = {
 }
 
 
+/**
+ * 
+ * @returns Não usando, copiamos todo o conteudo e salvamos no Firebase DataBase e estamos usando fireStoreDatabaseServices
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +28,6 @@ export class DDIService extends UnSubscription {
   constructor(private httpService: HttpClient ) {
     super();
   }
-
   getDDI = () => {
     const localId: any[] = [];
     return this.httpService.get<any>(`https://servicodados.ibge.gov.br/api/v1/paises/{paises}`).pipe(map(result => {
