@@ -192,7 +192,7 @@
             <!-- Country Dropdown -->
             <div class="col-md-6 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country"  name="country" [(ngModel)]="this.countryAndDdi.fone">
+              <select class="form-select" id="country"  name="country" [(ngModel)]="this.countryAndDdi().fone" (ngModelChange)="changeDDI()">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
 
@@ -206,7 +206,7 @@
             <!-- Phone -->
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input  type="number" class="form-control" id="phone" name="phone"
+              <input  type="number" class="form-control" id="phone" name="phone" [(ngModel)]="this.countryAndDdi().fone"
                 placeholder="Phone">
             </div>
             <!--------------------- Validatiors------------------------------------ -->

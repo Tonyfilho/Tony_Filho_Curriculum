@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal } from '@angular/core';
 import {
   FormsModule,
   NonNullableFormBuilder,
@@ -12,7 +12,7 @@ import { IDdi } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 import { UnSubscription } from '../../_share/UnSubscription';
-import { Subject } from 'rxjs';
+
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -42,7 +42,7 @@ export class RegisterComponent extends UnSubscription {
   };
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
-  protected countryAndDdi = {country: 'Portugal', fone: '0351'};
+  protected countryAndDdi = signal({country: 'Portugal', fone: '0351'});
   protected wordDdi: IDdi[] = [];
  
  
@@ -100,11 +100,11 @@ export class RegisterComponent extends UnSubscription {
       },
     ],
     country: [
-      this.countryAndDdi.country,
+      
       { validators: [Validators.required], updateOn: 'blur' },
     ],
     phone: [
-      +this.countryAndDdi.fone,
+     
       {
         validators: [
           Validators.required,
@@ -123,6 +123,9 @@ export class RegisterComponent extends UnSubscription {
     private firestoreDadabaseService: FirestoreDatabaseService
   ) {
     super();
+    console.log("phone", this.countryAndDdi().fone);
+    // this.registerForm.get('country')?.setValue(this.countryAndDdi().country as never);
+    // this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never) ;
   }
 
   ngOnInit(): void {
@@ -185,6 +188,10 @@ export class RegisterComponent extends UnSubscription {
 
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
+  }
+  changeDDI() {
+    console.log("change", this.countryAndDdi().fone);
+    this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never)
   }
 
   onFileSelected(event: any): void {
