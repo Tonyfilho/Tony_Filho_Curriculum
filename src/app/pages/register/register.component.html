@@ -4,7 +4,7 @@
       <!-- <div class="local-register"> -->
 
       <div class="container mt-5">
-        <h2>Cadastro de Usuário</h2>
+        <h2 class="user-registration">User Registration</h2>
         <form>
           <div class="row">
             <!-- Avatar Dropdown -->
@@ -12,7 +12,7 @@
               <label for="avatar" class="form-label">Avatar</label>
               <select class="form-select" id="
               " [(ngModel)]="selectedItensAvatarGender.gender" name="avatar" (change)="onAvatarChange()"
-                [ngModelOptions]="{standalone: true}" required="">
+                [ngModelOptions]="{standalone: true}" >
                 <option selected>Choose Your Avatar</option>
                 <option value="none">None</option>
                 <option value="male">Male</option>
@@ -192,7 +192,7 @@
             <!-- Country Dropdown -->
             <div class="col-md-6 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country"  name="country" [(ngModel)]="this.countryAndDdi().fone" (ngModelChange)="changeDDI()">
+              <select class="form-select" id="country"  name="country" [(ngModel)]="this.countryAndDdi.fone" (ngModelChange)="changeDDI()">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
 
@@ -206,7 +206,7 @@
             <!-- Phone -->
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input  type="number" class="form-control" id="phone" name="phone" [(ngModel)]="this.countryAndDdi().fone"
+              <input  type="number" class="form-control" id="phone" name="phone" [(ngModel)]="this.countryAndDdi.fone"
                 placeholder="Phone">
             </div>
             <!--------------------- Validatiors------------------------------------ -->
@@ -234,7 +234,8 @@
       </div>
       <div class="local-button">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
-          <a class="btn btn-dark" role="button" (click)="goBack()">CANCEL</a>
+          <!-- <a class="btn btn-dark" role="button" (click)="goBack()" >CANCEL</a> -->
+          <button type="button" class="btn btn-primary me-md-2" (click)="goBack()">CANCEL</button>
           <button type="submit" class="btn btn-primary me-md-2" [disabled]="this.registerForm.invalid" (click)="submitForms()">
             SING UP
           </button>

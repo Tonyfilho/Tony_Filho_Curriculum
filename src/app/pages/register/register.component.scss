@@ -30,11 +30,11 @@ div.local-center {
 }
 
 .container.mt-5 {
-  position: relative;
-  color: rgb(70, 76, 83);
+  position: relative; 
   font-size: 1.5rem !important;
   font-weight: 400;
   z-index: 2;
+  color: black !important;
 }
 
 .btn.ddi {
@@ -50,8 +50,9 @@ div.local-center {
 }
 
 
-.container.mt-5 {
-  color: black !important;
+.user-registration {
+  display: flex;
+  justify-content: space-around;
 }
 
 

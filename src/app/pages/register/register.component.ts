@@ -43,7 +43,7 @@ export class RegisterComponent extends UnSubscription {
   };
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
-  protected countryAndDdi = signal({country: 'Portugal', fone: '0351'});
+  protected countryAndDdi = {country: 'Portugal', fone: '0351'};
   protected wordDdi: IDdi[] = [];
  
  
@@ -190,7 +190,7 @@ export class RegisterComponent extends UnSubscription {
       this.selectedItensAvatarGender.gender === 'custom';
   }
   changeDDI() {    
-    this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never);
+    this.registerForm.get('phone')?.setValue(this.countryAndDdi.fone as never);
   }
 
   onFileSelected(event: any): void {
