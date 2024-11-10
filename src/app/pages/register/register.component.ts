@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, Input, signal } from '@angular/core';
 import {
+  
   FormsModule,
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -123,15 +124,14 @@ export class RegisterComponent extends UnSubscription {
     private firestoreDadabaseService: FirestoreDatabaseService
   ) {
     super();
-    console.log("phone", this.countryAndDdi().fone);
-    // this.registerForm.get('country')?.setValue(this.countryAndDdi().country as never);
-    // this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never) ;
+   
+ 
   }
 
   ngOnInit(): void {
     this.firestoreDadabaseService.getDDI().subscribe((itens) => {
       this.wordDdi.push(...itens)
-      //, console.log(itens[0].nome);
+      
     });
   }
 
@@ -189,9 +189,8 @@ export class RegisterComponent extends UnSubscription {
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
   }
-  changeDDI() {
-    console.log("change", this.countryAndDdi().fone);
-    this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never)
+  changeDDI() {    
+    this.registerForm.get('phone')?.setValue(this.countryAndDdi().fone as never);
   }
 
   onFileSelected(event: any): void {
