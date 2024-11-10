@@ -131,59 +131,64 @@
             </section>
             }
           </div>
+          <div class="row">
 
-          <!-- Email -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
-            <!--------------------- Validatiors------------------------------------ -->
-            <!---------------------------------------------------Usando CONTROLS Errors -->
-            @if(!registerForm.controls['email'].valid &&
-            registerForm.controls['email'].touched) {
-            <section>
-              @if (registerForm.controls['email'].errors?.['required'])
-              {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
-                <p>Field is mandatory</p>
-              </small>
-              } @if (registerForm.hasError('pattern', 'email')) {
-              <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
-                <p>{{ "Just Corporate Email" }}</p>
-                <p>{{ "Not Allow Free provider email Ex: Google, Hotmail..."}}</p>
-                <p>{{"Ex: yourName@companyThatYouWorking...."}}, </p>
-              </small>
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+              <!--------------------- Validatiors------------------------------------ -->
+              <!---------------------------------------------------Usando CONTROLS Errors -->
+              @if(!registerForm.controls['email'].valid &&
+              registerForm.controls['email'].touched) {
+              <section>
+                @if (registerForm.controls['email'].errors?.['required'])
+                {
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
+                  <p>Field is mandatory</p>
+                </small>
+                } @if (registerForm.hasError('pattern', 'email')) {
+                <!------------------------------------------------ Usando HASERROR -->
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
+                  <p>{{ "Just Corporate Email" }}</p>
+                  <p>{{ "Not Allow Free provider email Ex: Google, Hotmail..."}}</p>
+                  <p>{{"Ex: yourName@companyThatYouWorking...."}}, </p>
+                </small>
+                }
+
+              </section>
               }
+            </div>
 
-            </section>
-            }
+            <!-- Password -->
+            <div class="col-md-6 mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input formControlName="password" type="password" class="form-control" id="password"
+                placeholder="Password">
+              <!--------------------- Validatiors------------------------------------ -->
+              <!---------------------------------------------------Usando CONTROLS Errors -->
+              @if(!registerForm.controls['password'].valid &&
+              registerForm.controls['password'].touched) {
+              <section>
+                @if (registerForm.controls['password'].errors?.['required'])
+                {
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
+                  <p>Field is mandatory</p>
+                </small>
+                } @if (registerForm.hasError('pattern', 'password')) {
+                <!------------------------------------------------ Usando HASERROR -->
+                <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
+                  <p>
+                    Must have min 8 letters max 16, min 1 Uppercase and min 1 special character
+                  </p>
+                </small>
+                }
+              </section>
+              }
+            </div>
+
           </div>
 
-          <!-- Password -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password">
-            <!--------------------- Validatiors------------------------------------ -->
-            <!---------------------------------------------------Usando CONTROLS Errors -->
-            @if(!registerForm.controls['password'].valid &&
-            registerForm.controls['password'].touched) {
-            <section>
-              @if (registerForm.controls['password'].errors?.['required'])
-              {
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
-                <p>Field is mandatory</p>
-              </small>
-              } @if (registerForm.hasError('pattern', 'password')) {
-              <!------------------------------------------------ Usando HASERROR -->
-              <small class="warning" style="color: red; padding: 0.5%; font-size: 12px">
-                <p>
-                  Must have min 8 letters max 16, min 1 Uppercase and min 1 special character
-                </p>
-              </small>
-              }
-            </section>
-            }
-          </div>
         </form>
 
         <form>

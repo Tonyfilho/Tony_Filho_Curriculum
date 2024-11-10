@@ -29,6 +29,7 @@ const phoneRegex: RegExp =
 const providerEmailRegex: RegExp =
   /^(?!.*@(gmail|outlook|yahoo|protonmail|zoho|aol|gmx|mail|icloud|yandex|tutanota|mailfence|rediffmail|lycos|hushmail|mailru|fastmail|tempmail|guerrillamail|10minutemail|inbox|hotmail|sapomail|netcabo|clix)\.(com|ru|net|org|lv)).+$/;
 
+const passwordRegex: RegExp = /(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.{8,16})/;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -96,6 +97,7 @@ export class RegisterComponent extends UnSubscription {
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(16),
+          Validators.pattern(passwordRegex)
         ],
         updateOn: 'blur',
       },
