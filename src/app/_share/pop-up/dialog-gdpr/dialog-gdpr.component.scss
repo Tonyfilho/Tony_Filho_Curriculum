@@ -26,12 +26,14 @@
   mat-dialog-actions {
     position: relative;
     z-index: 20;
-
+    
     button {
       padding: 1.5%;
       margin-right: 8px;
       border-radius: 5px;     
       color: black !important;
+      // position: relative;
+      // z-index: 20;
     }
 
   }

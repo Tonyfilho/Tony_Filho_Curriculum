@@ -136,7 +136,7 @@
             <!-- Email -->
             <div class="col-md-6 mb-3">
               <label for="email" class="form-label">Email</label>
-              <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email">
+              <input formControlName="email" type="email" class="form-control" id="email" placeholder="E-mail">
               <!--------------------- Validatiors------------------------------------ -->
               <!---------------------------------------------------Usando CONTROLS Errors -->
               @if(!registerForm.controls['email'].valid &&
@@ -164,7 +164,7 @@
             <div class="col-md-6 mb-3">
               <label for="password" class="form-label">Password</label>
               <input formControlName="password" type="password" class="form-control" id="password"
-                placeholder="Password">
+                placeholder="Senha">
               <!--------------------- Validatiors------------------------------------ -->
               <!---------------------------------------------------Usando CONTROLS Errors -->
               @if(!registerForm.controls['password'].valid &&
@@ -245,6 +245,8 @@
             SING UP
           </button>
         </div>
+
+        {{ this.registerForm.invalid }}
       </div>
 
       <!-- </div> -->

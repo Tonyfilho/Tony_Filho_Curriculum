@@ -99,8 +99,9 @@ export class RegisterComponent extends UnSubscription {
         updateOn: 'blur',
       },
     ],
-    country: [{ validators: [Validators.required], updateOn: 'blur' }],
+    country: ['',{ validators: [Validators.required], updateOn: 'blur' }],
     phone: [
+      '',
       {
         validators: [
           Validators.required,
@@ -134,23 +135,25 @@ export class RegisterComponent extends UnSubscription {
   }
 
   submitForms() {
-    if (!this.registerForm.valid) {
-      this.registerForm.setValidators(Validators.required);
-    }
+    // if (!this.registerForm.valid) {
+    //   this.registerForm.setValidators(Validators.required);
+    // }
 
-    this.authServices
-      .logInWithEmailAndPassword({
-        email: <string>this.registerForm.value.email,
-        password: <string>this.registerForm.value.password,
-      })
-      .subscribe({
-        next: () => {
-          this.login();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.route.navigate(['/body']);
-        },
-      });
+    // this.authServices
+    //   .logInWithEmailAndPassword({
+    //     email: <string>this.registerForm.value.email,
+    //     password: <string>this.registerForm.value.password,
+    //   })
+    //   .subscribe({
+    //     next: () => {
+    //       this.login();
+    //     },
+    //     error: (err: HttpErrorResponse) => {
+    //       this.route.navigate(['/body']);
+    //     },
+    //   });
+
+    console.log("form: ", this.registerForm.value);
   }
 
   login = () => {
