@@ -8,11 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IDdi } from '../../_models/interface/share-interfaces';
+import { IDdi, IDdiEN } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 import { UnSubscription } from '../../_share/UnSubscription';
-
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -28,7 +27,8 @@ const phoneRegex: RegExp =
 const providerEmailRegex: RegExp =
   /^(?!.*@(gmail|outlook|yahoo|protonmail|zoho|aol|gmx|mail|icloud|yandex|tutanota|mailfence|rediffmail|lycos|hushmail|mailru|fastmail|tempmail|guerrillamail|10minutemail|inbox|hotmail|sapomail|netcabo|clix)\.(com|ru|net|org|lv)).+$/;
 
-const passwordRegex: RegExp = /(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.{8,16})/;
+const passwordRegex: RegExp =
+  /(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.{8,16})/;
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -43,10 +43,8 @@ export class RegisterComponent extends UnSubscription {
   };
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
-  protected countryAndDdi = {country: 'Portugal', fone: '0351'};
-  protected wordDdi: IDdi[] = [];
- 
- 
+  protected countryAndDdi = { country: 'Portugal', fone: '0351' };
+  protected wordDdi: IDdiEN[] = [];
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
@@ -96,17 +94,13 @@ export class RegisterComponent extends UnSubscription {
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(16),
-          Validators.pattern(passwordRegex)
+          Validators.pattern(passwordRegex),
         ],
         updateOn: 'blur',
       },
     ],
-    country: [
-      
-      { validators: [Validators.required], updateOn: 'blur' },
-    ],
+    country: [{ validators: [Validators.required], updateOn: 'blur' }],
     phone: [
-     
       {
         validators: [
           Validators.required,
@@ -125,14 +119,12 @@ export class RegisterComponent extends UnSubscription {
     private firestoreDadabaseService: FirestoreDatabaseService
   ) {
     super();
-   
- 
   }
 
   ngOnInit(): void {
-    this.firestoreDadabaseService.getDDI().subscribe((itens) => {
-      this.wordDdi.push(...itens)
-      
+    //  this.firestoreDadabaseService.saveDDIWithPromise();
+    this.firestoreDadabaseService.getDDIEN().subscribe((itens) => {
+      this.wordDdi.push(...itens);
     });
   }
 
@@ -190,7 +182,7 @@ export class RegisterComponent extends UnSubscription {
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
   }
-  changeDDI() {    
+  changeDDI() {
     this.registerForm.get('phone')?.setValue(this.countryAndDdi.fone as never);
   }
 

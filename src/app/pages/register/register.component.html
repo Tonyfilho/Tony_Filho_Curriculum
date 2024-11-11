@@ -201,7 +201,7 @@
                 (ngModelChange)="changeDDI()">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
-                <option [ngValue]="item.fone">{{item.nome}}</option>
+                <option [ngValue]="item.phone">{{item.name}}</option>
                 }
 
               </select>

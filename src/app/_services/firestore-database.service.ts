@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 // import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { asyncScheduler, BehaviorSubject, from, Observable, of, scheduled, take, tap } from 'rxjs';
-import { IDdi, IRegister } from '../_models/interface/share-interfaces';
+import { IDdi, IDdiEN, IRegister } from '../_models/interface/share-interfaces';
 import { DialogService } from '../_share/pop-up/dialog.service';
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { CountryCodesService } from './mock-up/CountryCodes.service';
@@ -45,8 +45,8 @@ export class FirestoreDatabaseService extends UnSubscription {
   /**Fui Usando para salvar os paises no Firebase Database */
   saveDDIWithPromise = () => {
     try {
-      this.mockUpService.fireBaseddiData().forEach((element: IDdi) => {
-        const docLocal = doc(db, 'ddi', element.nome);
+      this.mockUpService.fireBaseddiData().forEach((element: IDdiEN) => {
+        const docLocal = doc(db, 'ddiEN', element.name);
         const ddi = setDoc(docLocal, element, { merge: true });
       });
     } catch (error) {
@@ -57,19 +57,27 @@ export class FirestoreDatabaseService extends UnSubscription {
   /**Fui Usando para salvar os paises no Firebase Database */
   saveDDIObservable = () => {
     let setLocal;
-    this.mockUpService.fireBaseddiData().forEach((element: IDdi) => {
-      const docLocal = doc(db, 'ddiObservable', element.fone);
+    this.mockUpService.fireBaseddiData().forEach((element: IDdiEN) => {
+      const docLocal = doc(db, 'ddiEN', element.phone);
       setLocal = setDoc(docLocal, element, { merge: true });
       from(setLocal);
     });
   };
 
-  getDDI= () => {
+  getDDIPT= () => {
     const localCollection = collection(db, 'ddi');
     return collectionData(localCollection).pipe(
       take(1),
-      tap((data: any[]) => {
-        // return this.ddiItem$.next(data), console.log('servicesData ', data);
+      tap((data: any[]) => {        
+        return scheduled(data, asyncScheduler);
+      })
+    );
+  };
+  getDDIEN= () => {
+    const localCollection = collection(db, 'ddiEN');
+    return collectionData(localCollection).pipe(
+      take(1),
+      tap((data: any[]) => {        
         return scheduled(data, asyncScheduler);
       })
     );
