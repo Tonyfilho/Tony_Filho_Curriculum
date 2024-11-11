@@ -197,11 +197,11 @@
             <!-- Country Dropdown -->
             <div class="col-md-6 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" name="country" [(ngModel)]="this.countryAndDdi.fone"
-                (ngModelChange)="changeDDI()">
+              <select class="form-select" id="country" name="country" [(ngModel)]="this.countryAndDdi.name" [(ngModel)]="this.countryAndDdi.phone"
+                (ngModelChange)="onChangeDDI()">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
-                <option [ngValue]="item.phone">{{item.name}}</option>
+                <option [ngValue]="item.name" [ngValue]="item.phone">{{item.name}}</option>
                 }
 
               </select>
@@ -210,8 +210,8 @@
             <!-- Phone -->
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="phone" name="phone" [ngModel]="this.countryAndDdi.fone + '-'"
-                placeholder="Phone">
+              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="this.countryAndDdi.phone"  (ngModelChange)="onChangeDDI()"
+                placeholder="Telefone">
             </div>
             <!--------------------- Validatiors------------------------------------ -->
             <!---------------------------------------------------Usando CONTROLS Errors -->
@@ -240,7 +240,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
           <!-- <a class="btn btn-dark" role="button" (click)="goBack()" >CANCEL</a> -->
           <button type="button" class="btn btn-danger me-md-2 " (click)="goBack()">CANCEL</button>
-          <button type="submit" class="btn btn-primary me-md-2" [disabled]="this.registerForm.invalid"
+          <button type="submit" class="btn btn-primary me-md-2" [disabled]="!this.registerForm.invalid"
             (click)="submitForms()">
             SING UP
           </button>

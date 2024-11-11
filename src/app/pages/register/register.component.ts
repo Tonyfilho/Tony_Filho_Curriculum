@@ -43,7 +43,7 @@ export class RegisterComponent extends UnSubscription {
   };
   protected showCustomAvatarUpload: boolean = false;
   protected avatar: string | null = null;
-  protected countryAndDdi = { country: 'Portugal', fone: '0351' };
+  protected countryAndDdi: IDdiEN = { name: 'Portugal', phone: '0351' };
   protected wordDdi: IDdiEN[] = [];
 
   private route = inject(Router);
@@ -185,8 +185,10 @@ export class RegisterComponent extends UnSubscription {
     this.showCustomAvatarUpload =
       this.selectedItensAvatarGender.gender === 'custom';
   }
-  changeDDI() {
-    this.registerForm.get('phone')?.setValue(this.countryAndDdi.fone as never);
+  onChangeDDI() {
+    console.log("Phone and country ", this.countryAndDdi);
+    this.registerForm.get('phone')?.setValue(this.countryAndDdi.phone);
+    this.registerForm.get('country')?.setValue(this.countryAndDdi.name);
   }
 
   onFileSelected(event: any): void {

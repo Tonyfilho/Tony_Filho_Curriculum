@@ -34,14 +34,13 @@ export interface IDdi {
   nomeFormal: string;
 
 }
-export interface IDdiEN {
-
-  code: string;
-  phone: string;
-  iso: string;
-  iso3: string;
+export interface IDdiEN {  
   name: string;
-  formalName: string;
+  phone: string;
+  code?: string;
+  iso?: string;
+  iso3?: string;
+  formalName?: string;
 
 }
 
