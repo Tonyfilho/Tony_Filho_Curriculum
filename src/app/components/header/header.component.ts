@@ -2,8 +2,8 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from '../../_services/authentication.service';
-import { AvatarComponent } from '../../components/avatar/avatar.component';
 import { DialogService } from '../../_share/pop-up/dialog.service';
+import { AvatarComponent } from '../../components/avatar/avatar.component';
 
 @Component({
   selector: 'app-header',
