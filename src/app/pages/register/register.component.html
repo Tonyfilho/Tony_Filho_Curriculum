@@ -1,11 +1,9 @@
 <div class="local-center">
   <div class="card">
-    <div class="card-body">
-      <!-- <div class="local-register"> -->
-
+    <div class="card-body">      
       <div class="container mt-5">
         <h2 class="user-registration">User Registration</h2>
-        <form>
+        <form class="local-form">
           <div class="row">
             <!-- Avatar Dropdown -->
             <div class="col-md-6 mb-3">
@@ -163,8 +161,7 @@
             <!-- Password -->
             <div class="col-md-6 mb-3">
               <label for="password" class="form-label">Password</label>
-              <input formControlName="password" type="password" class="form-control" id="password"
-                placeholder="Senha">
+              <input formControlName="password" type="password" class="form-control" id="password" placeholder="Senha">
               <!--------------------- Validatiors------------------------------------ -->
               <!---------------------------------------------------Usando CONTROLS Errors -->
               @if(!registerForm.controls['password'].valid &&
@@ -195,10 +192,10 @@
           <!-- Country and Phone (Aligned) -->
           <div class="row">
             <!-- Country Dropdown -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
               <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" name="country" [(ngModel)]="this.countryAndDdi.name" [(ngModel)]="this.countryAndDdi.phone"
-                (ngModelChange)="onChangeDDI()">
+              <select class="form-select" id="country" name="country" [(ngModel)]="this.countryAndDdi.name"
+                [(ngModel)]="this.countryAndDdi.phone" (ngModelChange)="onChangeDDI()">
                 <option selected>Selecione um país</option>
                 @for (item of this.wordDdi; track $index) {
                 <option [ngValue]="item.name" [ngValue]="item.phone">{{item.name}}</option>
@@ -207,11 +204,16 @@
               </select>
             </div>
 
+            <!-- DDI -->
+            <div class="col-md-2 mb-3">
+              <label for="ddi" class="form-label">DDI</label>
+              <input type="text" class="form-control" id="ddi" name="ddi" [(ngModel)]="this.countryAndDdi.phone" readonly
+                (ngModelChange)="onChangeDDI()">
+            </div>
             <!-- Phone -->
             <div class="col-md-6 mb-3">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="this.countryAndDdi.phone"  (ngModelChange)="onChangeDDI()"
-                placeholder="Telefone">
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
             </div>
             <!--------------------- Validatiors------------------------------------ -->
             <!---------------------------------------------------Usando CONTROLS Errors -->
