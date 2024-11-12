@@ -213,7 +213,7 @@
             <!-- Phone -->
             <div class="col-md-6 mb-3 phone-ddi">
               <label for="phone" class="form-label">Phone</label>
-              <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
+              <input type="number" class="form-control" id="phone" name="phone" placeholder="Telefone" [(ngModel)]="this.phone" (ngModelChange)="onChangeDDI()">
             </div>
             <!--------------------- Validatiors------------------------------------ -->
             <!---------------------------------------------------Usando CONTROLS Errors -->
@@ -245,11 +245,8 @@
             (click)="submitForms()">
             SING UP
           </button>
-        </div>
-
-        {{ this.registerForm.invalid }}
+        </div>        
       </div>
-
       <!-- </div> -->
     </div>
   </div>

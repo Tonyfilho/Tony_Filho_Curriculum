@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
   FormsModule,
@@ -8,10 +7,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IDdi, IDdiEN } from '../../_models/interface/share-interfaces';
+import { IDdiEN } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 import { UnSubscription } from '../../_share/UnSubscription';
+import { ErrorSnackBarService } from '../../_share/pop-up/error-pop-up/error-snack-bar.service';
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -45,6 +45,7 @@ export class RegisterComponent extends UnSubscription {
   protected avatar: string | null = null;
   protected countryAndDdi: IDdiEN = { name: 'Portugal', phone: '0351' };
   protected wordDdi: IDdiEN[] = [];
+  protected phone!: number;
 
   private route = inject(Router);
   /**Esta é a forma correta de tipagem de fomularios, ja inicia a variavel */
@@ -99,7 +100,7 @@ export class RegisterComponent extends UnSubscription {
         updateOn: 'blur',
       },
     ],
-    country: ['',{ validators: [Validators.required], updateOn: 'blur' }],
+    country: ['', { validators: [Validators.required], updateOn: 'blur' }],
     phone: [
       '',
       {
@@ -113,10 +114,10 @@ export class RegisterComponent extends UnSubscription {
       },
     ],
   });
-  item: any;
 
   constructor(
     private authServices: AuthenticationService,
+    private errorDialogService: ErrorSnackBarService,
     private firestoreDadabaseService: FirestoreDatabaseService
   ) {
     super();
@@ -124,8 +125,10 @@ export class RegisterComponent extends UnSubscription {
 
   ngOnInit(): void {
     //  this.firestoreDadabaseService.saveDDIWithPromise();
-    this.firestoreDadabaseService.getDDIEN().subscribe((itens) => {
-      this.wordDdi.push(...itens);
+    this.firestoreDadabaseService.getDDIEN().subscribe({
+      next: (value) => this.wordDdi.push(...value),
+      error: (err) => this.errorDialogService.openErrorSnackBar(3000, err),
+      complete: () => console.log('Finishing up'),
     });
   }
 
@@ -133,8 +136,6 @@ export class RegisterComponent extends UnSubscription {
     this.route.navigateByUrl('/body');
     this.registerForm.reset();
   }
-
-
 
   submitForms() {
     // if (!this.registerForm.valid) {
@@ -155,7 +156,7 @@ export class RegisterComponent extends UnSubscription {
     //     },
     //   });
 
-    console.log("form: ", this.registerForm.value);
+    console.log('form: ', this.registerForm.value);
   }
 
   login = () => {
@@ -188,8 +189,10 @@ export class RegisterComponent extends UnSubscription {
       this.selectedItensAvatarGender.gender === 'custom';
   }
   onChangeDDI() {
-    console.log("Phone and country ", this.countryAndDdi);
-    this.registerForm.get('phone')?.setValue(this.countryAndDdi.phone);
+    // console.log("Phone and country ", this.countryAndDdi);
+    this.registerForm
+      .get('phone')
+      ?.setValue(this.countryAndDdi.phone + '-' + this.phone);
     this.registerForm.get('country')?.setValue(this.countryAndDdi.name);
   }
 
