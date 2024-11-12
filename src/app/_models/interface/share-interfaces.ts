@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 
 
 export interface IGoogleToken {
@@ -19,6 +20,7 @@ export interface IRegister {
   avatar: string;
   companyName: string;
   country: string;
+  date: Date;
   displayName: string,
   email: string;
   password: string;

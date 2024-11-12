@@ -42,25 +42,19 @@ export class FirestoreDatabaseService extends UnSubscription {
   }
 
   saveRegisterPromise = (data: IRegister) => {
-    const register = doc(db, 'register', data.phone);
+      /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
+      const phoneWithOutHifen = data.phone.split('').filter(data => data !== '-').toString().split(',').join('');
+    const docRegister = doc(db, 'register',phoneWithOutHifen);
     try {
-      setDoc(register, data);
+      setDoc(docRegister, data, {merge: true});
       this.popSuccess.openDialogSuccess();
 
-      console.log('Document written with ID: ', register.id);
+      console.log('Document written with ID: ', docRegister.id);
     } catch (e) {
-      this.popError.openErrorSnackBar(3000, e as string);
+      this.popError.openErrorSnackBar(30000, e as string);
     }
   };
-  saveRegister = (data: IRegister) => {
-     /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
-    const phoneWithOutHifen = data.phone.split('').filter(data => data !== '-').toString().split(',').join('');
-    // console.log("sem Hifem", phoneWithOutHifen);
-    const register = doc(db, 'register', phoneWithOutHifen);
-    const localData = setDoc(register, data);
-    return from(localData);
-    //.pipe(catchError((err: FirebaseError) => this.popError.openErrorSnackBar(3000,err.message)));   
-  };
+
 
   /**Fui Usando para salvar os paises no Firebase Database */
   saveDDIWithPromise = () => {

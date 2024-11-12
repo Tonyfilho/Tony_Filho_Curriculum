@@ -147,20 +147,9 @@ export class RegisterComponent extends UnSubscription {
     
     if (!this.registerForm.valid) {
       this.registerForm.setValidators(Validators.required);
-    }
-   // console.log('form: ', register);
+    } 
     this.firestoreDadabaseService
-      .saveRegister(register)
-      .subscribe({
-        next: () => {
-          this.popSuccess.openDialogSuccess();
-          this.login();
-        },
-        error: (err) => {
-          this.popError.openErrorSnackBar(3000, err as string);
-          this.registerForm.reset();
-        },
-      });
+      .saveRegisterPromise(register);     
 
   }
 

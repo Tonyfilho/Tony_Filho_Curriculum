@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore';
 import { IGoogleToken, IRegister } from '../interface/share-interfaces';
 
 export class ModelTokenResponse implements IGoogleToken {
@@ -32,6 +33,7 @@ export class ModelTokenResponse implements IGoogleToken {
   }
 }
 export class ModelRegister implements IRegister {
+  date: Date;
   gender: string;
   avatar: string;
   companyName: string;
@@ -50,6 +52,7 @@ export class ModelRegister implements IRegister {
     this.email = args.email;
     this.password = args.password;
     this.phone = args.phone;
+    this.date = new Date();
   }
 
   
