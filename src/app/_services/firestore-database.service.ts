@@ -1,8 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { ErrorHandler, inject, Injectable } from '@angular/core';
 // import { doc, getFirestore, setDoc } from "firebase/firestore";
 import {
   asyncScheduler,
   BehaviorSubject,
+  catchError,
   from,
   Observable,
   of,
@@ -23,6 +24,7 @@ import {
   setDoc,
 } from '@angular/fire/firestore';
 import { UnSubscription } from '../_share/UnSubscription';
+import { FirebaseError } from '@angular/fire/app';
 
 const db = getFirestore();
 
@@ -51,12 +53,13 @@ export class FirestoreDatabaseService extends UnSubscription {
     }
   };
   saveRegister = (data: IRegister) => {
-    const register = doc(db, 'register', data.phone);
+     /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
+    const phoneWithOutHifen = data.phone.split('').filter(data => data !== '-').toString().split(',').join('');
+    // console.log("sem Hifem", phoneWithOutHifen);
+    const register = doc(db, 'register', phoneWithOutHifen);
     const localData = setDoc(register, data);
-    return scheduled(localData, asyncScheduler);
-    //  this.popSuccess.openDialogSuccess();
-
-    // this.popError.openErrorSnackBar(3000, e as string);
+    return from(localData);
+    //.pipe(catchError((err: FirebaseError) => this.popError.openErrorSnackBar(3000,err.message)));   
   };
 
   /**Fui Usando para salvar os paises no Firebase Database */

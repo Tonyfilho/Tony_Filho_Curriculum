@@ -8,8 +8,9 @@ div.local-center {
  .card {
     width: 45%;    
     background:none;
-  .card-body {
-    padding: 0 !important;
+    .card-body {
+      padding: 0 !important;
+      margin-bottom: 1%;
   }
    .card-body::before {
      background: linear-gradient(68.15deg, #07389b 14.62%, #293244 85.61%);

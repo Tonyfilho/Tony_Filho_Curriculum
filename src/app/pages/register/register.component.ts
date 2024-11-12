@@ -1,4 +1,4 @@
-import { ModelRegister } from '../../_models/model/models-signin';
+import { ModelRegister } from '../../_models/model/share-models';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
@@ -8,12 +8,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IDdiEN } from '../../_models/interface/share-interfaces';
+import { IDdiEN, IRegister } from '../../_models/interface/share-interfaces';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 import { UnSubscription } from '../../_share/UnSubscription';
 import { ErrorSnackBarService } from '../../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DialogService } from '../../_share/pop-up/dialog.service';
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -119,8 +120,9 @@ export class RegisterComponent extends UnSubscription {
 
   constructor(
     private authServices: AuthenticationService,
-    private errorDialogService: ErrorSnackBarService,
-    private firestoreDadabaseService: FirestoreDatabaseService
+    private popError: ErrorSnackBarService,
+    private firestoreDadabaseService: FirestoreDatabaseService,
+    private popSuccess: DialogService,
   ) {
     super();
   }
@@ -129,7 +131,7 @@ export class RegisterComponent extends UnSubscription {
     //  this.firestoreDadabaseService.saveDDIWithPromise();
     this.firestoreDadabaseService.getDDIEN().subscribe({
       next: (value) => this.wordDdi.push(...value),
-      error: (err) => this.errorDialogService.openErrorSnackBar(3000, err),
+      error: (err) => this.popError.openErrorSnackBar(3000, err),
       complete: () => console.log('Finishing up'),
     });
   }
@@ -140,28 +142,30 @@ export class RegisterComponent extends UnSubscription {
   }
 
   submitForms() {
-    console.log('form: ', this.registerForm.value);
-    const register = new ModelRegister((...this.registerForm.value))
-
+    
+    const register = new ModelRegister(this.registerForm.value as IRegister)
+    
     if (!this.registerForm.valid) {
       this.registerForm.setValidators(Validators.required);
     }
-
+   // console.log('form: ', register);
     this.firestoreDadabaseService
-      .saveRegister()
+      .saveRegister(register)
       .subscribe({
         next: () => {
+          this.popSuccess.openDialogSuccess();
           this.login();
         },
-        error: (err: HttpErrorResponse) => {
-          this.route.navigate(['/body']);
+        error: (err) => {
+          this.popError.openErrorSnackBar(3000, err as string);
+          this.registerForm.reset();
         },
       });
 
   }
 
   login = () => {
-    this.route.navigate(['/home']);
+    this.route.navigate(['/autentication']);
     this.registerForm.reset;
   };
 

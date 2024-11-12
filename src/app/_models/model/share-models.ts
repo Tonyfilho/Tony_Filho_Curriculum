@@ -41,24 +41,15 @@ export class ModelRegister implements IRegister {
   password: string;
   phone: string;
 
-  constructor(
-    gender: string,
-    avatar: string,
-    companyName: string,
-    country: string,
-    displayName: string,
-    email: string,
-    password: string,
-    phone: string
-  ) {
-    this.gender = gender;
-    this.avatar = avatar;
-    this.companyName = companyName;
-    this.country = country;
-    this.displayName = displayName;
-    this.email = email;
-    this.password = password;
-    this.phone = phone;
+  constructor(args:IRegister) {
+    this.gender = args.gender;
+    this.avatar = args.avatar;
+    this.companyName = args.companyName;
+    this.country = args.country;
+    this.displayName = args.displayName;
+    this.email = args.email;
+    this.password = args.password;
+    this.phone = args.phone;
   }
 
   
