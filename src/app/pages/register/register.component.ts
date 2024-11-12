@@ -1,3 +1,4 @@
+import { ModelRegister } from '../../_models/model/models-signin';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
@@ -12,6 +13,7 @@ import { AuthenticationService } from '../../_services/authentication.service';
 import { FirestoreDatabaseService } from '../../_services/firestore-database.service';
 import { UnSubscription } from '../../_share/UnSubscription';
 import { ErrorSnackBarService } from '../../_share/pop-up/error-pop-up/error-snack-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type TItensClass = {
   image: string | ArrayBuffer | null;
@@ -138,25 +140,24 @@ export class RegisterComponent extends UnSubscription {
   }
 
   submitForms() {
-    // if (!this.registerForm.valid) {
-    //   this.registerForm.setValidators(Validators.required);
-    // }
-
-    // this.authServices
-    //   .logInWithEmailAndPassword({
-    //     email: <string>this.registerForm.value.email,
-    //     password: <string>this.registerForm.value.password,
-    //   })
-    //   .subscribe({
-    //     next: () => {
-    //       this.login();
-    //     },
-    //     error: (err: HttpErrorResponse) => {
-    //       this.route.navigate(['/body']);
-    //     },
-    //   });
-
     console.log('form: ', this.registerForm.value);
+    const register = new ModelRegister((...this.registerForm.value))
+
+    if (!this.registerForm.valid) {
+      this.registerForm.setValidators(Validators.required);
+    }
+
+    this.firestoreDadabaseService
+      .saveRegister()
+      .subscribe({
+        next: () => {
+          this.login();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.route.navigate(['/body']);
+        },
+      });
+
   }
 
   login = () => {

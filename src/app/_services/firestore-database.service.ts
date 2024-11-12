@@ -1,6 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 // import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { asyncScheduler, BehaviorSubject, from, Observable, of, scheduled, take, tap } from 'rxjs';
+import {
+  asyncScheduler,
+  BehaviorSubject,
+  from,
+  Observable,
+  of,
+  scheduled,
+  take,
+  tap,
+} from 'rxjs';
 import { IDdi, IDdiEN, IRegister } from '../_models/interface/share-interfaces';
 import { DialogService } from '../_share/pop-up/dialog.service';
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
@@ -30,7 +39,7 @@ export class FirestoreDatabaseService extends UnSubscription {
     super();
   }
 
-  saveRegister = (data: IRegister) => {
+  saveRegisterPromise = (data: IRegister) => {
     const register = doc(db, 'register', data.phone);
     try {
       setDoc(register, data);
@@ -40,6 +49,14 @@ export class FirestoreDatabaseService extends UnSubscription {
     } catch (e) {
       this.popError.openErrorSnackBar(3000, e as string);
     }
+  };
+  saveRegister = (data: IRegister) => {
+    const register = doc(db, 'register', data.phone);
+    const localData = setDoc(register, data);
+    return scheduled(localData, asyncScheduler);
+    //  this.popSuccess.openDialogSuccess();
+
+    // this.popError.openErrorSnackBar(3000, e as string);
   };
 
   /**Fui Usando para salvar os paises no Firebase Database */
@@ -64,20 +81,20 @@ export class FirestoreDatabaseService extends UnSubscription {
     });
   };
 
-  getDDIPT= () => {
+  getDDIPT = () => {
     const localCollection = collection(db, 'ddi');
     return collectionData(localCollection).pipe(
       take(1),
-      tap((data: any[]) => {        
+      tap((data: any[]) => {
         return scheduled(data, asyncScheduler);
       })
     );
   };
-  getDDIEN= () => {
+  getDDIEN = () => {
     const localCollection = collection(db, 'ddiEN');
     return collectionData(localCollection).pipe(
       take(1),
-      tap((data: any[]) => {        
+      tap((data: any[]) => {
         return scheduled(data, asyncScheduler);
       })
     );
