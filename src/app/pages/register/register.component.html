@@ -205,13 +205,13 @@
             </div>
 
             <!-- DDI -->
-            <div class="col-md-2 mb-3">
+            <div class="col-md-2 mb-3 ddi-en">
               <label for="ddi" class="form-label">DDI</label>
               <input type="text" class="form-control" id="ddi" name="ddi" [(ngModel)]="this.countryAndDdi.phone" readonly
                 (ngModelChange)="onChangeDDI()">
             </div>
             <!-- Phone -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3 phone-ddi">
               <label for="phone" class="form-label">Phone</label>
               <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
             </div>
@@ -239,10 +239,9 @@
         </form>
       </div>
       <div class="local-button">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end two">
-          <!-- <a class="btn btn-dark" role="button" (click)="goBack()" >CANCEL</a> -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end two">          
           <button type="button" class="btn btn-danger me-md-2 " (click)="goBack()">CANCEL</button>
-          <button type="submit" class="btn btn-primary me-md-2" [disabled]="!this.registerForm.invalid"
+          <button type="submit" class="btn btn-primary me-md-2" [disabled]="this.registerForm.invalid"
             (click)="submitForms()">
             SING UP
           </button>

@@ -134,6 +134,8 @@ export class RegisterComponent extends UnSubscription {
     this.registerForm.reset();
   }
 
+
+
   submitForms() {
     // if (!this.registerForm.valid) {
     //   this.registerForm.setValidators(Validators.required);
