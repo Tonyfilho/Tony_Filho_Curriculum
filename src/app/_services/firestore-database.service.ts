@@ -27,6 +27,7 @@ import {
 import { UnSubscription } from '../_share/UnSubscription';
 import { FirebaseError } from '@angular/fire/app';
 import { addDoc } from 'firebase/firestore';
+import { AuthenticationService } from './authentication.service';
 
 const db = getFirestore();
 
@@ -39,10 +40,14 @@ export class FirestoreDatabaseService extends UnSubscription {
   private mockUpService = inject(CountryCodesService);
   // ddiItem$!: BehaviorSubject<IDdi[]>;
 
-  constructor(firestore: Firestore) {
+  constructor(private firestore: Firestore, private autenticationService: AuthenticationService) {
     super();
   }
 
+  /**
+   * 
+   * @param data recebe 1 registro e salva  no firebase e cria o User
+   */
   saveRegisterPromise = async (data: IRegister) => {
     /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
     const phoneWithOutHifen = data.phone
@@ -55,8 +60,9 @@ export class FirestoreDatabaseService extends UnSubscription {
     try {
       const docLocal = doc(db, 'register', phoneWithOutHifen);
       const ddi = setDoc(docLocal, {...data, merge: true});
+      this.popSuccess.openDialogSingInSuccess();
     } catch (e) {
-      this.popError.openErrorSnackBar(30000, e as string);
+      this.popError.openErrorSnackBar(4000, e as string);
     }
   };
 

@@ -6,7 +6,8 @@ import { catchError, from, Observable, throwError } from 'rxjs';
 import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { UnSubscription } from '../_share/UnSubscription';
 
-import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, user, User } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateProfile, user, User, UserCredential } from '@angular/fire/auth';
+import { IRegister } from '../_models/interface/share-interfaces';
 
 
 
@@ -53,16 +54,22 @@ export class AuthenticationService extends UnSubscription {
 
 
   }
+ /**Update Profile */
+  updateProfile(user: Partial<User>) {
 
-  registerUserByEmail = (parans: SingIn) => {
-    const localPromise = createUserWithEmailAndPassword(this.auth, parans.email, parans.password!)
-      .then(response => updateProfile(response.user, { displayName: parans?.userName }));
+
+  }
+
+/**Create User */
+  createUserWithByEmailAndPassword = (singIn: SingIn, register?: IRegister) => {
+    const localPromise = createUserWithEmailAndPassword(this.auth, singIn.email, singIn.password!)
+      .then((response: UserCredential) => updateProfile(response.user, { displayName: singIn?.userName }));
     return from(localPromise);
 
   }
 
   /**Quando usa o AngularFire não precisa usar HttpClient e não se implementa Interceptor, pois isto será feito automaticamente pelo AngularFire */
-  logInWithEmailAndPassword = (parans: SingIn) => {
+  sigInWithEmailAndPassword = (parans: SingIn) => {
     const localPromise = signInWithEmailAndPassword(this.auth, parans.email, parans.password!);
     return from(localPromise).pipe(catchError((e: any) => {
       this.snackService.openErrorSnackBar(5000, e.code);
