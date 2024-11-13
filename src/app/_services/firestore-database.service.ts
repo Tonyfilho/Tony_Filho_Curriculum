@@ -25,6 +25,7 @@ import {
 } from '@angular/fire/firestore';
 import { UnSubscription } from '../_share/UnSubscription';
 import { FirebaseError } from '@angular/fire/app';
+import { addDoc } from 'firebase/firestore';
 
 const db = getFirestore();
 
@@ -42,19 +43,23 @@ export class FirestoreDatabaseService extends UnSubscription {
   }
 
   saveRegisterPromise = (data: IRegister) => {
-      /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
-      const phoneWithOutHifen = data.phone.split('').filter(data => data !== '-').toString().split(',').join('');
-    const docRegister = doc(db, 'register',phoneWithOutHifen);
+    /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
+    const phoneWithOutHifen = data.phone
+      .split('')
+      .filter((data) => data !== '-')
+      .toString()
+      .split(',')
+      .join('');
+    const collectionRegister = collection(db, 'register', phoneWithOutHifen);
     try {
-      setDoc(docRegister, data, {merge: true});
+      const docRef = await addDoc(collectionRegister, data);
       this.popSuccess.openDialogSuccess();
 
-      console.log('Document written with ID: ', docRegister.id);
+      console.log('Document written with ID: ', docRef.id);
     } catch (e) {
       this.popError.openErrorSnackBar(30000, e as string);
     }
   };
-
 
   /**Fui Usando para salvar os paises no Firebase Database */
   saveDDIWithPromise = () => {
