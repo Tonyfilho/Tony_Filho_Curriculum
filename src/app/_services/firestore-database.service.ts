@@ -5,6 +5,7 @@ import {
   BehaviorSubject,
   catchError,
   from,
+  merge,
   Observable,
   of,
   scheduled,
@@ -42,7 +43,7 @@ export class FirestoreDatabaseService extends UnSubscription {
     super();
   }
 
-  saveRegisterPromise = (data: IRegister) => {
+  saveRegisterPromise = async (data: IRegister) => {
     /**Converte para array, remove o "hifem", volto para string, remove a virgular e junta retornando uma string*/
     const phoneWithOutHifen = data.phone
       .split('')
@@ -50,19 +51,17 @@ export class FirestoreDatabaseService extends UnSubscription {
       .toString()
       .split(',')
       .join('');
-    const collectionRegister = collection(db, 'register', phoneWithOutHifen);
+    
     try {
-      const docRef = await addDoc(collectionRegister, data);
-      this.popSuccess.openDialogSuccess();
-
-      console.log('Document written with ID: ', docRef.id);
+      const docLocal = doc(db, 'register', phoneWithOutHifen);
+      const ddi = setDoc(docLocal, {...data, merge: true});
     } catch (e) {
       this.popError.openErrorSnackBar(30000, e as string);
     }
   };
 
   /**Fui Usando para salvar os paises no Firebase Database */
-  saveDDIWithPromise = () => {
+  saveDDIWithPromise = async () => {
     try {
       this.mockUpService.fireBaseddiData().forEach((element: IDdiEN) => {
         const docLocal = doc(db, 'ddiEN', element.name);
