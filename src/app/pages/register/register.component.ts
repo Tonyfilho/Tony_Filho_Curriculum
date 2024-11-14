@@ -149,14 +149,12 @@ export class RegisterComponent extends UnSubscription {
       this.registerForm.setValidators(Validators.required);
     } 
     this.firestoreDadabaseService
-      .saveRegisterPromise(register);     
+      .saveRegisterPromise(register);    
+      this.registerForm.reset(); 
 
   }
 
-  login = () => {
-    this.route.navigate(['/autentication']);
-    this.registerForm.reset;
-  };
+
 
   onAvatarChange(): void {
     switch (this.selectedItensAvatarGender.gender) {

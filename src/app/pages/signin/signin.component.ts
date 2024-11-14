@@ -55,10 +55,10 @@ export class SigninComponent implements OnInit {
       this.autenticationForm.setValidators(Validators.required);
     }
 
-    this.authServices.sigInWithEmailAndPassword({
-      email: this.autenticationForm.value.email,
-      password: this.autenticationForm.value.password
-    }).subscribe(
+    this.authServices.sigInWithEmailAndPassword(
+      this.autenticationForm.value.email,
+      this.autenticationForm.value.password
+    ).subscribe(
       {
         next: () => {
           this.login();
