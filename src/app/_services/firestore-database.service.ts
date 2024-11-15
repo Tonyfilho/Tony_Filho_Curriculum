@@ -1,33 +1,26 @@
-import { ErrorHandler, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 // import { doc, getFirestore, setDoc } from "firebase/firestore";
 import {
-  asyncScheduler,
-  BehaviorSubject,
-  catchError,
-  from,
-  merge,
-  Observable,
-  of,
-  scheduled,
-  take,
-  tap,
-} from 'rxjs';
-import { IDdi, IDdiEN, IRegister } from '../_models/interface/share-interfaces';
-import { DialogService } from '../_share/pop-up/dialog.service';
-import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
-import { CountryCodesService } from './mock-up/CountryCodes.service';
-import {
-  collectionData,
-  Firestore,
   collection,
-  getFirestore,
+  collectionData,
   doc,
+  Firestore,
+  getFirestore,
   setDoc,
 } from '@angular/fire/firestore';
+import {
+  asyncScheduler,
+  from,
+  scheduled,
+  take,
+  tap
+} from 'rxjs';
+import { IDdiEN, IRegister } from '../_models/interface/share-interfaces';
+import { DialogService } from '../_share/pop-up/dialog.service';
+import { ErrorSnackBarService } from '../_share/pop-up/error-pop-up/error-snack-bar.service';
 import { UnSubscription } from '../_share/UnSubscription';
-import { FirebaseError } from '@angular/fire/app';
-import { addDoc } from 'firebase/firestore';
 import { AuthenticationService } from './authentication.service';
+import { CountryCodesService } from './mock-up/CountryCodes.service';
 
 const db = getFirestore();
 
@@ -40,12 +33,15 @@ export class FirestoreDatabaseService extends UnSubscription {
   private mockUpService = inject(CountryCodesService);
   // ddiItem$!: BehaviorSubject<IDdi[]>;
 
-  constructor(private firestore: Firestore, private autenticationService: AuthenticationService) {
+  constructor(
+    private firestore: Firestore,
+    private autenticationService: AuthenticationService
+  ) {
     super();
   }
 
   /**
-   * 
+   *
    * @param data recebe 1 registro e salva  no firebase e cria o User
    */
   saveRegisterPromise = async (data: IRegister) => {
@@ -56,10 +52,10 @@ export class FirestoreDatabaseService extends UnSubscription {
       .toString()
       .split(',')
       .join('');
-    
+
     try {
       const docLocal = doc(db, 'register', phoneWithOutHifen);
-      const ddi = setDoc(docLocal, {...data, merge: true});
+      const ddi = setDoc(docLocal, { ...data, merge: true });
       this.popSuccess.openDialogSingInSuccess();
     } catch (e) {
       this.popError.openErrorSnackBar(4000, e as string);

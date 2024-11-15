@@ -40,12 +40,12 @@ const passwordRegex: RegExp =
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent extends UnSubscription {
+  protected avatar: string = '';
   protected selectedItensAvatarGender: TItensClass = {
     image: './../../../assets/images/login/no_avatar.png',
     gender: 'none',
   };
   protected showCustomAvatarUpload: boolean = false;
-  protected avatar: string | null = null;
   protected countryAndDdi: IDdiEN = { name: 'Portugal', phone: '0351' };
   protected wordDdi: IDdiEN[] = [];
   protected phone!: number;
@@ -57,7 +57,7 @@ export class RegisterComponent extends UnSubscription {
     avatar: [
       this.selectedItensAvatarGender.image,
       {
-        validators: [Validators.required, Validators.pattern(imgRegex)],
+        validators: [Validators.required],
         updateOn: 'blur',
       },
     ],
@@ -122,13 +122,13 @@ export class RegisterComponent extends UnSubscription {
     private authServices: AuthenticationService,
     private popError: ErrorSnackBarService,
     private firestoreDadabaseService: FirestoreDatabaseService,
-    private popSuccess: DialogService,
+    private popSuccess: DialogService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    //  this.firestoreDadabaseService.saveDDIWithPromise();
+     this.firestoreDadabaseService.saveDDIWithPromise();
     this.firestoreDadabaseService.getDDIEN().subscribe({
       next: (value) => this.wordDdi.push(...value),
       error: (err) => this.popError.openErrorSnackBar(3000, err),
@@ -142,19 +142,14 @@ export class RegisterComponent extends UnSubscription {
   }
 
   submitForms() {
-    
-    const register = new ModelRegister(this.registerForm.value as IRegister)
-    
+    const register = new ModelRegister(this.registerForm.value as IRegister);
+
     if (!this.registerForm.valid) {
       this.registerForm.setValidators(Validators.required);
-    } 
-    this.firestoreDadabaseService
-      .saveRegisterPromise(register);    
-      this.registerForm.reset(); 
-
+    }
+    this.firestoreDadabaseService.saveRegisterPromise(register);
+    this.registerForm.reset();
   }
-
-
 
   onAvatarChange(): void {
     switch (this.selectedItensAvatarGender.gender) {
@@ -166,10 +161,7 @@ export class RegisterComponent extends UnSubscription {
         this.selectedItensAvatarGender.image =
           './../../../assets/images/login/female_avatar.png';
         break;
-      case 'custom':
-        this.selectedItensAvatarGender.image =
-          './../../../assets/images/login/no_avatar.png';
-        break;
+  
 
       default:
         'none';
@@ -181,7 +173,6 @@ export class RegisterComponent extends UnSubscription {
       this.selectedItensAvatarGender.gender === 'custom';
   }
   onChangeDDI() {
-    // console.log("Phone and country ", this.countryAndDdi);
     this.registerForm
       .get('phone')
       ?.setValue(this.countryAndDdi.phone + '-' + this.phone);
@@ -189,21 +180,24 @@ export class RegisterComponent extends UnSubscription {
   }
 
   onFileSelected(event: any): void {
-    const file = event.target.files[0];
+    const file = event.target.files[0]; // Obtém o arquivo selecionado
+    const reader = new FileReader(); // Cria uma instância do FileReader
 
+    // Verifica se o arquivo é válido e corresponde ao regex de imagem
     if (file && imgRegex.test(file.name)) {
-      const reader = new FileReader();
+      // Define a função a ser executada quando a leitura for concluída
       reader.onload = () => {
-        /**onload vai carregar o arquivo e quando terminar manda pata reader.readAsDataURL */
-        this.selectedItensAvatarGender.image = reader.result; // Armazena a URL da imagem
+        this.selectedItensAvatarGender.image = reader.result as string; // Armazena a URL da imagem
+       this.registerForm.get('avatar')?.setValue(this.selectedItensAvatarGender.image);
       };
-      reader.readAsDataURL(file); // Carrega o arquivo como Data URL
-      /**Salvando na Db */
+
+      // Inicia a leitura do arquivo como Data URL
+      reader.readAsDataURL(file);
     } else {
-      this.registerForm.controls.avatar.setErrors({ incorrect: true });
-      setInterval(() => {
-        this.avatar = null;
-      }, 3000);
+      this.popError.openErrorSnackBar(3000,'Ups...Something Wrong, try again');
+      this.registerForm.get('avatar')?.setErrors({errors: true});
+
+      console.error('Arquivo inválido ou não é uma imagem');
     }
   }
 }
